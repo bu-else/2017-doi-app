@@ -1,17 +1,16 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Wait</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <div *ngIf="state==emergencyEnum.CALL">
+    <button ion-button full class="quarter-button" color="danger" (click)="startEmergency()">Emergency</button>
+  </div>
+
+  <div *ngIf="state==emergencyEnum.WAIT">
+    <h1 style="text-align: center;"><b>Help is on the way!</b></h1>
+    <button ion-button full class="quarter-button" color="dark" (click)="emergencyOver()">Emergency Over</button>
+  </div>
 </ion-content>
