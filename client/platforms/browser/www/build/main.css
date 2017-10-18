@@ -25516,3 +25516,7 @@ ion-navbar.toolbar {
   width: 25%;
   margin: auto;
 }
+
+.big-alert .alert-wrapper {
+  max-width: 350px;
+}

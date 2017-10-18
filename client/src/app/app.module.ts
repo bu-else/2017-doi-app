@@ -10,6 +10,11 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { EulaPage } from "../pages/eula/eula";
 import {WaitPage} from "../pages/wait/wait";
+import { AccountSettingsPage } from "../pages/accountSettings/accountSettings";
+import { MainPagePage } from "../pages/mainPage/mainPage";
+import { Message911Page } from "../pages/message911/message911";
+import { RegistrationPage } from "../pages/registration/registration";
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,7 +27,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     TabsPage,
     EulaPage,
-    WaitPage
+    WaitPage,
+    AccountSettingsPage,
+    MainPagePage,
+    Message911Page,
+    RegistrationPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +46,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     TabsPage,
     EulaPage,
-    WaitPage
+    WaitPage,
+    AccountSettingsPage,
+    MainPagePage,
+    Message911Page,
+    RegistrationPage
   ],
   providers: [
     StatusBar,
