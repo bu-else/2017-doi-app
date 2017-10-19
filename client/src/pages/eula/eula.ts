@@ -16,19 +16,19 @@ export class EulaPage {
 
   public async checkAgreed() {
     var result = await this.storage.get("agreed");
-    console.log(result)
     if (!result) {
       return;
     }
     this.agreed = true;
     this.hidden = true;
+    this.navCtrl.parent.select(1);
+  }
 
+  public async agree() {
+    await this.storage.set("agreed",true);
+    this.checkAgreed()
   }
-  public agree(): void {
-    this.storage.set("agreed",true);
-    this.hidden = true;
-    this.agreed = true;
-  }
+
   public disagree(): void {
     this.hidden = true;
   }
