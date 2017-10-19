@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { HomePage } from "../home/home";
+import { NavController, Tabs } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
 export enum EmergencyState {CALL,WAIT};
@@ -42,7 +41,7 @@ export class WaitPage {
 
   public emergencyOver(): void {
     this.state = EmergencyState.CALL;
-    this.navCtrl.setRoot(HomePage)
+    this.navCtrl.parent.select(0);
   }
 
 }
