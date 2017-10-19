@@ -7,22 +7,30 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'eula.html'
 })
 export class EulaPage {
+  agreed: boolean;
   hidden: boolean;
 
   constructor(public navCtrl: NavController, public storage: Storage) {
-    this.hide()
+    this.checkAgreed();
   }
 
-  public async hide() {
-    if (!await this.storage.get("agreed")) {
+  public async checkAgreed() {
+    var result = await this.storage.get("agreed");
+    console.log(result)
+    if (!result) {
       return;
     }
+    this.agreed = true;
     this.hidden = true;
 
   }
   public agree(): void {
     this.storage.set("agreed",true);
-    this.hide()
+    this.hidden = true;
+    this.agreed = true;
+  }
+  public disagree(): void {
+    this.hidden = true;
   }
 
 }

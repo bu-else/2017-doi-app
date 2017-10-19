@@ -17,14 +17,12 @@
         Ut suscipit suscipit tempus.
         Vivamus quis fermentum odio.
         Nunc placerat congue hendrerit.
-      </ion-card-content>
-      <ion-card-content>
+        <br/><br/>
         Sed nisi lacus, condimentum ut magna vel, tempus finibus eros.
         Ut blandit varius purus, nec lacinia sapien sodales quis.
         Donec pulvinar vestibulum erat, et accumsan turpis pretium congue.
         Phasellus tempus sit amet purus ac congue.
-      </ion-card-content>
-      <ion-card-content>
+        <br/><br/>
         Sed ipsum massa, facilisis ut purus a, facilisis pretium dolor.
         Aenean vel purus convallis, pulvinar lectus quis, pellentesque lacus.
         Vivamus sit amet porta nulla.
@@ -34,8 +32,7 @@
         Ut scelerisque ut purus ut molestie.
         Cras gravida interdum diam, eu aliquam mauris pretium eget.
         Nam et velit id dui varius rutrum ut id magna.
-      </ion-card-content>
-      <ion-card-content>
+        <br/><br/>
         Phasellus elementum eleifend dui, quis ullamcorper metus ornare porttitor.
         Etiam blandit, ante blandit consequat ornare, felis eros laoreet odio, in semper est ipsum sed mi.
         Cras vestibulum, dui eu varius pellentesque, est nulla malesuada quam, non hendrerit lorem eros consectetur
@@ -48,8 +45,7 @@
         Donec blandit, nisl id fermentum venenatis, mi odio finibus mauris, et ultrices nisi erat sed ex.
         Cras viverra blandit imperdiet.
         Maecenas nulla metus, congue et turpis nec, vehicula egestas leo.
-      </ion-card-content>
-      <ion-card-content>
+        <br/><br/>
         Maecenas sed imperdiet nunc.
         Praesent in euismod augue.
         Aliquam nulla tellus, aliquam ut erat nec, ullamcorper vestibulum massa.
@@ -58,14 +54,25 @@
         Sed sed nibh quam.
         Vivamus ac metus ac nisi pretium finibus.
         Sed ullamcorper sem at dui porttitor sagittis.
-      </ion-card-content>
-      <ion-card-content>
-        <button ion-button full class="quarter-button" (click)="agree()">I Agree</button>
+        <br/><br/>
+        <ion-row>
+          <ion-col>
+            <button ion-button full class="quarter-button" (click)="disagree()">I Do Not Agree</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button full class="quarter-button" (click)="agree()">I Agree</button>
+          </ion-col>
+        </ion-row>
       </ion-card-content>
     </div>
-    <div *ngIf="hidden">
+    <div *ngIf="hidden && agreed">
       <ion-card-content>
         Thanks for agreeing!
+      </ion-card-content>
+    </div>
+    <div *ngIf="hidden && !agreed">
+      <ion-card-content>
+        You must agree to the EULA to use the app.
       </ion-card-content>
     </div>
   </ion-card>
