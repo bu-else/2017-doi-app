@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Geolocation } from "@ionic-native/geolocation";
 
 @Component({
   selector: 'page-eula',
@@ -10,7 +11,7 @@ export class EulaPage {
   agreed: boolean;
   hidden: boolean;
 
-  constructor(public navCtrl: NavController, public storage: Storage) {
+  constructor(public navCtrl: NavController, public storage: Storage, public geolocation: Geolocation) {
     this.checkAgreed();
   }
 
@@ -26,6 +27,11 @@ export class EulaPage {
 
   public async agree() {
     await this.storage.set("agreed",true);
+    this.geolocation.getCurrentPosition().then((resp) => {
+      // Simply requesting the coordinate is good enough.
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
     this.checkAgreed()
   }
 

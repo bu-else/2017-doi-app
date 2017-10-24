@@ -14,6 +14,7 @@ import { RegistrationPage } from "../pages/registration/registration";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Geolocation} from "@ionic-native/geolocation";
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AlertController,
+    Geolocation,
     Storage
   ]
 })
