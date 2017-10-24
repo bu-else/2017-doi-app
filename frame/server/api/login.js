@@ -51,7 +51,7 @@ internals.applyRoutes = function (server, next) {
                 method: function (request, reply) {
 
                     const username = request.payload.username;
-                    const password = request.payload.password;
+                  const password = request.payload.password;
 
                     User.findByCredentials(username, password, (err, user) => {
 

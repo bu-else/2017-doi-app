@@ -57,7 +57,7 @@
             "ionic-plugin-keyboard": {},
             "cordova-sqlite-storage": {},
             "cordova-plugin-geolocation": {
-                "GEOLOCATION_USAGE_DESCRIPTION": "To alert emergency responders"
+                "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
             }
         },
         "platforms": [

@@ -50,11 +50,11 @@
     "cordova-plugin-geolocation": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-geolocation"
+            "id": "cordova-plugin-geolocation@^2.4.3"
         },
         "is_top_level": true,
         "variables": {
-            "GEOLOCATION_USAGE_DESCRIPTION": "To alert emergency responders"
+            "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
         }
     },
     "cordova-plugin-compat": {
