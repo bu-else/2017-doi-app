@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+// import * as Config from './config.js';
 
 @Component({
   selector: 'page-main',
@@ -14,5 +15,6 @@ export class MainPage {
 
   public clearStorage(): void {
     this.storage.clear();
+    // console.log(Config.get("projectName"));
   }
 }
