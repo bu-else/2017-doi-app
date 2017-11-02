@@ -11,4 +11,6 @@
   "group": "stable",
   "dist": "trusty",
   "os": "linux"
+  notifications:
+    email: false
 }
