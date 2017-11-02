@@ -11,10 +11,10 @@ import { AccountSettingsPage } from "../pages/accountSettings/accountSettings";
 import { MainPage } from "../pages/main/main";
 import { RegistrationPage } from "../pages/registration/registration";
 
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation} from "@ionic-native/geolocation";
+import { HTTP } from '@ionic-native/http';
 
 @NgModule({
   declarations: [
@@ -47,6 +47,7 @@ import { Geolocation} from "@ionic-native/geolocation";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AlertController,
     Geolocation,
+    HTTP,
     Storage
   ]
 })

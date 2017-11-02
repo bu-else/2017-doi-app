@@ -4,7 +4,6 @@ const port = 3000
 const twtest = require("./twtest.js")
 const uuidv4 = require('uuid/v4');
 
-
 const requestHandler = (request, response) => {
   var result = request.url.toString().split("/");
   if (result.length == 0 || result.length == 1) {
