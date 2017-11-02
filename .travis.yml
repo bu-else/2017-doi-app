@@ -1,4 +1,8 @@
-language: node_js
-node_js:
- - "stable"
-after_success: true
+os:
+  - linux
+  - osx
+matrix:
+  allow_failures:
+    - os: osx
+notifications:
+   email: false
