@@ -7,5 +7,6 @@ os:
 matrix:
   allow_failures:
     - os: osx
+npm test
 notifications:
    email: false
