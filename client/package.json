@@ -26,6 +26,7 @@
         "@ionic-native/splash-screen": "3.12.1",
         "@ionic-native/status-bar": "3.12.1",
         "@ionic/storage": "^2.0.1",
+        "chai": "^4.1.2",
         "confidence": "^3.0.2",
         "cordova-browser": "^4.1.0",
         "cordova-ios": "^4.4.0",
@@ -44,6 +45,7 @@
         "mocha": "^4.0.1",
         "nodemon": "^1.12.1",
         "rxjs": "5.4.3",
+        "sinon": "^4.0.2",
         "sw-toolbox": "3.6.0",
         "uuid": "^3.1.0",
         "zone.js": "0.8.18"
