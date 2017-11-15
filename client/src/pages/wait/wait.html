@@ -9,8 +9,19 @@
     <button ion-button full class="quarter-button" color="danger" (click)="startEmergency()">Emergency</button>
   </div>
 
+  <div *ngIf="state==emergencyEnum.SEND">
+    <h2 style="text-align: center;">Please confirm your location</h2>
+    <ion-label color="primary" stacked>Address</ion-label>
+    <ion-input type="text" [(ngModel)]="address" placeholder="Confirm Address"></ion-input>
+    <ion-label color="primary" stacked>Zipcode</ion-label>
+    <ion-input type="text" [(ngModel)]="zipcode"  placeholder="Confirm Zipcode"></ion-input>
+    <button ion-button full class="quarter-button" color="danger" (click)="sendSecond()">Emergency</button>
+  </div>
+
   <div *ngIf="state==emergencyEnum.WAIT">
     <h1 style="text-align: center;"><b>Help is on the way!</b></h1>
     <button ion-button full class="quarter-button" color="dark" (click)="emergencyOver()">Emergency Over</button>
   </div>
 </ion-content>
+
+

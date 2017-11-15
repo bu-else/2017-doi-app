@@ -1,4 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, AlertController } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
@@ -10,6 +11,7 @@ import { WaitPage } from "../pages/wait/wait";
 import { AccountSettingsPage } from "../pages/accountSettings/accountSettings";
 import { MainPage } from "../pages/main/main";
 import { RegistrationPage } from "../pages/registration/registration";
+
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -29,7 +31,8 @@ import { Geolocation} from "@ionic-native/geolocation";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -47,7 +50,8 @@ import { Geolocation} from "@ionic-native/geolocation";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AlertController,
     Geolocation,
-    Storage
+    Storage,
+    HttpClientModule
   ]
 })
 export class AppModule {}
