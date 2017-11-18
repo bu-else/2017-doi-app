@@ -15,7 +15,7 @@
     <ion-input type="text" [(ngModel)]="address" placeholder="Confirm Address"></ion-input>
     <ion-label color="primary" stacked>Zipcode</ion-label>
     <ion-input type="text" [(ngModel)]="zipcode"  placeholder="Confirm Zipcode"></ion-input>
-    <button ion-button full class="quarter-button" color="danger" (click)="sendSecond()">Emergency</button>
+    <button ion-button full class="quarter-button" color="danger" (click)="sendAddress()">Emergency</button>
   </div>
 
   <div *ngIf="state==emergencyEnum.WAIT">

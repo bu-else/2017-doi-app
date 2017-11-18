@@ -3,7 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Geolocation } from "@ionic-native/geolocation";
-
+import {UniqueDeviceID} from "@ionic-native/unique-device-id";
+import { SMS } from '@ionic-native/sms';
 
 export enum EmergencyState {CALL,SEND,WAIT};
 
@@ -16,10 +17,10 @@ export class WaitPage {
   // tslint:disable-next-line: no-unused-variable
   private emergencyEnum = EmergencyState;
   private state : EmergencyState;
-  private id: string;
   private address: string;
   private zipcode: string;
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public geolocation: Geolocation, public http: HttpClient) {
+  private isSMS: boolean;
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public geolocation: Geolocation, public http: HttpClient, public  uniqueDeviceID: UniqueDeviceID, public sms: SMS) {
     this.state = EmergencyState.CALL;
   }
 
@@ -52,15 +53,17 @@ export class WaitPage {
       message: 'Send this emergency over wifi or sms?',
       buttons: [
         {
-          text: 'wifi',
+          text: 'Sms',
           handler: () => {
-            this.confirmEmergency(true);
+            this.isSMS = true;
+            this.sendLocation();
           }
         },
         {
-          text: 'sms',
+          text: 'Wifi',
           handler: () => {
-            this.confirmEmergency(false);
+            this.isSMS = false;
+            this.sendLocation();
           }
         }
       ],
@@ -69,31 +72,47 @@ export class WaitPage {
     dialogue.present();
   }
 
-  private confirmEmergency(isWifi:boolean): void {
+  private async sendLocation() {
     this.state = EmergencyState.SEND;
-    this.geolocation.getCurrentPosition().then((resp) => {
-      this.sendFirst(resp.coords);
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
+    var location;
+    try {
+      location = await this.geolocation.getCurrentPosition();
+    } catch (e) {
+      console.log("Error getting location")
+      return
+    }
+    var uuid;
+    try {
+      uuid = await this.uniqueDeviceID.get();
+    } catch (e) {
+      uuid = "computer-id";
+    }
+    const latLng = location.coords.latitude + "," + location.coords.longitude;
+
+    if (this.isSMS) {
+      this.sms.send("6178299064","latlng\n"+uuid+"\n"+latLng,{replaceLineBreaks:true});
+    } else {
+      this.http.get("http://localhost:8100/latlng/?&UUID=" + uuid + "&LatLng=" + latLng, {"responseType": "text"}).subscribe(data => {
+        console.log(data);
+      });
+    }
   }
 
-  
+  private async sendAddress() {
+    var uuid;
+    try {
+      uuid = await this.uniqueDeviceID.get();
+    } catch (e) {
+      uuid = "computer-id";
+    }
 
-  private sendFirst(coords): void {
-    const args = coords.latitude + "," + coords.longitude;
-    this.http.get('http://localhost:8100/first/' + args,{"responseType":"text"}).subscribe(data => {
-      this.id = data;
-    });
-  }
-
-  // tslint:disable-next-line: no-unused-variable
-  private sendSecond(coords): void {
-    const args = this.address + "," + this.zipcode + "," + this.id;
-    console.log(args);
-    this.http.get('http://localhost:8100/second/' + args,{"responseType":"text"}).subscribe(data => {
-
-    });
+    if (this.isSMS) {
+      this.sms.send("6178299064","address\n"+uuid+"\n"+this.address+"\n"+this.zipcode,{replaceLineBreaks:true});
+    } else {
+      this.http.get("http://localhost:8100/address/?&UUID=" + uuid + "&Address=" + this.address + "&Zipcode=" + this.zipcode, {"responseType": "text"}).subscribe(data => {
+        console.log(data);
+      });
+    }
     this.state = EmergencyState.WAIT;
   }
 

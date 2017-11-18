@@ -25,6 +25,11 @@
 		C6C44C21D724425FB4E8577C /* sqlite3.c in Resources */ = {isa = PBXBuildFile; fileRef = 0994394171794B9AB5ADA2EE /* sqlite3.c */; settings = {COMPILER_FLAGS = "-DSQLITE_THREADSAFE=1 -DSQLITE_DEFAULT_MEMSTATUS=0 -DSQLITE_OMIT_DECLTYPE -DSQLITE_OMIT_DEPRECATED -DSQLITE_OMIT_PROGRESS_CALLBACK -DSQLITE_OMIT_SHARED_CACHE -DSQLITE_TEMP_STORE=2 -DSQLITE_OMIT_LOAD_EXTENSION -DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_FTS3_PARENTHESIS -DSQLITE_ENABLE_FTS4 -DSQLITE_ENABLE_RTREE -DSQLITE_DEFAULT_PAGE_SIZE=1024 -DSQLITE_DEFAULT_CACHE_SIZE=2000"; }; };
 		F48BCB27F4964487BAA83E63 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9522046E770E4616957EF948 /* CDVLocation.m */; };
 		2FC6665C10FA47EC9013F81B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFE6C14E8E3409DB5661C6E /* CoreLocation.framework */; };
+		16AE66E45D52495ABE9605DC /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E0F38562F94FD494A4B736 /* UICKeyChainStore.m */; };
+		EE3297A859AA48148DC8C016 /* CDVUniqueDeviceID.m in Sources */ = {isa = PBXBuildFile; fileRef = 128BC90C41DE4E28BCB6FD96 /* CDVUniqueDeviceID.m */; };
+		FCF9594A45404C6CB579D757 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A313502A583345328E7BBBA7 /* Security.framework */; };
+		5D93A99EBA70410381D051C2 /* Sms.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A6A73A810B4626A0DB5153 /* Sms.m */; };
+		3BBB05960F0D4DA2A24283ED /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5901C3A6BD2245498EDC46BD /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +87,14 @@
 		9522046E770E4616957EF948 /* CDVLocation.m */ = {isa = PBXFileReference; name = "CDVLocation.m"; path = "cordova-plugin-geolocation/CDVLocation.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		DFD4AD2F39F94CD6950BA8A0 /* CDVLocation.h */ = {isa = PBXFileReference; name = "CDVLocation.h"; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 		6AFE6C14E8E3409DB5661C6E /* CoreLocation.framework */ = {isa = PBXFileReference; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		05E0F38562F94FD494A4B736 /* UICKeyChainStore.m */ = {isa = PBXFileReference; name = "UICKeyChainStore.m"; path = "cordova-plugin-uniquedeviceid/UICKeyChainStore.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		128BC90C41DE4E28BCB6FD96 /* CDVUniqueDeviceID.m */ = {isa = PBXFileReference; name = "CDVUniqueDeviceID.m"; path = "cordova-plugin-uniquedeviceid/CDVUniqueDeviceID.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		69531FD5C11E41B7BE8BF1DC /* UICKeyChainStore.h */ = {isa = PBXFileReference; name = "UICKeyChainStore.h"; path = "cordova-plugin-uniquedeviceid/UICKeyChainStore.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		7F15721F88F64F50A796FD76 /* CDVUniqueDeviceID.h */ = {isa = PBXFileReference; name = "CDVUniqueDeviceID.h"; path = "cordova-plugin-uniquedeviceid/CDVUniqueDeviceID.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		A313502A583345328E7BBBA7 /* Security.framework */ = {isa = PBXFileReference; name = "Security.framework"; path = "System/Library/Frameworks/Security.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		E2A6A73A810B4626A0DB5153 /* Sms.m */ = {isa = PBXFileReference; name = "Sms.m"; path = "cordova-sms-plugin/Sms.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		BFB484BE08214EF6B8B1ACFB /* Sms.h */ = {isa = PBXFileReference; name = "Sms.h"; path = "cordova-sms-plugin/Sms.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		5901C3A6BD2245498EDC46BD /* MessageUI.framework */ = {isa = PBXFileReference; name = "MessageUI.framework"; path = "System/Library/Frameworks/MessageUI.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +104,8 @@
 			files = (
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				2FC6665C10FA47EC9013F81B /* CoreLocation.framework in Frameworks */,
+				FCF9594A45404C6CB579D757 /* Security.framework in Frameworks */,
+				3BBB05960F0D4DA2A24283ED /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				6AFE6C14E8E3409DB5661C6E /* CoreLocation.framework */,
+				A313502A583345328E7BBBA7 /* Security.framework */,
+				5901C3A6BD2245498EDC46BD /* MessageUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -203,6 +220,12 @@
 				0D289D582A864491A740DEBC /* sqlite3.h */,
 				9522046E770E4616957EF948 /* CDVLocation.m */,
 				DFD4AD2F39F94CD6950BA8A0 /* CDVLocation.h */,
+				05E0F38562F94FD494A4B736 /* UICKeyChainStore.m */,
+				128BC90C41DE4E28BCB6FD96 /* CDVUniqueDeviceID.m */,
+				69531FD5C11E41B7BE8BF1DC /* UICKeyChainStore.h */,
+				7F15721F88F64F50A796FD76 /* CDVUniqueDeviceID.h */,
+				E2A6A73A810B4626A0DB5153 /* Sms.m */,
+				BFB484BE08214EF6B8B1ACFB /* Sms.h */,
 			);
 			name = Plugins;
 			path = "MyApp/Plugins";
@@ -323,6 +346,9 @@
 				FE3E62D3063E413CB39A1E46 /* SQLitePlugin.m in Sources */,
 				C6C44C21D724425FB4E8577C /* sqlite3.c in Resources */,
 				F48BCB27F4964487BAA83E63 /* CDVLocation.m in Sources */,
+				16AE66E45D52495ABE9605DC /* UICKeyChainStore.m in Sources */,
+				EE3297A859AA48148DC8C016 /* CDVUniqueDeviceID.m in Sources */,
+				5D93A99EBA70410381D051C2 /* Sms.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,8 @@ import { RegistrationPage } from "../pages/registration/registration";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
+import { SMS } from '@ionic-native/sms';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AlertController,
     Geolocation,
+    UniqueDeviceID,
+    SMS,
     Storage,
     HttpClientModule
   ]
