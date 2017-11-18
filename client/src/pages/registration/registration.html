@@ -37,6 +37,44 @@
 </div>
 
 </body>
+<script>
+  function register(){
+    $("#form1Sbm").click(function () {
+      //submitHandlerPatient("<%= configUrl %>");
+      var uname = $("#firstName") ? $("#firstName")[0].value : " ";
+      var email = $("#email") ? $("#email")[0].value : "";
+      var password = $("#password") ? $("#password")[0].value : "";
+      var yoI = $("#yearOfInjury") ? parseInt($("#yearOfInjury")[0].value) : 1900; //default
+      var gender = $("#gender") ? $("#gender")[0].value : "";
+      var comments = $("#comments") ? $("#comments")[0].value : "";
+      var tncCheckboxValue = $('#tncCheckbox') ? $('#tncCheckbox').prop('checked') : false;
+      var tncAgreement = tncCheckboxValue ? 1 : 0;
+
+      $.ajax({
+        type: 'POST',
+        url: "localhost:8001/api/signup",
+        data: {
+          name: uname,
+          email: Joi.string().email().lowercase().required(),
+          username: Joi.string().token().lowercase().required(),
+          password: Joi.string().required()
+        },
+        dataType: "json",
+        success: function (data, text) {
+          basil.set('cookie', data);
+          console.log("sucess");
+          console.log(data)
+          window.location.href = serverUrl;
+        },
+        error: function (request, status, error) {
+          var reply = request.responseText
+          var replyText = (JSON.parse(reply))
+          alert(replyText.message)
+          console.log('failure')
+        }
+      });
+    }
+</script>>
 </html>
 
 
