@@ -4,27 +4,28 @@
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
+<script src="jquery-3.2.1.min.js"></script>
 <body>
 
 <div *ngIf="!registered">
   <form class="modal-content animate">
     <div class="container">
       <label><b>First Name</b></label>
-      <ion-input type="text" placeholder="First Name" name="firstName" required></ion-input>
+      <ion-input type="text" placeholder="First Name" id="firstName" required></ion-input>
       <label><b>Phone Number</b></label>
-      <ion-input type="text" placeholder="Enter Phone Number" name="phoneNumber" required></ion-input>
+      <ion-input type="text" placeholder="Enter Phone Number" id="phoneNumber" required></ion-input>
       <label><b>Zip Code</b></label>
-      <ion-input type="text" placeholder="Enter ZipCode" name="zipCode" required></ion-input>
+      <ion-input type="text" placeholder="Enter ZipCode" id="zipCode" required></ion-input>
       <label><b>Email</b></label>
-      <ion-input type="text" placeholder="Enter Email" name="email" required></ion-input>
+      <ion-input type="text" placeholder="Enter Email" id ="email" required></ion-input>
 
       <label><b>Password</b></label>
-      <ion-input type="password" placeholder="Enter Password" name="psw" required></ion-input>
+      <ion-input type="password" placeholder="Enter Password" id="psw" required></ion-input>
 
       <label><b>Repeat Password</b></label>
-      <ion-input type="password" placeholder="Repeat Password" name="psw-repeat" required></ion-input>
+      <ion-input type="password" placeholder="Repeat Password" id="psw-repeat" required></ion-input>
 
-      <button ion-button full class="quarter-button" color="secondary" (click)="register()">Register</button>
+      <button ion-button full class="quarter-button" color="secondary" id ="form1Sbm" (click)="register()">Register</button>
     </div>
   </form>
 </div>
@@ -36,28 +37,27 @@
   </ion-card>
 </div>
 
-</body>
+<!--
 <script>
   function register(){
+    console.log("hello");
     $("#form1Sbm").click(function () {
       //submitHandlerPatient("<%= configUrl %>");
-      var uname = $("#firstName") ? $("#firstName")[0].value : " ";
-      var email = $("#email") ? $("#email")[0].value : "";
-      var password = $("#password") ? $("#password")[0].value : "";
-      var yoI = $("#yearOfInjury") ? parseInt($("#yearOfInjury")[0].value) : 1900; //default
-      var gender = $("#gender") ? $("#gender")[0].value : "";
-      var comments = $("#comments") ? $("#comments")[0].value : "";
-      var tncCheckboxValue = $('#tncCheckbox') ? $('#tncCheckbox').prop('checked') : false;
-      var tncAgreement = tncCheckboxValue ? 1 : 0;
+      var firstName = $("#firstName") ? $("#firstName")[0].value : " ";
+      var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "";
+      var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "";
+      var email = $("#email") ? ($("#email")[0].value) : ""; //default
+      var password = $("#psw") ? $("#psw")[0].value : "";
 
       $.ajax({
         type: 'POST',
         url: "localhost:8001/api/signup",
         data: {
-          name: uname,
+          firstName: Joi.string().required(),
           email: Joi.string().email().lowercase().required(),
-          username: Joi.string().token().lowercase().required(),
-          password: Joi.string().required()
+          password: Joi.string().required(),
+          phoneNumber: Joi.string().required(),
+          zipCode: Joi.string().required()
         },
         dataType: "json",
         success: function (data, text) {
@@ -74,7 +74,9 @@
         }
       });
     }
-</script>>
+</script>
+-->
+</body>
 </html>
 
 

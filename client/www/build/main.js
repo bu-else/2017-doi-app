@@ -293,11 +293,7 @@ var WaitPage = (function () {
 }());
 WaitPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-<<<<<<< Updated upstream
-        selector: 'page-wait',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/wait/wait.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Wait</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div *ngIf="state==emergencyEnum.CALL">\n    <button ion-button full class="quarter-button" color="danger" (click)="startEmergency()">Emergency</button>\n  </div>\n\n  <div *ngIf="state==emergencyEnum.SEND">\n    <h2 style="text-align: center;">Please confirm your location</h2>\n    <ion-label color="primary" stacked>Address</ion-label>\n    <ion-input type="text" [(ngModel)]="address" placeholder="Confirm Address"></ion-input>\n    <ion-label color="primary" stacked>Zipcode</ion-label>\n    <ion-input type="text" [(ngModel)]="zipcode"  placeholder="Confirm Zipcode"></ion-input>\n    <button ion-button full class="quarter-button" color="danger" (click)="sendSecond()">Emergency</button>\n  </div>\n\n  <div *ngIf="state==emergencyEnum.WAIT">\n    <h1 style="text-align: center;"><b>Help is on the way!</b></h1>\n    <button ion-button full class="quarter-button" color="dark" (click)="emergencyOver()">Emergency Over</button>\n  </div>\n</ion-content>\n\n\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/wait/wait.html"*/
-=======
-        selector: 'page-wait',template:/*ion-inline-start:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/wait/wait.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Wait</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div *ngIf="state==emergencyEnum.CALL">\n    <button ion-button full class="quarter-button" color="danger" (click)="startEmergency()">Emergency</button>\n  </div>\n\n  <div *ngIf="state==emergencyEnum.WAIT">\n    <h1 style="text-align: center;"><b>Help is on the way!</b></h1>\n    <button ion-button full class="quarter-button" color="dark" (click)="emergencyOver()">Emergency Over</button>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/wait/wait.html"*/
->>>>>>> Stashed changes
+        selector: 'page-wait',template:/*ion-inline-start:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/wait/wait.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Wait</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div *ngIf="state==emergencyEnum.CALL">\n    <button ion-button full class="quarter-button" color="danger" (click)="startEmergency()">Emergency</button>\n  </div>\n\n  <div *ngIf="state==emergencyEnum.SEND">\n    <h2 style="text-align: center;">Please confirm your location</h2>\n    <ion-label color="primary" stacked>Address</ion-label>\n    <ion-input type="text" [(ngModel)]="address" placeholder="Confirm Address"></ion-input>\n    <ion-label color="primary" stacked>Zipcode</ion-label>\n    <ion-input type="text" [(ngModel)]="zipcode"  placeholder="Confirm Zipcode"></ion-input>\n    <button ion-button full class="quarter-button" color="danger" (click)="sendSecond()">Emergency</button>\n  </div>\n\n  <div *ngIf="state==emergencyEnum.WAIT">\n    <h1 style="text-align: center;"><b>Help is on the way!</b></h1>\n    <button ion-button full class="quarter-button" color="dark" (click)="emergencyOver()">Emergency Over</button>\n  </div>\n</ion-content>\n\n\n'/*ion-inline-end:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/wait/wait.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
 ], WaitPage);
@@ -375,11 +371,7 @@ var MainPage = (function () {
 }());
 MainPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-<<<<<<< Updated upstream
-        selector: 'page-main',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/main/main.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h2>Version 0.1!</h2>\n  <p>\n    This page will explain information about the application, and allow people to navigate the application easily.\n  </p>\n  <p>\n    For now, all pages created will be added as a tab at the bottom of the page.\n  </p>\n\n  <button ion-button full class="quarter-button" color="secondary" (click)="clearStorage()">Clear Storage</button>\n</ion-content>\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/main/main.html"*/
-=======
         selector: 'page-main',template:/*ion-inline-start:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/main/main.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h2>Version 0.1!</h2>\n  <p>\n    This page will explain information about the application, and allow people to navigate the application easily.\n  </p>\n  <p>\n    For now, all pages created will be added as a tab at the bottom of the page.\n  </p>\n\n  <button ion-button full class="quarter-button" color="secondary" (click)="clearStorage()">Clear Storage</button>\n</ion-content>\n'/*ion-inline-end:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/main/main.html"*/
->>>>>>> Stashed changes
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
 ], MainPage);
@@ -396,6 +388,8 @@ MainPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(277);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -443,6 +437,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
 var RegistrationPage = (function () {
     function RegistrationPage(navCtrl, storage) {
         this.navCtrl = navCtrl;
@@ -468,23 +463,51 @@ var RegistrationPage = (function () {
         });
     };
     RegistrationPage.prototype.register = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.storage.set("registered", true)];
-                    case 1:
-                        _a.sent();
-                        this.checkAgreed();
-                        return [2 /*return*/];
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#form1Sbm").click(function () {
+            //submitHandlerPatient("<%= configUrl %>");
+            var firstName = __WEBPACK_IMPORTED_MODULE_3_jquery__("#firstName") ? __WEBPACK_IMPORTED_MODULE_3_jquery__("#firstName")[0].value : " ";
+            var phoneNumber = __WEBPACK_IMPORTED_MODULE_3_jquery__("#phoneNumber") ? __WEBPACK_IMPORTED_MODULE_3_jquery__("#phoneNumber")[0].value : "";
+            var zipCode = __WEBPACK_IMPORTED_MODULE_3_jquery__("#zipCode") ? __WEBPACK_IMPORTED_MODULE_3_jquery__("#zipCode")[0].value : "";
+            var email = __WEBPACK_IMPORTED_MODULE_3_jquery__("#email") ? (__WEBPACK_IMPORTED_MODULE_3_jquery__("#email")[0].value) : ""; //default
+            var password = __WEBPACK_IMPORTED_MODULE_3_jquery__("#psw") ? __WEBPACK_IMPORTED_MODULE_3_jquery__("#psw")[0].value : "";
+            __WEBPACK_IMPORTED_MODULE_3_jquery__["ajax"]({
+                type: 'POST',
+                url: "localhost:8001/api/signup",
+                data: {
+                    firstName: firstName,
+                    email: email,
+                    password: password,
+                    phoneNumber: phoneNumber,
+                    zipCode: zipCode
+                },
+                dataType: "json",
+                success: function (data, text) {
+                    //basil.set('cookie', data);
+                    console.log("sucess");
+                    console.log(data);
+                    //window.location.href = serverUrl;
+                },
+                error: function (request, status, error) {
+                    var reply = request.responseText;
+                    console.log("WE HERE");
+                    var replyText = (JSON.parse(reply));
+                    alert(replyText.message);
+                    console.log('failure');
                 }
             });
         });
+        /*
+        public async register() {
+          await this.storage.set("registered",true);
+          this.checkAgreed()
+        }
+        */
     };
     return RegistrationPage;
 }());
 RegistrationPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-registration',template:/*ion-inline-start:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/registration/registration.html"*/'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Title</title>\n</head>\n<body>\n\n<div *ngIf="!registered">\n  <form class="modal-content animate">\n    <div class="container">\n      <label><b>First Name</b></label>\n      <ion-input type="text" placeholder="First Name" name="firstName" required></ion-input>\n      <label><b>Phone Number</b></label>\n      <ion-input type="text" placeholder="Enter Phone Number" name="phoneNumber" required></ion-input>\n      <label><b>Zip Code</b></label>\n      <ion-input type="text" placeholder="Enter ZipCode" name="zipCode" required></ion-input>\n      <label><b>Email</b></label>\n      <ion-input type="text" placeholder="Enter Email" name="email" required></ion-input>\n\n      <label><b>Password</b></label>\n      <ion-input type="password" placeholder="Enter Password" name="psw" required></ion-input>\n\n      <label><b>Repeat Password</b></label>\n      <ion-input type="password" placeholder="Repeat Password" name="psw-repeat" required></ion-input>\n\n      <button ion-button full class="quarter-button" color="secondary" (click)="register()">Register</button>\n    </div>\n  </form>\n</div>\n<div *ngIf="registered">\n  <ion-card>\n    <ion-card-content>\n      Thanks for registering\n    </ion-card-content>\n  </ion-card>\n</div>\n\n</body>\n</html>\n\n\n'/*ion-inline-end:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/registration/registration.html"*/
+        selector: 'page-registration',template:/*ion-inline-start:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/registration/registration.html"*/'<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Title</title>\n</head>\n<script src="jquery-3.2.1.min.js"></script>\n<body>\n\n<div *ngIf="!registered">\n  <form class="modal-content animate">\n    <div class="container">\n      <label><b>First Name</b></label>\n      <ion-input type="text" placeholder="First Name" id="firstName" required></ion-input>\n      <label><b>Phone Number</b></label>\n      <ion-input type="text" placeholder="Enter Phone Number" id="phoneNumber" required></ion-input>\n      <label><b>Zip Code</b></label>\n      <ion-input type="text" placeholder="Enter ZipCode" id="zipCode" required></ion-input>\n      <label><b>Email</b></label>\n      <ion-input type="text" placeholder="Enter Email" id ="email" required></ion-input>\n\n      <label><b>Password</b></label>\n      <ion-input type="password" placeholder="Enter Password" id="psw" required></ion-input>\n\n      <label><b>Repeat Password</b></label>\n      <ion-input type="password" placeholder="Repeat Password" id="psw-repeat" required></ion-input>\n\n      <button ion-button full class="quarter-button" color="secondary" id ="form1Sbm" (click)="register()">Register</button>\n    </div>\n  </form>\n</div>\n<div *ngIf="registered">\n  <ion-card>\n    <ion-card-content>\n      Thanks for registering\n    </ion-card-content>\n  </ion-card>\n</div>\n\n<!--\n<script>\n  function register(){\n    console.log("hello");\n    $("#form1Sbm").click(function () {\n      //submitHandlerPatient("<%= configUrl %>");\n      var firstName = $("#firstName") ? $("#firstName")[0].value : " ";\n      var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "";\n      var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "";\n      var email = $("#email") ? ($("#email")[0].value) : ""; //default\n      var password = $("#psw") ? $("#psw")[0].value : "";\n\n      $.ajax({\n        type: \'POST\',\n        url: "localhost:8001/api/signup",\n        data: {\n          firstName: Joi.string().required(),\n          email: Joi.string().email().lowercase().required(),\n          password: Joi.string().required(),\n          phoneNumber: Joi.string().required(),\n          zipCode: Joi.string().required()\n        },\n        dataType: "json",\n        success: function (data, text) {\n          basil.set(\'cookie\', data);\n          console.log("sucess");\n          console.log(data)\n          window.location.href = serverUrl;\n        },\n        error: function (request, status, error) {\n          var reply = request.responseText\n          var replyText = (JSON.parse(reply))\n          alert(replyText.message)\n          console.log(\'failure\')\n        }\n      });\n    }\n</script>\n-->\n</body>\n</html>\n\n\n'/*ion-inline-end:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/registration/registration.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
 ], RegistrationPage);

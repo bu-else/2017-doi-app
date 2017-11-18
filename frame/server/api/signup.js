@@ -21,10 +21,11 @@ internals.applyRoutes = function (server, next) {
         config: {
             validate: {
                 payload: {
-                    name: Joi.string().required(),
+                    firstName: Joi.string().required(),
                     email: Joi.string().email().lowercase().required(),
-                    username: Joi.string().token().lowercase().required(),
-                    password: Joi.string().required()
+                    password: Joi.string().required(),
+                    phoneNumber: Joi.string().required(),
+                    zipCode: Joi.string().required()
                 }
             },
             pre: [{
