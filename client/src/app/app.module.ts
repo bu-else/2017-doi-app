@@ -16,7 +16,7 @@ import { RegistrationPage } from "../pages/registration/registration";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Geolocation} from "@ionic-native/geolocation";
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [

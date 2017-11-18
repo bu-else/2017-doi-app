@@ -24,7 +24,7 @@ export class WaitPage {
   }
 
   public startEmergency(): void {
-    let confirm = this.alertCtrl.create({
+    let dialogue = this.alertCtrl.create({
       title: 'Emergency',
       message: 'Please confirm the emergency.',
       buttons: [
@@ -37,25 +37,48 @@ export class WaitPage {
         {
           text: 'Confirm Emergency',
           handler: () => {
-            this.confirmEmergency();
-
+            this.askMethod();
           }
         }
       ],
       cssClass: 'big-alert'
     });
-    confirm.present();
+    dialogue.present();
   }
 
-  private confirmEmergency(): void {
+  public askMethod(): void {
+    let dialogue = this.alertCtrl.create({
+      title: 'Method',
+      message: 'Send this emergency over wifi or sms?',
+      buttons: [
+        {
+          text: 'wifi',
+          handler: () => {
+            this.confirmEmergency(true);
+          }
+        },
+        {
+          text: 'sms',
+          handler: () => {
+            this.confirmEmergency(false);
+          }
+        }
+      ],
+      cssClass: 'big-alert'
+    });
+    dialogue.present();
+  }
+
+  private confirmEmergency(isWifi:boolean): void {
     this.state = EmergencyState.SEND;
     this.geolocation.getCurrentPosition().then((resp) => {
       this.sendFirst(resp.coords);
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-
   }
+
+  
 
   private sendFirst(coords): void {
     const args = coords.latitude + "," + coords.longitude;
