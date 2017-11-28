@@ -116,7 +116,21 @@ export class WaitPage {
     this.state = EmergencyState.WAIT;
   }
 
-  public emergencyOver(): void {
+  public async emergencyOver() {
+    var uuid;
+    try {
+      uuid = await this.uniqueDeviceID.get();
+    } catch (e) {
+      uuid = "computer-id";
+    }
+
+    if (this.isSMS) {
+      this.sms.send("6178299064","end\n"+uuid,{replaceLineBreaks:true});
+    } else {
+      this.http.get("http://localhost:8100/end/?&UUID=" + uuid, {"responseType": "text"}).subscribe(data => {
+        console.log(data);
+      });
+    }
     this.state = EmergencyState.CALL;
     this.navCtrl.parent.select(0);
   }
