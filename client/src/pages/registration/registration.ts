@@ -36,6 +36,11 @@ export class RegistrationPage {
       var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "a";
       var email = $("#email") ? ($("#email")[0].value) : "a"; //default
       var password = $("#psw") ? $("#psw")[0].value : "a";
+      var repeatPassword = $("#psw-repeat") ? $("#psw-repeat")[0].value : "ab";
+      if (password != repeatPassword){
+        console.log("Don't match");
+        return
+      }
 
       $.ajax({
         type: 'POST',
