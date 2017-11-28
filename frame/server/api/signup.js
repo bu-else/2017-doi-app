@@ -21,11 +21,10 @@ internals.applyRoutes = function (server, next) {
         config: {
             validate: {
                 payload: {
-                    firstName: Joi.string().required(),
+                    name: Joi.string().required(),
                     email: Joi.string().email().lowercase().required(),
-                    password: Joi.string().required(),
-                    phoneNumber: Joi.string().required(),
-                    zipCode: Joi.string().required()
+                    username: Joi.string().token().lowercase().required(),
+                    password: Joi.string().required()
                 }
             },
             pre: [{
@@ -143,7 +142,10 @@ internals.applyRoutes = function (server, next) {
                 }],
                 session: ['linkUser', 'linkAccount', function (results, done) {
 
-                    Session.create(results.user._id.toString(), done);
+                    const userAgent = request.headers['user-agent'];
+                    const ip = request.headers['x-forwarded-for'] || request.info.remoteAddress;
+
+                    Session.create(results.user._id.toString(), ip, userAgent, done);
                 }]
             }, (err, results) => {
 
@@ -168,6 +170,7 @@ internals.applyRoutes = function (server, next) {
             });
         }
     });
+
 
     next();
 };

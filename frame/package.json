@@ -11,11 +11,11 @@
   "author": "Reza Akhavan <jedireza@gmail.com> (http://reza.akhavan.me/)",
   "license": "MIT",
   "engines": {
-    "node": ">=8.1.4"
+    "node": "8.x.x"
   },
   "dependencies": {
     "async": "2.x.x",
-    "bcrypt": "^1.0.3",
+    "bcrypt": "1.x.x",
     "boom": "5.x.x",
     "confidence": "3.x.x",
     "dotenv": "4.x.x",
@@ -30,12 +30,12 @@
     "joi": "10.x.x",
     "lout": "10.x.x",
     "mongo-models": "1.x.x",
-    "mongodb": "2.x.x",
-    "node": "^8.3.0",
-    "nodemailer": "^4.1.1",
+    "mongodb": "^2.2.33",
+    "nodemailer": "4.x.x",
     "nodemailer-markdown": "1.x.x",
     "object-assign": "4.x.x",
     "slug": "0.9.x",
+    "useragent": "2.x.x",
     "uuid": "3.x.x",
     "vision": "4.x.x",
     "visionary": "6.x.x"

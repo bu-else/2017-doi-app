@@ -5,7 +5,7 @@ import { WaitPage } from "../wait/wait";
 import { AccountSettingsPage } from "../accountSettings/accountSettings";
 import { MainPage } from "../main/main";
 import { RegistrationPage } from "../registration/registration";
-
+import { LoginPage } from "../logIn/login";
 
 
 @Component({
@@ -17,6 +17,7 @@ export class TabsPage {
   tabAccountSettings = AccountSettingsPage;
   tabMainPage = MainPage;
   tabRegistration = RegistrationPage;
+  tabLogIn = LoginPage;
 
   constructor() {
 

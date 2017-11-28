@@ -11,7 +11,7 @@ import { WaitPage } from "../pages/wait/wait";
 import { AccountSettingsPage } from "../pages/accountSettings/accountSettings";
 import { MainPage } from "../pages/main/main";
 import { RegistrationPage } from "../pages/registration/registration";
-
+import { LoginPage } from "../pages/logIn/login";
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -28,7 +28,8 @@ import { SMS } from '@ionic-native/sms';
     WaitPage,
     AccountSettingsPage,
     MainPage,
-    RegistrationPage
+    RegistrationPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,8 @@ import { SMS } from '@ionic-native/sms';
     WaitPage,
     AccountSettingsPage,
     MainPage,
-    RegistrationPage
+    RegistrationPage,
+    LoginPage
   ],
   providers: [
     StatusBar,

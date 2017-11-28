@@ -31,11 +31,11 @@ export class RegistrationPage {
   register() {
     $("#form1Sbm").click(function () {
       //submitHandlerPatient("<%= configUrl %>");
-      var firstName = $("#firstName") ? $("#firstName")[0].value : " ";
-      var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "";
-      var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "";
-      var email = $("#email") ? ($("#email")[0].value) : ""; //default
-      var password = $("#psw") ? $("#psw")[0].value : "";
+      var firstName = $("#firstName") ? $("#firstName")[0].value : "a";
+      var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "a";
+      var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "a";
+      var email = $("#email") ? ($("#email")[0].value) : "a"; //default
+      var password = $("#psw") ? $("#psw")[0].value : "a";
 
       $.ajax({
         type: 'POST',
@@ -47,7 +47,7 @@ export class RegistrationPage {
           phoneNumber: phoneNumber,
           zipCode: zipCode
         },
-        dataType: "json",
+        dataType: "application/json",
         success: function (data, text) {
           //basil.set('cookie', data);
           console.log("sucess");
@@ -56,7 +56,6 @@ export class RegistrationPage {
         },
         error: function (request, status, error) {
           var reply = request.responseText
-          console.log("WE HERE")
           var replyText = (JSON.parse(reply))
           alert(replyText.message)
           console.log('failure')
