@@ -72,7 +72,7 @@ export class WaitPage {
     dialogue.present();
   }
 
-  private async sendLocation() {
+  public async sendLocation() {
     this.state = EmergencyState.SEND;
     var location;
     try {
@@ -92,13 +92,19 @@ export class WaitPage {
     if (this.isSMS) {
       this.sms.send("6178299064","latlng\n"+uuid+"\n"+latLng,{replaceLineBreaks:true});
     } else {
-      this.http.get("http://localhost:8100/latlng/?&UUID=" + uuid + "&LatLng=" + latLng, {"responseType": "text"}).subscribe(data => {
-        console.log(data);
-      });
+      this.http.get("http://localhost:8100/latlng/?&UUID=" + uuid + "&LatLng=" + latLng, {"responseType": "text"}).subscribe(
+        data => {
+          return console.log(data);
+        },
+        err => {
+          console.log(err);
+          this.showError(err.status,err.statusText);
+        }
+      );
     }
   }
 
-  private async sendAddress() {
+  public async sendAddress() {
     var uuid;
     try {
       uuid = await this.uniqueDeviceID.get();
@@ -109,9 +115,16 @@ export class WaitPage {
     if (this.isSMS) {
       this.sms.send("6178299064","address\n"+uuid+"\n"+this.address+"\n"+this.zipcode,{replaceLineBreaks:true});
     } else {
-      this.http.get("http://localhost:8100/address/?&UUID=" + uuid + "&Address=" + this.address + "&Zipcode=" + this.zipcode, {"responseType": "text"}).subscribe(data => {
-        console.log(data);
-      });
+      console.log("HELLO");
+      this.http.get("http://localhost:8100/address/?&UUID=" + uuid + "&Address=" + this.address + "&Zipcode=" + this.zipcode, {"responseType": "text"}).subscribe(
+        data => {
+          return console.log(data);
+        },
+        err => {
+          console.log(err);
+          this.showError(err.status,err.statusText);
+        }
+      );
     }
     this.state = EmergencyState.WAIT;
   }
@@ -127,12 +140,36 @@ export class WaitPage {
     if (this.isSMS) {
       this.sms.send("6178299064","end\n"+uuid,{replaceLineBreaks:true});
     } else {
-      this.http.get("http://localhost:8100/end/?&UUID=" + uuid, {"responseType": "text"}).subscribe(data => {
-        console.log(data);
-      });
+      this.http.get("http://localhost:8100/end/?&UUID=" + uuid, {"responseType": "text"}).subscribe(
+        data => {
+          return console.log(data);
+        },
+        err => {
+          console.log(err);
+          this.showError(err.status,err.statusText);
+        }
+      );
     }
     this.state = EmergencyState.CALL;
     this.navCtrl.parent.select(0);
+  }
+
+  public showError(code:string, text:string): void {
+    let dialogue = this.alertCtrl.create({
+      title: 'Error ' + code,
+      message: 'An error occurred:\n' + text,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.state = EmergencyState.CALL;
+            this.navCtrl.parent.select(0);
+          }
+        },
+      ],
+      cssClass: 'big-alert'
+    });
+    dialogue.present();
   }
 
 }
