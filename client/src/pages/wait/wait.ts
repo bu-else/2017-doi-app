@@ -78,8 +78,8 @@ export class WaitPage {
     try {
       location = await this.geolocation.getCurrentPosition();
     } catch (e) {
-      console.log("Error getting location")
-      return
+      console.log("Error getting location");
+      return;
     }
     var uuid;
     try {
@@ -146,7 +146,7 @@ export class WaitPage {
         },
         err => {
           console.log(err);
-          this.showError(err.status,err.statusText);
+          // No need to alert the user. We are manually ending it.
         }
       );
     }

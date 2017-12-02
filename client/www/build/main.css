@@ -25668,6 +25668,13 @@ button {
   }
 }
 
+page-map .map-container {
+  position: absolute;
+  background-color: red;
+  width: 100%;
+  height: 90%;
+}
+
 input[type=text], input[type=password] {
   width: 100%;
   padding: 12px 20px;

@@ -23,11 +23,14 @@
     "@angular/platform-browser-dynamic": "4.4.3",
     "@ionic-native/core": "3.12.1",
     "@ionic-native/geolocation": "^4.4.2",
+    "@ionic-native/google-maps": "^4.4.2",
     "@ionic-native/sms": "^4.4.2",
     "@ionic-native/splash-screen": "3.12.1",
     "@ionic-native/status-bar": "3.12.1",
     "@ionic-native/unique-device-id": "^4.4.2",
     "@ionic/storage": "^2.0.1",
+    "@types/geojson": "^7946.0.0",
+    "@types/leaflet": "^1.2.2",
     "basil-js": "^1.0.0",
     "chai": "^4.1.2",
     "confidence": "^3.0.2",
@@ -37,6 +40,8 @@
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-geolocation": "^2.4.3",
+    "cordova-plugin-googlemaps": "^2.1.1",
+    "cordova-plugin-googlemaps-sdk": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk.git",
     "cordova-plugin-splashscreen": "^4.0.3",
     "cordova-plugin-statusbar": "^2.2.2",
     "cordova-plugin-uniquedeviceid": "^1.3.2",
@@ -50,6 +55,7 @@
     "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "3.0.0",
     "jquery": "^3.2.1",
+    "leaflet": "^1.2.0",
     "mocha": "^4.0.1",
     "nodemon": "^1.12.1",
     "rxjs": "5.4.3",
@@ -75,7 +81,13 @@
         "GEOLOCATION_USAGE_DESCRIPTION": "For emergency purposes"
       },
       "cordova-plugin-uniquedeviceid": {},
-      "cordova-sms-plugin": {}
+      "cordova-sms-plugin": {},
+      "cordova-plugin-googlemaps": {
+        "API_KEY_FOR_ANDROID": "AIzaSyBHq-8JO2ytIyF4Vwx2FChHCcK8NJ6EgLs",
+        "API_KEY_FOR_IOS": "AIzaSyCJDW2uiUY3g9MIzTOYuas192BkdU1AcEs",
+        "LOCATION_WHEN_IN_USE_DESCRIPTION": "Show your location on the map",
+        "LOCATION_ALWAYS_USAGE_DESCRIPTION": "Trace your location on the map"
+      }
     },
     "platforms": [
       "ios",

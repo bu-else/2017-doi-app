@@ -80,6 +80,8 @@
     </platform>
     <allow-navigation href="http://168.122.2.133:8100" />
     <engine name="ios" spec="^4.4.0" />
+    <engine name="android" spec="6.3.0" />
+    <engine name="browser" spec="5.0.1" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
     <plugin name="cordova-plugin-statusbar" spec="^2.2.2" />
@@ -89,8 +91,12 @@
     <plugin name="cordova-plugin-geolocation" spec="^2.4.3">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="For emergency purposes" />
     </plugin>
-    <engine name="android" spec="~6.3.0" />
-    <engine name="browser" spec="~5.0.1" />
     <plugin name="cordova-plugin-uniquedeviceid" spec="^1.3.2" />
     <plugin name="cordova-sms-plugin" spec="^0.1.11" />
+    <plugin name="cordova-plugin-googlemaps" spec="^2.1.1">
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBHq-8JO2ytIyF4Vwx2FChHCcK8NJ6EgLs" />
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyCJDW2uiUY3g9MIzTOYuas192BkdU1AcEs" />
+        <variable name="LOCATION_WHEN_IN_USE_DESCRIPTION" value="Show your location on the map" />
+        <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="Trace your location on the map" />
+    </plugin>
 </widget>

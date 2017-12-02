@@ -12,7 +12,7 @@ import { AccountSettingsPage } from "../pages/accountSettings/accountSettings";
 import { MainPage } from "../pages/main/main";
 import { RegistrationPage } from "../pages/registration/registration";
 import { LoginPage } from "../pages/logIn/login";
-
+import { MapPage} from "../pages/map/map";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -29,7 +29,8 @@ import { SMS } from '@ionic-native/sms';
     AccountSettingsPage,
     MainPage,
     RegistrationPage,
-    LoginPage
+    LoginPage,
+    MapPage
   ],
   imports: [
     BrowserModule,
@@ -46,7 +47,8 @@ import { SMS } from '@ionic-native/sms';
     AccountSettingsPage,
     MainPage,
     RegistrationPage,
-    LoginPage
+    LoginPage,
+    MapPage
   ],
   providers: [
     StatusBar,
@@ -57,7 +59,7 @@ import { SMS } from '@ionic-native/sms';
     UniqueDeviceID,
     SMS,
     Storage,
-    HttpClientModule
+    HttpClientModule,
   ]
 })
 export class AppModule {}
