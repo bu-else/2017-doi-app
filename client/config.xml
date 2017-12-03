@@ -93,10 +93,4 @@
     </plugin>
     <plugin name="cordova-plugin-uniquedeviceid" spec="^1.3.2" />
     <plugin name="cordova-sms-plugin" spec="^0.1.11" />
-    <plugin name="cordova-plugin-googlemaps" spec="^2.1.1">
-        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBHq-8JO2ytIyF4Vwx2FChHCcK8NJ6EgLs" />
-        <variable name="API_KEY_FOR_IOS" value="AIzaSyCJDW2uiUY3g9MIzTOYuas192BkdU1AcEs" />
-        <variable name="LOCATION_WHEN_IN_USE_DESCRIPTION" value="Show your location on the map" />
-        <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="Trace your location on the map" />
-    </plugin>
 </widget>

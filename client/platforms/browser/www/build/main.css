@@ -25668,15 +25668,6 @@ button {
   }
 }
 
-page-wait .scroll {
-  height: 100%;
-}
-
-page-wait #map {
-  width: 100%;
-  height: 100%;
-}
-
 input[type=text], input[type=password] {
   width: 100%;
   padding: 12px 20px;

@@ -12,7 +12,6 @@ export class MapPage {
   private loaded: boolean;
   private showMap: boolean = false;
   private map: L.Map;
-  private center: L.PointTuple;
   private mapWidth: string = "500px";
   private mapHeight: string = "500px";
   private zero: string = "0px";

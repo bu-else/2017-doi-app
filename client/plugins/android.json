@@ -33,10 +33,6 @@
     },
     "cordova-sms-plugin": {
       "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-googlemaps": {
-      "API_KEY_FOR_ANDROID": "AIzaSyBHq-8JO2ytIyF4Vwx2FChHCcK8NJ6EgLs",
-      "PACKAGE_NAME": "io.ionic.starter"
     }
   },
   "dependent_plugins": {}

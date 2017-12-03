@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 112:
+/***/ 113:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -13,7 +13,7 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 112;
+webpackEmptyAsyncContext.id = 113;
 
 /***/ }),
 
@@ -46,7 +46,7 @@ webpackEmptyAsyncContext.id = 155;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__main_main__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__registration_registration__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__logIn_login__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__map_map__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__map_map__ = __webpack_require__(207);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -92,9 +92,9 @@ TabsPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EulaPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(103);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -210,9 +210,9 @@ EulaPage = __decorate([
 /* unused harmony export EmergencyState */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WaitPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_unique_device_id__ = __webpack_require__(201);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_sms__ = __webpack_require__(202);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -265,7 +265,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-
 var EmergencyState;
 (function (EmergencyState) {
     EmergencyState[EmergencyState["CALL"] = 0] = "CALL";
@@ -294,7 +293,7 @@ var WaitPage = (function () {
                 {
                     text: 'Cancel',
                     handler: function () {
-                        _this.emergencyOver();
+                        _this.endEmergency();
                     }
                 },
                 {
@@ -336,7 +335,7 @@ var WaitPage = (function () {
     WaitPage.prototype.sendLocation = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var location, e_1, uuid, e_2, latLng;
+            var location, e_1, deviceID, e_2, latLng;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -356,19 +355,19 @@ var WaitPage = (function () {
                         _a.trys.push([4, 6, , 7]);
                         return [4 /*yield*/, this.uniqueDeviceID.get()];
                     case 5:
-                        uuid = _a.sent();
+                        deviceID = _a.sent();
                         return [3 /*break*/, 7];
                     case 6:
                         e_2 = _a.sent();
-                        uuid = "computer-id";
+                        deviceID = "computer-id";
                         return [3 /*break*/, 7];
                     case 7:
                         latLng = location.coords.latitude + "," + location.coords.longitude;
                         if (this.isSMS) {
-                            this.sms.send("6178299064", "latlng\n" + uuid + "\n" + latLng, { replaceLineBreaks: true });
+                            this.sms.send("6178299064", "latlng\n" + deviceID + "\n" + latLng, { replaceLineBreaks: true });
                         }
                         else {
-                            this.http.get("http://localhost:8100/latlng/?&UUID=" + uuid + "&LatLng=" + latLng, { "responseType": "text" }).subscribe(function (data) {
+                            this.http.get("http://localhost:8100/latlng/?&deviceID=" + deviceID + "&LatLng=" + latLng, { "responseType": "text" }).subscribe(function (data) {
                                 return console.log(data);
                             }, function (err) {
                                 console.log(err);
@@ -383,26 +382,26 @@ var WaitPage = (function () {
     WaitPage.prototype.sendAddress = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var uuid, e_3;
+            var deviceID, e_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, this.uniqueDeviceID.get()];
                     case 1:
-                        uuid = _a.sent();
+                        deviceID = _a.sent();
                         return [3 /*break*/, 3];
                     case 2:
                         e_3 = _a.sent();
-                        uuid = "computer-id";
+                        deviceID = "computer-id";
                         return [3 /*break*/, 3];
                     case 3:
                         if (this.isSMS) {
-                            this.sms.send("6178299064", "address\n" + uuid + "\n" + this.address + "\n" + this.zipcode, { replaceLineBreaks: true });
+                            this.sms.send("6178299064", "address\n" + deviceID + "\n" + this.address + "\n" + this.zipcode, { replaceLineBreaks: true });
                         }
                         else {
                             console.log("HELLO");
-                            this.http.get("http://localhost:8100/address/?&UUID=" + uuid + "&Address=" + this.address + "&Zipcode=" + this.zipcode, { "responseType": "text" }).subscribe(function (data) {
+                            this.http.get("http://localhost:8100/address/?&deviceID=" + deviceID + "&Address=" + this.address + "&Zipcode=" + this.zipcode, { "responseType": "text" }).subscribe(function (data) {
                                 return console.log(data);
                             }, function (err) {
                                 console.log(err);
@@ -415,31 +414,52 @@ var WaitPage = (function () {
             });
         });
     };
-    WaitPage.prototype.emergencyOver = function () {
+    WaitPage.prototype.endEmergency = function () {
+        var _this = this;
+        var dialogue = this.alertCtrl.create({
+            title: 'Please confirm ending this emergency.',
+            message: 'Emergency dispatcher will be notified.',
+            buttons: [
+                {
+                    text: 'Cancel',
+                },
+                {
+                    text: 'Yes, End Emergency',
+                    handler: function () {
+                        _this.sendEndHttp();
+                    }
+                },
+            ],
+            cssClass: 'big-alert'
+        });
+        dialogue.present();
+    };
+    WaitPage.prototype.sendEndHttp = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var uuid, e_4;
+            var _this = this;
+            var deviceID, e_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, this.uniqueDeviceID.get()];
                     case 1:
-                        uuid = _a.sent();
+                        deviceID = _a.sent();
                         return [3 /*break*/, 3];
                     case 2:
                         e_4 = _a.sent();
-                        uuid = "computer-id";
+                        deviceID = "computer-id";
                         return [3 /*break*/, 3];
                     case 3:
                         if (this.isSMS) {
-                            this.sms.send("6178299064", "end\n" + uuid, { replaceLineBreaks: true });
+                            this.sms.send("6178299064", "end\n" + deviceID, { replaceLineBreaks: true });
                         }
                         else {
-                            this.http.get("http://localhost:8100/end/?&UUID=" + uuid, { "responseType": "text" }).subscribe(function (data) {
+                            this.http.get("http://localhost:8100/end/?&deviceID=" + deviceID, { "responseType": "text" }).subscribe(function (data) {
                                 return console.log(data);
                             }, function (err) {
                                 console.log(err);
-                                // No need to alert the user. We are manually ending it.
+                                _this.showError(err.status, err.statusText);
                             });
                         }
                         this.state = EmergencyState.CALL;
@@ -471,7 +491,7 @@ var WaitPage = (function () {
 }());
 WaitPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-wait',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/wait/wait.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Wait</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div *ngIf="state==emergencyEnum.CALL">\n    <button ion-button full class="quarter-button" color="danger" (click)="startEmergency()">Emergency</button>\n  </div>\n\n  <div *ngIf="state==emergencyEnum.SEND">\n    <h2 style="text-align: center;">Please confirm your location</h2>\n    <ion-label color="primary" stacked>Address</ion-label>\n    <ion-input type="text" [(ngModel)]="address" placeholder="Confirm Address"></ion-input>\n    <ion-label color="primary" stacked>Zipcode</ion-label>\n    <ion-input type="text" [(ngModel)]="zipcode"  placeholder="Confirm Zipcode"></ion-input>\n    <button ion-button full class="quarter-button" color="danger" (click)="sendAddress()">Emergency</button>\n  </div>\n\n  <div *ngIf="state==emergencyEnum.WAIT">\n    <h1 style="text-align: center;"><b>Help is on the way!</b></h1>\n    <button ion-button full class="quarter-button" color="dark" (click)="emergencyOver()">Emergency Over</button>\n  </div>\n</ion-content>\n\n\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/wait/wait.html"*/
+        selector: 'page-wait',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/wait/wait.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Wait</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-card *ngIf="state==emergencyEnum.CALL">\n    <ion-card-content>\n      <button ion-button full class="quarter-button" color="danger" (click)="startEmergency()">Emergency</button>\n    </ion-card-content>\n  </ion-card>\n  <ion-card *ngIf="state==emergencyEnum.SEND">\n    <ion-card-content>\n      <h2 style="text-align: center;">Please confirm your location</h2>\n      <ion-label color="primary" stacked>Address</ion-label>\n      <ion-input type="text" [(ngModel)]="address" placeholder="Confirm Address"></ion-input>\n      <ion-label color="primary" stacked>Zipcode</ion-label>\n      <ion-input type="text" [(ngModel)]="zipcode" placeholder="Confirm Zipcode"></ion-input>\n      <button ion-button full class="quarter-button" color="light" (click)="sendAddress()">Update Information</button>\n    </ion-card-content>\n  </ion-card>\n\n  <ion-card *ngIf="state!=emergencyEnum.CALL">\n    <ion-card-header>\n      Help is on the way!\n    </ion-card-header>\n    <ion-card-content>\n      <button ion-button full class="quarter-button" color="dark" (click)="endEmergency()">Emergency Over</button>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n\n\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/wait/wait.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_unique_device_id__["a" /* UniqueDeviceID */], __WEBPACK_IMPORTED_MODULE_5__ionic_native_sms__["a" /* SMS */]])
 ], WaitPage);
@@ -486,7 +506,7 @@ WaitPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountSettingsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -521,9 +541,9 @@ AccountSettingsPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MainPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -589,9 +609,9 @@ MainPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegistrationPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -733,9 +753,9 @@ RegistrationPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -869,9 +889,141 @@ LoginPage = __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MapPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_leaflet__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_leaflet__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var MapPage = (function () {
+    function MapPage(navCtrl, alertCtrl, http) {
+        this.navCtrl = navCtrl;
+        this.alertCtrl = alertCtrl;
+        this.http = http;
+        this.showMap = false;
+        this.mapWidth = "500px";
+        this.mapHeight = "500px";
+        this.zero = "0px";
+        this.viewHeight = 15;
+    }
+    MapPage.prototype.viewEmergency = function () {
+        var _this = this;
+        this.http.get("http://localhost:8100/fetch/?&emergencyID=" + this.uuid, { "responseType": "json" }).subscribe(function (data) {
+            _this.loadMap(data["address"], data["latLng"]);
+        }, function (err) {
+            console.log(err);
+            _this.showError(err.status, err.statusText);
+        });
+    };
+    MapPage.prototype.endEmergency = function () {
+        var _this = this;
+        var dialogue = this.alertCtrl.create({
+            title: 'Please confirm ending this emergency.',
+            message: 'Emergency caller will be notified.',
+            buttons: [
+                {
+                    text: 'Cancel',
+                },
+                {
+                    text: 'Yes, End Emergency',
+                    handler: function () {
+                        _this.sendEndHttp();
+                    }
+                },
+            ],
+            cssClass: 'big-alert'
+        });
+        dialogue.present();
+    };
+    MapPage.prototype.sendEndHttp = function () {
+        var _this = this;
+        this.http.get("http://localhost:8100/end/?&emergencyID=" + this.uuid, { "responseType": "text" }).subscribe(function (data) {
+            _this.goBack();
+        }, function (err) {
+            console.log(err);
+            _this.showError(err.status, err.statusText);
+        });
+    };
+    MapPage.prototype.loadMap = function (address, latLngRaw) {
+        if (!this.loaded) {
+            this.initMap();
+        }
+        this.showMap = true;
+        var mapBox = document.getElementById("map");
+        mapBox.style.width = this.mapWidth;
+        mapBox.style.height = this.mapHeight;
+        var s = latLngRaw.split(",");
+        var latLng = new __WEBPACK_IMPORTED_MODULE_3_leaflet___default.a.LatLng(Number(s[0]), Number(s[1]));
+        this.map.setView(latLng, this.viewHeight);
+        var marker = __WEBPACK_IMPORTED_MODULE_3_leaflet___default.a.marker(latLng).addTo(this.map);
+        marker.bindPopup(address).openPopup();
+    };
+    MapPage.prototype.goBack = function () {
+        this.uuid = "";
+        this.showMap = false;
+        var mapBox = document.getElementById("map");
+        mapBox.style.width = this.zero;
+        mapBox.style.height = this.zero;
+    };
+    MapPage.prototype.initMap = function () {
+        this.loaded = true;
+        this.map = __WEBPACK_IMPORTED_MODULE_3_leaflet___default.a.map('map', {
+            zoom: 13
+        });
+        //Add OSM Layer
+        __WEBPACK_IMPORTED_MODULE_3_leaflet___default.a.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+            .addTo(this.map);
+    };
+    MapPage.prototype.showError = function (code, text) {
+        var _this = this;
+        var dialogue = this.alertCtrl.create({
+            title: 'Error ' + code,
+            message: 'An error occurred:\n' + text,
+            buttons: [
+                {
+                    text: 'OK',
+                    handler: function () {
+                        _this.goBack();
+                    }
+                },
+            ],
+            cssClass: 'big-alert'
+        });
+        dialogue.present();
+    };
+    return MapPage;
+}());
+MapPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        selector: 'page-map',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/map/map.html"*/'<head>\n  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"\n        integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="\n        crossorigin=""/>\n  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"\n          integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="\n          crossorigin=""></script>\n</head>\n<ion-header>\n  <ion-navbar>\n    <ion-title>Map</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-card>\n    <div *ngIf="!showMap">\n      <ion-card-header>\n        Please enter 4-digit emergency code:\n      </ion-card-header>\n      <ion-card-content>\n        <ion-input type="text" style="width: 50%; margin: auto;" [(ngModel)]="uuid" placeholder=""></ion-input>\n        <button ion-button full class="quarter-button" color="secondary" (click)="viewEmergency()">View Emergency</button>\n      </ion-card-content>\n    </div>\n    <div *ngIf="showMap">\n      <button ion-button full style="width: 10%;" color="secondary" (click)="goBack()">←</button>\n      <button ion-button full class="quarter-button" color="dark" (click)="endEmergency()">Emergency Over</button>\n    </div>\n    <div id="map"></div>\n  </ion-card>\n</ion-content>\n\n\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/map/map.html"*/
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]])
+], MapPage);
+
+//# sourceMappingURL=map.js.map
+
+/***/ }),
+
+/***/ 208:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(226);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -879,17 +1031,17 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 225:
+/***/ 226:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(273);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_tabs_tabs__ = __webpack_require__(198);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_eula_eula__ = __webpack_require__(199);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_wait_wait__ = __webpack_require__(200);
@@ -897,10 +1049,10 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_main_main__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_registration_registration__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_logIn_login__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_map_map__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_map_map__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_status_bar__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_splash_screen__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_geolocation__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_geolocation__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_unique_device_id__ = __webpack_require__(201);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_sms__ = __webpack_require__(202);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -975,7 +1127,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_17__ionic_native_unique_device_id__["a" /* UniqueDeviceID */],
             __WEBPACK_IMPORTED_MODULE_18__ionic_native_sms__["a" /* SMS */],
             Storage,
-            __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClientModule */]
+            __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClientModule */],
         ]
     })
 ], AppModule);
@@ -984,13 +1136,13 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 272:
+/***/ 273:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_tabs_tabs__ = __webpack_require__(198);
@@ -1028,59 +1180,7 @@ MyApp = __decorate([
 
 //# sourceMappingURL=app.component.js.map
 
-/***/ }),
-
-/***/ 281:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MapPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var MapPage = (function () {
-    function MapPage(navCtrl) {
-        this.navCtrl = navCtrl;
-    }
-    MapPage.prototype.ionViewDidLoad = function () {
-        this.loadMap();
-    };
-    MapPage.prototype.loadMap = function () {
-        var latLng = new google.maps.LatLng(-34.9290, 138.6010);
-        var mapOptions = {
-            center: latLng,
-            zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    };
-    return MapPage;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* ViewChild */])('map'),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */]) === "function" && _a || Object)
-], MapPage.prototype, "mapElement", void 0);
-MapPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-map',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/map/map.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Map</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div #map id="map"></div>\n</ion-content>\n\n\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/map/map.html"*/
-    }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _b || Object])
-], MapPage);
-
-var _a, _b;
-//# sourceMappingURL=map.js.map
-
 /***/ })
 
-},[207]);
+},[208]);
 //# sourceMappingURL=main.js.map
