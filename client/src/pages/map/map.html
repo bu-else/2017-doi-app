@@ -2,7 +2,9 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
         integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
         crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+          integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+          crossorigin=""></script>
 </head>
 <ion-header>
   <ion-navbar>
@@ -11,10 +13,22 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="map-container">
-    <div id="map" style="width: 100%; height: 100%">
+  <ion-card>
+    <div *ngIf="!showMap">
+      <ion-card-header>
+        Please enter 4-digit emergency code:
+      </ion-card-header>
+      <ion-card-content>
+        <ion-input type="text" style="width: 50%; margin: auto;" [(ngModel)]="uuid" placeholder=""></ion-input>
+        <button ion-button full class="quarter-button" color="secondary" (click)="viewEmergency()">View Emergency</button>
+      </ion-card-content>
     </div>
-  </div>
+    <div *ngIf="showMap">
+      <button ion-button full style="width: 10%;" color="secondary" (click)="goBack()">←</button>
+      <button ion-button full class="quarter-button" color="dark" (click)="endEmergency()">Emergency Over</button>
+    </div>
+    <div id="map"></div>
+  </ion-card>
 </ion-content>
 
 

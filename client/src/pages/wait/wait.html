@@ -5,23 +5,30 @@
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf="state==emergencyEnum.CALL">
-    <button ion-button full class="quarter-button" color="danger" (click)="startEmergency()">Emergency</button>
-  </div>
+  <ion-card *ngIf="state==emergencyEnum.CALL">
+    <ion-card-content>
+      <button ion-button full class="quarter-button" color="danger" (click)="startEmergency()">Emergency</button>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="state==emergencyEnum.SEND">
+    <ion-card-content>
+      <h2 style="text-align: center;">Please confirm your location</h2>
+      <ion-label color="primary" stacked>Address</ion-label>
+      <ion-input type="text" [(ngModel)]="address" placeholder="Confirm Address"></ion-input>
+      <ion-label color="primary" stacked>Zipcode</ion-label>
+      <ion-input type="text" [(ngModel)]="zipcode" placeholder="Confirm Zipcode"></ion-input>
+      <button ion-button full class="quarter-button" color="light" (click)="sendAddress()">Update Information</button>
+    </ion-card-content>
+  </ion-card>
 
-  <div *ngIf="state==emergencyEnum.SEND">
-    <h2 style="text-align: center;">Please confirm your location</h2>
-    <ion-label color="primary" stacked>Address</ion-label>
-    <ion-input type="text" [(ngModel)]="address" placeholder="Confirm Address"></ion-input>
-    <ion-label color="primary" stacked>Zipcode</ion-label>
-    <ion-input type="text" [(ngModel)]="zipcode"  placeholder="Confirm Zipcode"></ion-input>
-    <button ion-button full class="quarter-button" color="danger" (click)="sendAddress()">Emergency</button>
-  </div>
-
-  <div *ngIf="state==emergencyEnum.WAIT">
-    <h1 style="text-align: center;"><b>Help is on the way!</b></h1>
-    <button ion-button full class="quarter-button" color="dark" (click)="emergencyOver()">Emergency Over</button>
-  </div>
+  <ion-card *ngIf="state!=emergencyEnum.CALL">
+    <ion-card-header>
+      Help is on the way!
+    </ion-card-header>
+    <ion-card-content>
+      <button ion-button full class="quarter-button" color="dark" (click)="endEmergency()">Emergency Over</button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
 
