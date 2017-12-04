@@ -13,12 +13,9 @@ import { MapPage } from "../map/map";
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-  tabEula = EulaPage;
   tabWait = WaitPage;
   tabAccountSettings = AccountSettingsPage;
   tabMainPage = MainPage;
-  tabRegistration = RegistrationPage;
-  tabLogIn = LoginPage;
   tabMap = MapPage;
 
   constructor() {

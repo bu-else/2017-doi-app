@@ -60,14 +60,9 @@
             <button ion-button full class="quarter-button" (click)="disagree()">I Do Not Agree</button>
           </ion-col>
           <ion-col>
-            <button ion-button full class="quarter-button" (click)="agree()">I Agree</button>
+            <button ion-button full class="quarter-button" (click)="goToMain()">I Agree</button>
           </ion-col>
         </ion-row>
-      </ion-card-content>
-    </div>
-    <div *ngIf="hidden && agreed">
-      <ion-card-content>
-        Thanks for agreeing!
       </ion-card-content>
     </div>
     <div *ngIf="hidden && !agreed">

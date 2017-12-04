@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController,NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import * as $ from 'jquery';
+import {RegistrationPage} from "../registration/registration";
+import {TabsPage} from "../tabs/tabs";
+
 /*
 import * as basil from 'basil-js';
 import * as Hapi from 'hapi';
@@ -14,6 +17,7 @@ import * as Hapi from 'hapi';
 })
 export class LoginPage {
   registered: boolean;
+  @ViewChild('myNav') nav: NavController;
 
   constructor(public navCtrl: NavController, public storage: Storage) {
     this.checkAgreed();
@@ -60,7 +64,13 @@ export class LoginPage {
           console.log('failure')
         }
       });
-    })
+    })}
+    public goToReg(): void{
+      this.navCtrl.push(RegistrationPage);
+    }
+    public goToMain(): void{
+      this.navCtrl.setRoot(TabsPage);
+    }
 
     /*
     public async register() {
@@ -69,4 +79,3 @@ export class LoginPage {
     }
     */
   }
-}

@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController,NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { MainPage } from "../main/main";
+import { TabsPage} from "../tabs/tabs";
 import * as $ from 'jquery';
+import {EulaPage} from "../eula/eula";
 /*
 import * as basil from 'basil-js';
 import * as Hapi from 'hapi';
@@ -14,6 +17,7 @@ import * as Hapi from 'hapi';
 })
 export class RegistrationPage {
   registered: boolean;
+  @ViewChild('myNav') nav: NavController;
 
   constructor(public navCtrl: NavController, public storage: Storage) {
     this.checkAgreed();
@@ -27,6 +31,8 @@ export class RegistrationPage {
     this.registered = true;
     this.navCtrl.parent.select(2);
   }
+
+
 
   register() {
     $("#form1Sbm").click(function () {
@@ -66,7 +72,10 @@ export class RegistrationPage {
           console.log('failure')
         }
       });
-    })
+    })}
+  public goToEULA(): void{
+      this.navCtrl.setRoot(EulaPage);
+  }
 
     /*
     public async register() {
@@ -75,4 +84,4 @@ export class RegistrationPage {
     }
     */
   }
-}
+

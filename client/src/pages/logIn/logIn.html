@@ -1,34 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<script src="jquery-3.2.1.min.js"></script>
-<body>
 
-<div *ngIf="!registered">
-  <form class="modal-content animate">
-    <div class="container">
-      <label><b>Email</b></label>
-      <ion-input type="text" placeholder="Enter Email" id ="email" required></ion-input>
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Welcome!
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
 
-      <label><b>Password</b></label>
-      <ion-input type="password" placeholder="Enter Password" id="psw" required></ion-input>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
 
-      <label><b>Repeat Password</b></label>
-      <ion-input type="password" placeholder="Repeat Password" id="psw-repeat" required></ion-input>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
 
-      <button ion-button full class="quarter-button" color="secondary" id ="form2Sbm" (click)="signin()">Log In</button>
-    </div>
-  </form>
-</div>
-<div *ngIf="registered">
-  <ion-card>
-    <ion-card-content>
-      Thanks for registering
-    </ion-card-content>
-  </ion-card>
-</div>
-</body>
-</html>
+  </ion-list>
+      <button ion-button full color="primary" style="margin-top: 20px;" type="submit" (click)="goToMain()">Login</button>
+      <button ion-button full color="primary" style="margin-top: 20px;" (click)="goToReg()">Create an Account</button>
+</ion-content>

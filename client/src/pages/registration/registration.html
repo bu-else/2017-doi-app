@@ -1,41 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<script src="jquery-3.2.1.min.js"></script>
-<body>
+<ion-header>
+  <ion-navbar>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
 
-<div *ngIf="!registered">
-  <form class="modal-content animate">
-    <div class="container">
-      <label><b>First Name</b></label>
-      <ion-input type="text" placeholder="First Name" id="firstName" required></ion-input>
-      <label><b>Phone Number</b></label>
-      <ion-input type="text" placeholder="Enter Phone Number" id="phoneNumber" required></ion-input>
-      <label><b>Zip Code</b></label>
-      <ion-input type="text" placeholder="Enter ZipCode" id="zipCode" required></ion-input>
-      <label><b>Email</b></label>
-      <ion-input type="text" placeholder="Enter Email" id ="email" required></ion-input>
+    <ion-item>
+    <ion-label floating>First Name</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
 
-      <label><b>Password</b></label>
-      <ion-input type="password" placeholder="Enter Password" id="psw" required></ion-input>
+    <ion-item>
+      <ion-label floating>Phone Number</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
 
-      <label><b>Repeat Password</b></label>
-      <ion-input type="password" placeholder="Repeat Password" id="psw-repeat" required></ion-input>
+    <ion-item>
+      <ion-label floating>Zip Code</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
 
-      <button ion-button full class="quarter-button" color="secondary" id ="form1Sbm" (click)="register()">Register</button>
-    </div>
-  </form>
-</div>
-<div *ngIf="registered">
-  <ion-card>
-    <ion-card-content>
-      Thanks for registering
-    </ion-card-content>
-  </ion-card>
-</div>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Repeat Password</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+
+  </ion-list>
+  <button ion-button full class="quarter-button" color="secondary" id ="form1Sbm" (click)="goToEULA();">Register</button>
+</ion-content>
+
 
 <!--
 <script>
@@ -76,7 +79,4 @@
     }
 </script>
 -->
-</body>
-</html>
-
 
