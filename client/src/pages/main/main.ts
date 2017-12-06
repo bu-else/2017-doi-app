@@ -28,6 +28,7 @@ export class MainPage {
         dataType: "application/json",
         success: function (data, text) {
           //basil.set('cookie', data);
+
           console.log("sucess");
           console.log(data)
           //window.location.href = serverUrl;

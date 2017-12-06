@@ -34,7 +34,7 @@ export class RegistrationPage {
 
 
 
-  register() {
+  public register() {
     $("#form1Sbm").click(function () {
       //submitHandlerPatient("<%= configUrl %>");
       var firstName = $("#firstName") ? $("#firstName")[0].value : "a";
@@ -47,6 +47,10 @@ export class RegistrationPage {
         console.log("Don't match");
         return
       }
+
+      // @Michael: Please keep this or refactor it because @Ben is relying on this for sending it to the server
+      // You can remove this comment.
+      this.storage.set("phoneNumber",$("#phoneNumber"));
 
       $.ajax({
         type: 'POST',
@@ -61,6 +65,9 @@ export class RegistrationPage {
         dataType: "application/json",
         success: function (data, text) {
           //basil.set('cookie', data);
+
+
+
           console.log("sucess");
           console.log(data)
           //window.location.href = serverUrl;

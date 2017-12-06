@@ -5,7 +5,11 @@ import {Geolocation} from "@ionic-native/geolocation";
 import {UniqueDeviceID} from "@ionic-native/unique-device-id";
 import {SMS} from '@ionic-native/sms';
 
-export enum EmergencyState {CALL, SEND, WAIT};
+export enum EmergencyState {
+  CALL, // Button is available to call emergency. We then confirm.
+  SEND, // Input address and send it to the dispatcher.
+  WAIT // Nothing else to be done. Wait for dispatcher or button to be pressed.
+};
 
 @Component({
   selector: 'page-wait',
@@ -181,6 +185,9 @@ export class WaitPage {
   }
 
   public async getDispatch() {
+    if (this.state == EmergencyState.CALL) {
+      return;
+    }
     var deviceID;
     try {
       deviceID = await this.uniqueDeviceID.get();

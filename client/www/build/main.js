@@ -324,6 +324,9 @@ var RegistrationPage = (function () {
                 console.log("Don't match");
                 return;
             }
+            // @Michael: Please keep this or refactor it because @Ben is relying on this for sending it to the server
+            // You can remove this comment.
+            this.storage.set("phoneNumber", __WEBPACK_IMPORTED_MODULE_3_jquery__("#phoneNumber"));
             __WEBPACK_IMPORTED_MODULE_3_jquery__["ajax"]({
                 type: 'POST',
                 url: "localhost:8001/api/signup",
@@ -357,15 +360,16 @@ var RegistrationPage = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* ViewChild */])('myNav'),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */])
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object)
 ], RegistrationPage.prototype, "nav", void 0);
 RegistrationPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-registration',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/registration/registration.html"*/'<ion-header>\n  <ion-navbar>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-list>\n\n    <ion-item>\n    <ion-label floating>First Name</ion-label>\n    <ion-input type="text"></ion-input>\n  </ion-item>\n\n    <ion-item>\n      <ion-label floating>Phone Number</ion-label>\n      <ion-input type="text"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Zip Code</ion-label>\n      <ion-input type="text"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Email</ion-label>\n      <ion-input type="text"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Password</ion-label>\n      <ion-input type="text"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Repeat Password</ion-label>\n      <ion-input type="password"></ion-input>\n    </ion-item>\n\n  </ion-list>\n  <button ion-button full class="quarter-button" color="secondary" id ="form1Sbm" (click)="goToEULA();">Register</button>\n</ion-content>\n\n\n<!--\n<script>\n  function register(){\n    console.log("hello");\n    $("#form1Sbm").click(function () {\n      //submitHandlerPatient("<%= configUrl %>");\n      var firstName = $("#firstName") ? $("#firstName")[0].value : " ";\n      var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "";\n      var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "";\n      var email = $("#email") ? ($("#email")[0].value) : ""; //default\n      var password = $("#psw") ? $("#psw")[0].value : "";\n\n      $.ajax({\n        type: \'POST\',\n        url: "localhost:8001/api/signup",\n        data: {\n          firstName: Joi.string().required(),\n          email: Joi.string().email().lowercase().required(),\n          password: Joi.string().required(),\n          phoneNumber: Joi.string().required(),\n          zipCode: Joi.string().required()\n        },\n        dataType: "json",\n        success: function (data, text) {\n          basil.set(\'cookie\', data);\n          console.log("sucess");\n          console.log(data)\n          window.location.href = serverUrl;\n        },\n        error: function (request, status, error) {\n          var reply = request.responseText\n          var replyText = (JSON.parse(reply))\n          alert(replyText.message)\n          console.log(\'failure\')\n        }\n      });\n    }\n</script>\n-->\n\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/registration/registration.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]) === "function" && _c || Object])
 ], RegistrationPage);
 
+var _a, _b, _c;
 //# sourceMappingURL=registration.js.map
 
 /***/ }),
@@ -556,7 +560,7 @@ var EmergencyState;
 (function (EmergencyState) {
     EmergencyState[EmergencyState["CALL"] = 0] = "CALL";
     EmergencyState[EmergencyState["SEND"] = 1] = "SEND";
-    EmergencyState[EmergencyState["WAIT"] = 2] = "WAIT";
+    EmergencyState[EmergencyState["WAIT"] = 2] = "WAIT"; // Nothing else to be done. Wait for dispatcher or button to be pressed.
 })(EmergencyState || (EmergencyState = {}));
 ;
 var WaitPage = (function () {
@@ -768,16 +772,21 @@ var WaitPage = (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.uniqueDeviceID.get()];
+                        if (this.state == EmergencyState.CALL) {
+                            return [2 /*return*/];
+                        }
+                        _a.label = 1;
                     case 1:
-                        deviceID = _a.sent();
-                        return [3 /*break*/, 3];
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.uniqueDeviceID.get()];
                     case 2:
+                        deviceID = _a.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
                         e_5 = _a.sent();
                         deviceID = "computer-id";
-                        return [3 /*break*/, 3];
-                    case 3:
+                        return [3 /*break*/, 4];
+                    case 4:
                         this.currentPings++;
                         this.http.get("http://localhost:8100/dispatch/?&deviceID=" + deviceID, { "responseType": "text" }).subscribe(function (data) {
                             if (data == "Accepted") {
@@ -843,10 +852,9 @@ WaitPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-wait',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/wait/wait.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Wait</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-card *ngIf="state==emergencyEnum.CALL">\n    <ion-card-content>\n      <button ion-button full class="quarter-button" color="danger" (click)="startEmergency()">Emergency</button>\n    </ion-card-content>\n  </ion-card>\n  <ion-card *ngIf="state==emergencyEnum.SEND">\n    <ion-card-content>\n      <h2 style="text-align: center;">Please confirm your location</h2>\n      <ion-label color="primary" stacked>Address</ion-label>\n      <ion-input type="text" [(ngModel)]="address" placeholder="Confirm Address"></ion-input>\n      <ion-label color="primary" stacked>Zipcode</ion-label>\n      <ion-input type="text" [(ngModel)]="zipcode" placeholder="Confirm Zipcode"></ion-input>\n      <button ion-button full class="quarter-button" color="light" (click)="sendAddress()">Update Information</button>\n    </ion-card-content>\n  </ion-card>\n\n  <ion-card *ngIf="state!=emergencyEnum.CALL">\n    <ion-card-header>\n      <div *ngIf="isSMS">\n        Please check your SMS to ensure help is on the way!\n      </div>\n      <div *ngIf="!isSMS">\n        <div *ngIf="isConfirmed">\n          Help is on the way!\n        </div>\n        <div *ngIf="!isConfirmed">\n          Waiting for confirmation from the dispatcher!\n        </div>\n      </div>\n    </ion-card-header>\n    <ion-card-content>\n      <button ion-button full class="quarter-button" color="dark" (click)="endEmergency()">Emergency Over</button>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n\n\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/wait/wait.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_unique_device_id__["a" /* UniqueDeviceID */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_unique_device_id__["a" /* UniqueDeviceID */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_sms__["a" /* SMS */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_sms__["a" /* SMS */]) === "function" && _f || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_unique_device_id__["a" /* UniqueDeviceID */], __WEBPACK_IMPORTED_MODULE_5__ionic_native_sms__["a" /* SMS */]])
 ], WaitPage);
 
-var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=wait.js.map
 
 /***/ }),
@@ -947,9 +955,10 @@ MainPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-main',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/main/main.html"*/'<ion-header xmlns="http://www.w3.org/1999/html">\n  <ion-navbar>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h2>Version 0.1!</h2>\n  <p>\n    This page will explain information about the application, and allow people to navigate the application easily.\n  </p>\n  <p>\n    For now, all pages created will be added as a tab at the bottom of the page.\n  </p>\n\n  <button ion-button full class="quarter-button" color="secondary" (click)="clearStorage()">Clear Storage</button>\n  <br>\n  <br>\n  <button ion-button full class="quarter-button" color="primary" id ="form3Sbm" (click)="logOut()">LogOut</button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/main/main.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */]) === "function" && _b || Object])
 ], MainPage);
 
+var _a, _b;
 //# sourceMappingURL=main.js.map
 
 /***/ }),
