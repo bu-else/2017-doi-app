@@ -19,6 +19,10 @@ export class WaitPage {
   private address: string;
   private zipcode: string;
   private isSMS: boolean;
+  private isConfirmed: boolean;
+  private confirmationTime: number = 2 * 60 * 1000;
+  private confirmationPings: number = 4;
+  private currentPings: number = 0;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public geolocation: Geolocation, public http: HttpClient, public  uniqueDeviceID: UniqueDeviceID, public sms: SMS) {
     this.state = EmergencyState.CALL;
@@ -32,7 +36,7 @@ export class WaitPage {
         {
           text: 'Cancel',
           handler: () => {
-            this.endEmergency()
+            this.resetEmergency();
           }
         },
         {
@@ -94,6 +98,7 @@ export class WaitPage {
     } else {
       this.http.get("http://localhost:8100/latlng/?&deviceID=" + deviceID + "&LatLng=" + latLng, {"responseType": "text"}).subscribe(
         data => {
+          this.getDispatch();
           return console.log(data);
         },
         err => {
@@ -151,13 +156,14 @@ export class WaitPage {
 
 
   public async sendEndHttp() {
+    this.resetEmergency();
+
     var deviceID;
     try {
       deviceID = await this.uniqueDeviceID.get();
     } catch (e) {
       deviceID = "computer-id";
     }
-
     if (this.isSMS) {
       this.sms.send("6178299064", "end\n" + deviceID, {replaceLineBreaks: true});
     } else {
@@ -171,28 +177,72 @@ export class WaitPage {
         }
       );
     }
-    this.state = EmergencyState.CALL;
-    this.navCtrl.parent.select(0);
+
   }
 
+  public async getDispatch() {
+    var deviceID;
+    try {
+      deviceID = await this.uniqueDeviceID.get();
+    } catch (e) {
+      deviceID = "computer-id";
+    }
+    this.currentPings++;
+    this.http.get("http://localhost:8100/dispatch/?&deviceID=" + deviceID, {"responseType": "text"}).subscribe(
+      data => {
+        if (data == "Accepted") {
+          let dialogue = this.alertCtrl.create({
+            title: 'Emergency confirmed!',
+            message: 'Help is on the way to your position now!',
+            buttons: [
+              {
+                text: 'OK',
+              },
+            ],
+            cssClass: 'big-alert'
+          });
+          dialogue.present();
+          this.isConfirmed = true;
+        } else if (data == "Rejected") {
+          this.showError("503","The dispatcher is unable to handle your request.")
+        } else {
+          if (this.currentPings < this.confirmationPings) {
+            setTimeout(() => {this.getDispatch()}, this.confirmationTime/this.confirmationPings);
+          } else {
+            this.showError("408", "Did not recieve a confirmation in time.");
+          }
+        }
+      },
+      err => {
+        console.log(err);
+        this.showError(err.status, err.statusText);
+      }
+    );
+  }
 
 
   public showError(code: string, text: string): void {
     let dialogue = this.alertCtrl.create({
       title: 'Error ' + code,
-      message: 'An error occurred:\n' + text,
+      message: 'An error occurred:\n' + text +"\n Please call 911 to handle this emergency!",
       buttons: [
         {
           text: 'OK',
           handler: () => {
-            this.state = EmergencyState.CALL;
-            this.navCtrl.parent.select(0);
+            this.resetEmergency();
           }
         },
       ],
       cssClass: 'big-alert'
     });
     dialogue.present();
+  }
+
+  private resetEmergency() {
+    this.state = EmergencyState.CALL;
+    this.navCtrl.parent.select(0);
+    this.isConfirmed = false;
+    this.currentPings = 0;
   }
 
 }

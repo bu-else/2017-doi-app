@@ -23,7 +23,17 @@
 
   <ion-card *ngIf="state!=emergencyEnum.CALL">
     <ion-card-header>
-      Help is on the way!
+      <div *ngIf="isSMS">
+        Please check your SMS to ensure help is on the way!
+      </div>
+      <div *ngIf="!isSMS">
+        <div *ngIf="isConfirmed">
+          Help is on the way!
+        </div>
+        <div *ngIf="!isConfirmed">
+          Waiting for confirmation from the dispatcher!
+        </div>
+      </div>
     </ion-card-header>
     <ion-card-content>
       <button ion-button full class="quarter-button" color="dark" (click)="endEmergency()">Emergency Over</button>
