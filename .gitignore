@@ -57,6 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
+# Ben's attempt at an dotenv hack in Typescript
+env.ts
+
 # IntelliJ IDEA
 .idea/
 
