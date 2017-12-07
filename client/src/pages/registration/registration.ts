@@ -1,10 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController,NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-import { MainPage } from "../main/main";
-import { TabsPage} from "../tabs/tabs";
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { AlertController } from 'ionic-angular';
 import * as $ from 'jquery';
 import {EulaPage} from "../eula/eula";
+
 /*
 import * as basil from 'basil-js';
 import * as Hapi from 'hapi';
@@ -18,9 +19,32 @@ import * as Hapi from 'hapi';
 export class RegistrationPage {
   registered: boolean;
   @ViewChild('myNav') nav: NavController;
+  authForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public storage: Storage) {
+  constructor(public navCtrl: NavController, public storage: Storage, private alertCtrl: AlertController,public navParams: NavParams, public formBuilder: FormBuilder){
+    this.nav = navCtrl;
+
+    this.authForm = formBuilder.group({
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
+      phoneNumber: ['', Validators.compose([Validators.required])],
+      repeatPassword: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
+      zipCode: ['', Validators.compose([Validators.required])],
+    }, {validator: this.matchingPasswords('password', 'repeatPassword')});
     this.checkAgreed();
+  }
+
+  matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
+    return (group: FormGroup): {[key: string]: any} => {
+      let password = group.controls[passwordKey];
+      let confirmPassword = group.controls[confirmPasswordKey];
+
+      if (password.value !== confirmPassword.value) {
+        return {
+          mismatchedPasswords: true
+        };
+      }
+    }
   }
 
   public async checkAgreed() {
@@ -82,6 +106,15 @@ export class RegistrationPage {
     })}
   public goToEULA(): void{
       this.navCtrl.setRoot(EulaPage);
+  }
+  onSubmit(value: any): void {
+    if(this.authForm.valid) {
+      window.localStorage.setItem('email', value.email);
+      window.localStorage.setItem('password', value.password);
+      window.localStorage.setItem('repeatPassword',value.repeatPassword);
+      window.localStorage.setItem('phoneNum',value.phoneNumber);
+      window.localStorage.setItem('zipCode',value.zipCode);
+    }
   }
 
     /*

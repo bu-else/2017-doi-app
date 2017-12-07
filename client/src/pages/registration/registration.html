@@ -3,40 +3,66 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-list>
-
-    <ion-item>
-    <ion-label floating>First Name</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
-
-    <ion-item>
-      <ion-label floating>Phone Number</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label floating>Zip Code</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
 
     <ion-item>
       <ion-label floating>Email</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input formControlName="email" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="authForm.controls.email.hasError('required') && authForm.controls.email.touched">
+      <p>Sorry, field email is required!</p>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.email.hasError('email') && authForm.controls.email.touched">
+      <p>Must be a valid email!</p>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Password</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched">
+      <p>Sorry, field password is required!</p>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.password.hasError('minlength') && authForm.controls.password.touched">
+      <p>Sorry, minimum password length is 8!</p>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Repeat Password</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-label floating>Phone Number</ion-label>
+      <ion-input formControlName="phoneNumber" type="text"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.phoneNumber.hasError('required') && authForm.controls.phoneNumber.touched">
+      <p>Sorry, field Phone Number is required!</p>
     </ion-item>
 
-  </ion-list>
-  <button ion-button full class="quarter-button" color="secondary" id ="form1Sbm" (click)="goToEULA();">Register</button>
+    <ion-item>
+      <ion-label floating>Zip Code</ion-label>
+      <ion-input formControlName="zipCode" type="text"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.zipCode.hasError('required') && authForm.controls.zipCode.touched">
+      <p>Sorry, field Zip Code is required!</p>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label floating>Repeat Password</ion-label>
+      <ion-input formControlName="repeatPassword" type="password" ></ion-input>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.repeatPassword.hasError('required') && authForm.controls.repeatPassword.touched">
+      <p>Sorry, field Repeat Password is required!</p>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.repeatPassword.hasError('minlength') && authForm.controls.repeatPassword.touched">
+      <p>Sorry, minimum password length is 8!</p>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.repeatPassword.touched && authForm.hasError('mismatchedPasswords') && authForm.controls.password.valid">
+      <p>Passwords do not match</p>
+    </ion-item>
+
+
+
+    <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="secondary" id ="form1Sbm" type = "submit"(click)="goToEULA();">Create Account</button>
+  </form>
 </ion-content>
 
 

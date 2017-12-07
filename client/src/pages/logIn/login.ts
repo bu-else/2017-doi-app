@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController,NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { AlertController } from 'ionic-angular';
 import * as $ from 'jquery';
 import {RegistrationPage} from "../registration/registration";
 import {TabsPage} from "../tabs/tabs";
@@ -18,8 +20,13 @@ import * as Hapi from 'hapi';
 export class LoginPage {
   registered: boolean;
   @ViewChild('myNav') nav: NavController;
+  authForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public storage: Storage) {
+  constructor(public navCtrl: NavController, public storage: Storage, private alertCtrl: AlertController,public navParams: NavParams, public formBuilder: FormBuilder) {
+    this.authForm = formBuilder.group({
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
+    });
     this.checkAgreed();
   }
 

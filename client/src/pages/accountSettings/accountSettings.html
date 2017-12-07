@@ -1,32 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+<ion-header>
+  <ion-navbar>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
 
-<form class="modal-content animate">
-  <div class="container">
-    <label><b>Change Phone Number</b></label>
-    <ion-input type="text" placeholder="Enter New Phone Number" name="phoneNumber" required></ion-input>
-    <label><b>Change Zip Code</b></label>
-    <ion-input type="text" placeholder="Enter New ZipCode" name="zipCode" required></ion-input>
-    <label><b>Change Email</b></label>
-    <ion-input type="text" placeholder="Enter New Email" name="email" required></ion-input>
+    <ion-item>
+      <ion-label floating>Change Email</ion-label>
+      <ion-input formControlName="email" type="text"></ion-input>
+    </ion-item>
 
-    <label><b>Change Password</b></label>
-    <ion-input type="password" placeholder="Enter New Password" name="psw" required></ion-input>
+    <ion-item *ngIf="authForm.controls.email.hasError('required') && authForm.controls.email.touched">
+      <p>Sorry, field email is required!</p>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.email.hasError('email') && authForm.controls.email.touched">
+      <p>Must be a valid email!</p>
+    </ion-item>
 
-    <label><b>Repeat Changed Password</b></label>
-    <ion-input type="password" placeholder="Repeat New Password" name="psw-repeat" required></ion-input>
+    <ion-item>
+      <ion-label floating>Change Password</ion-label>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched">
+      <p>Sorry, field password is required!</p>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.password.hasError('minlength') && authForm.controls.password.touched">
+      <p>Sorry, minimum password length is 8!</p>
+    </ion-item>
 
-    <div class="clearfix">
-      <button type="submit" class="confirmbtn">Confirm</button>
-    </div>
-  </div>
-</form>
+    <ion-item>
+      <ion-label floating>Change Phone Number</ion-label>
+      <ion-input formControlName="phoneNumber" type="text"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.phoneNumber.hasError('required') && authForm.controls.phoneNumber.touched">
+      <p>Sorry, field Phone Number is required!</p>
+    </ion-item>
 
-</body>
-</html>
+    <ion-item>
+      <ion-label floating>Change Zip Code</ion-label>
+      <ion-input formControlName="zipCode" type="text"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.zipCode.hasError('required') && authForm.controls.zipCode.touched">
+      <p>Sorry, field Zip Code is required!</p>
+    </ion-item>
 
+
+    <ion-item>
+      <ion-label floating>Repeat New Password</ion-label>
+      <ion-input formControlName="repeatPassword" type="password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.repeatPassword.hasError('required') && authForm.controls.repeatPassword.touched">
+      <p>Sorry, field Repeat Password is required!</p>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.repeatPassword.hasError('minlength') && authForm.controls.repeatPassword.touched">
+      <p>Sorry, minimum password length is 8!</p>
+    </ion-item>
+    <ion-item *ngIf="authForm.controls.repeatPassword.touched && authForm.hasError('mismatchedPasswords') && authForm.controls.password.valid">
+      <p>Passwords do not match</p>
+    </ion-item>
+
+
+
+  <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="secondary" id ="form1Sbm" type = "submit"(click)="goToMain();presentAlert();">Confirm Changes</button>
+  </form>
+</ion-content>
