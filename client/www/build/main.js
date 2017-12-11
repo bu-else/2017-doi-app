@@ -791,7 +791,7 @@ var WaitPage = (function () {
     WaitPage.prototype.sendLocation = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var location, e_1, deviceID, e_2, latLng, phoneNumber;
+            var location, e_1, deviceID, e_2, latLng;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -819,17 +819,11 @@ var WaitPage = (function () {
                         return [3 /*break*/, 7];
                     case 7:
                         latLng = location.coords.latitude + "," + location.coords.longitude;
-                        return [4 /*yield*/, this.storage.get("phoneNumber")];
-                    case 8:
-                        phoneNumber = _a.sent();
-                        if (!phoneNumber) {
-                            this.showError("400", "No phone number stored for this account");
-                        }
                         if (this.isSMS) {
                             this.sms.send(__WEBPACK_IMPORTED_MODULE_6__env__["b" /* TWILLIO_NUMBER */], "latlng\n" + deviceID + "\n" + latLng, { replaceLineBreaks: true });
                         }
                         else {
-                            this.http.get("http://localhost:8100/latlng/?&deviceID=" + deviceID + "&From=" + phoneNumber + "&LatLng=" + latLng, { "responseType": "text" }).subscribe(function (data) {
+                            this.http.get("http://localhost:8100/latlng/?&deviceID=" + deviceID + "&From=" + this.storage.get("phoneNumber") + "&LatLng=" + latLng, { "responseType": "text" }).subscribe(function (data) {
                                 _this.getDispatch();
                                 return console.log(data);
                             }, function (err) {
@@ -1039,10 +1033,9 @@ WaitPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-wait',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/wait/wait.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Wait</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-card *ngIf="state==emergencyEnum.CALL">\n    <ion-card-content>\n      <button ion-button full class="quarter-button" color="danger" (click)="startEmergency()">Emergency</button>\n    </ion-card-content>\n  </ion-card>\n  <ion-card *ngIf="state==emergencyEnum.SEND">\n    <ion-card-content>\n      <h2 style="text-align: center;">Please confirm your location</h2>\n      <ion-label color="primary" stacked>Address</ion-label>\n      <ion-input type="text" [(ngModel)]="address" placeholder="Confirm Address"></ion-input>\n      <ion-label color="primary" stacked>Zipcode</ion-label>\n      <ion-input type="text" [(ngModel)]="zipcode" placeholder="Confirm Zipcode"></ion-input>\n      <button ion-button full class="quarter-button" color="light" (click)="sendAddress()">Update Information</button>\n    </ion-card-content>\n  </ion-card>\n\n  <ion-card *ngIf="state!=emergencyEnum.CALL">\n    <ion-card-header>\n      <div *ngIf="isSMS">\n        Please check your SMS to ensure help is on the way!\n      </div>\n      <div *ngIf="!isSMS">\n        <div *ngIf="isConfirmed">\n          Help is on the way!\n        </div>\n        <div *ngIf="!isConfirmed">\n          Waiting for confirmation from the dispatcher!\n        </div>\n      </div>\n    </ion-card-header>\n    <ion-card-content>\n      <button ion-button full class="quarter-button" color="dark" (click)="endEmergency()">Emergency Over</button>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n\n\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/wait/wait.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_unique_device_id__["a" /* UniqueDeviceID */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_unique_device_id__["a" /* UniqueDeviceID */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_sms__["a" /* SMS */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_sms__["a" /* SMS */]) === "function" && _g || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_7__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */], __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_unique_device_id__["a" /* UniqueDeviceID */], __WEBPACK_IMPORTED_MODULE_5__ionic_native_sms__["a" /* SMS */]])
 ], WaitPage);
 
-var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=wait.js.map
 
 /***/ }),
