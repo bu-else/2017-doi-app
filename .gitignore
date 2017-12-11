@@ -69,3 +69,5 @@ client/www/build/vendor.js.map
 client/www/build/main.js
 
 client/www/build/main.js.map
+
+client/src/env.ts

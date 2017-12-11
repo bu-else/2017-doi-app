@@ -4,8 +4,10 @@ import {NavController, AlertController} from 'ionic-angular';
 import {Geolocation} from "@ionic-native/geolocation";
 import {UniqueDeviceID} from "@ionic-native/unique-device-id";
 import {SMS} from '@ionic-native/sms';
+import * as Env from "../../env";
+import { Storage } from '@ionic/storage';
 
-export enum EmergencyState {
+enum EmergencyState {
   CALL, // Button is available to call emergency. We then confirm.
   SEND, // Input address and send it to the dispatcher.
   WAIT // Nothing else to be done. Wait for dispatcher or button to be pressed.
@@ -17,7 +19,7 @@ export enum EmergencyState {
 })
 
 export class WaitPage {
-  // tslint:disable-next-line: no-unused-variable
+  // HACK: This is the only way to access an enum declared in the same file in this class. (It seems)
   private emergencyEnum = EmergencyState;
   private state: EmergencyState;
   private address: string;
@@ -28,8 +30,8 @@ export class WaitPage {
   private confirmationPings: number = 4;
   private currentPings: number = 0;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public geolocation: Geolocation, public http: HttpClient, public  uniqueDeviceID: UniqueDeviceID, public sms: SMS) {
-    this.state = EmergencyState.CALL;
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public storage: Storage, public geolocation: Geolocation, public http: HttpClient, public  uniqueDeviceID: UniqueDeviceID, public sms: SMS) {
+    this.state = this.emergencyEnum.CALL;
   }
 
   public startEmergency(): void {
@@ -81,7 +83,7 @@ export class WaitPage {
   }
 
   public async sendLocation() {
-    this.state = EmergencyState.SEND;
+    this.state = this.emergencyEnum.SEND;
     var location;
     try {
       location = await this.geolocation.getCurrentPosition();
@@ -96,11 +98,15 @@ export class WaitPage {
       deviceID = "computer-id";
     }
     const latLng = location.coords.latitude + "," + location.coords.longitude;
+    const phoneNumber = await this.storage.get("phoneNumber");
+    if (!phoneNumber) {
+      this.showError("400","No phone number stored for this account");
+    }
 
     if (this.isSMS) {
-      this.sms.send("6178299064", "latlng\n" + deviceID + "\n" + latLng, {replaceLineBreaks: true});
+      this.sms.send(Env.TWILLIO_NUMBER, "latlng\n" + deviceID + "\n" + latLng, {replaceLineBreaks: true});
     } else {
-      this.http.get("http://localhost:8100/latlng/?&deviceID=" + deviceID + "&LatLng=" + latLng, {"responseType": "text"}).subscribe(
+      this.http.get("http://localhost:8100/latlng/?&deviceID=" + deviceID + "&From=" + phoneNumber + "&LatLng=" + latLng, {"responseType": "text"}).subscribe(
         data => {
           this.getDispatch();
           return console.log(data);
@@ -122,7 +128,7 @@ export class WaitPage {
     }
 
     if (this.isSMS) {
-      this.sms.send("6178299064", "address\n" + deviceID + "\n" + this.address + "\n" + this.zipcode, {replaceLineBreaks: true});
+      this.sms.send(Env.TWILLIO_NUMBER, "address\n" + deviceID + "\n" + this.address + "\n" + this.zipcode, {replaceLineBreaks: true});
     } else {
       console.log("HELLO");
       this.http.get("http://localhost:8100/address/?&deviceID=" + deviceID + "&Address=" + this.address + "&Zipcode=" + this.zipcode, {"responseType": "text"}).subscribe(
@@ -135,7 +141,7 @@ export class WaitPage {
         }
       );
     }
-    this.state = EmergencyState.WAIT;
+    this.state = this.emergencyEnum.WAIT;
   }
 
   public endEmergency(): void {
@@ -169,7 +175,7 @@ export class WaitPage {
       deviceID = "computer-id";
     }
     if (this.isSMS) {
-      this.sms.send("6178299064", "end\n" + deviceID, {replaceLineBreaks: true});
+      this.sms.send(Env.TWILLIO_NUMBER, "end\n" + deviceID, {replaceLineBreaks: true});
     } else {
       this.http.get("http://localhost:8100/end/?&deviceID=" + deviceID, {"responseType": "text"}).subscribe(
         data => {
@@ -185,7 +191,7 @@ export class WaitPage {
   }
 
   public async getDispatch() {
-    if (this.state == EmergencyState.CALL) {
+    if (this.state == this.emergencyEnum.CALL) {
       return;
     }
     var deviceID;
@@ -210,14 +216,31 @@ export class WaitPage {
           });
           dialogue.present();
           this.isConfirmed = true;
+        } else if (data == "Ended") {
+          let dialogue = this.alertCtrl.create({
+            title: 'Emergency ended!',
+            message: 'The emergency was ended! Check your SMS for more details.',
+            buttons: [
+              {
+                text: 'OK',
+                handler: () => {
+                  this.resetEmergency();
+                }
+              },
+            ],
+            cssClass: 'big-alert'
+          });
+          dialogue.present();
         } else if (data == "Rejected") {
-          this.showError("503","The dispatcher is unable to handle your request.")
-        } else {
+          this.showError("503","The dispatcher is unable to handle your request.");
+        } else if (data == "Pending") {
           if (this.currentPings < this.confirmationPings) {
             setTimeout(() => {this.getDispatch()}, this.confirmationTime/this.confirmationPings);
           } else {
-            this.showError("408", "Did not recieve a confirmation in time.");
+            this.showError("408", "Did not receive a confirmation in time.");
           }
+        } else {
+          this.showError("501","Unexpected response from the server");
         }
       },
       err => {

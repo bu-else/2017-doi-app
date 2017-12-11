@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import * as $ from 'jquery';
 import {LoginPage} from "../logIn/login";
 import { AlertController } from 'ionic-angular';
+import * as Env from "../../env";
 
 
 @Component({
@@ -17,9 +18,10 @@ export class MainPage {
 
   }
 
-  public clearStorage(): void {
-    this.storage.clear();
+  public async clearStorage() {
+    console.log(await this.storage.clear());
     // console.log(Config.get("projectName"));
+    console.log(await this.storage.set("phoneNumber",Env.BEN_NUMBER));
   }
   public goToLogin(): void{
     this.navCtrl.setRoot(LoginPage);
