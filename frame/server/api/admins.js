@@ -18,10 +18,10 @@ internals.applyRoutes = function (server, next) {
         method: 'GET',
         path: '/admins',
         config: {
-            auth: {
-                strategy: 'simple',
-                scope: 'admin'
-            },
+            // auth: {
+            //     strategy: 'simple',
+            //     scope: 'admin'
+            // },
             validate: {
                 query: {
                     fields: Joi.string(),
