@@ -204,33 +204,17 @@ export class WaitPage {
     this.http.get("http://localhost:8100/dispatch/?&deviceID=" + deviceID, {"responseType": "text"}).subscribe(
       data => {
         if (data == "Accepted") {
-          let dialogue = this.alertCtrl.create({
-            title: 'Emergency confirmed!',
-            message: 'Help is on the way to your position now!',
-            buttons: [
-              {
-                text: 'OK',
-              },
-            ],
-            cssClass: 'big-alert'
-          });
-          dialogue.present();
+          this.showAlert('Emergency confirmed!',
+            'Help is on the way to your position now!',
+            ()=> {
+            });
           this.isConfirmed = true;
         } else if (data == "Ended") {
-          let dialogue = this.alertCtrl.create({
-            title: 'Emergency ended!',
-            message: 'The emergency was ended! Check your SMS for more details.',
-            buttons: [
-              {
-                text: 'OK',
-                handler: () => {
-                  this.resetEmergency();
-                }
-              },
-            ],
-            cssClass: 'big-alert'
+          this.showAlert('Emergency ended!',
+            'The emergency was ended! Check your SMS for more details.',
+            ()=> {
+              this.resetEmergency();
           });
-          dialogue.present();
         } else if (data == "Rejected") {
           this.showError("503","The dispatcher is unable to handle your request.");
         } else if (data == "Pending") {
@@ -252,15 +236,20 @@ export class WaitPage {
 
 
   public showError(code: string, text: string): void {
+    this.showAlert('Error ' + code,
+      'An error occurred:\n' + text +'\n Please call 911 to handle this emergency!',
+      () => {this.resetEmergency();
+    });
+  }
+
+  public showAlert(title:string,message:string,handler:()=>void) {
     let dialogue = this.alertCtrl.create({
-      title: 'Error ' + code,
-      message: 'An error occurred:\n' + text +"\n Please call 911 to handle this emergency!",
+      title: title,
+      message: message,
       buttons: [
         {
           text: 'OK',
-          handler: () => {
-            this.resetEmergency();
-          }
+          handler: handler
         },
       ],
       cssClass: 'big-alert'
