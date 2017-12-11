@@ -21,16 +21,16 @@ internals.applyRoutes = function (server, next) {
         config: {
             validate: {
                 payload: {
-                    name: Joi.string().required(),
                     email: Joi.string().email().lowercase().required(),
-                    username: Joi.string().token().lowercase().required(),
-                    password: Joi.string().required()
+                    password: Joi.string().required(),
+                    phoneNumber: Joi.string().required(),
+                    zipCode: Joi.string().required()
                 }
             },
             pre: [{
                 assign: 'usernameCheck',
                 method: function (request, reply) {
-
+                    console.log("trying to validate username...");
                     const conditions = {
                         username: request.payload.username
                     };

@@ -7,7 +7,7 @@
 
     <ion-item>
       <ion-label floating>Email</ion-label>
-      <ion-input formControlName="email" type="text"></ion-input>
+      <ion-input formControlName="email" type="text" id="email"></ion-input>
     </ion-item>
 
     <ion-item *ngIf="authForm.controls.email.hasError('required') && authForm.controls.email.touched">
@@ -19,7 +19,7 @@
 
     <ion-item>
       <ion-label floating>Password</ion-label>
-      <ion-input formControlName="password" type="password"></ion-input>
+      <ion-input formControlName="password" type="password" id="psw"></ion-input>
     </ion-item>
     <ion-item *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched">
       <p>Sorry, field password is required!</p>
@@ -27,10 +27,13 @@
     <ion-item *ngIf="authForm.controls.password.hasError('minlength') && authForm.controls.password.touched">
       <p>Sorry, minimum password length is 8!</p>
     </ion-item>
+    <ion-item *ngIf="authForm.controls.password.hasError('pattern') && authForm.controls.password.touched">
+      <p>Password should be at least 8 characters long and <br>should contain one number,one character <br>and one special character.</p>
+    </ion-item>
 
     <ion-item>
       <ion-label floating>Phone Number</ion-label>
-      <ion-input formControlName="phoneNumber" type="text"></ion-input>
+      <ion-input formControlName="phoneNumber" type="text" id="phoneNumber"></ion-input>
     </ion-item>
     <ion-item *ngIf="authForm.controls.phoneNumber.hasError('required') && authForm.controls.phoneNumber.touched">
       <p>Sorry, field Phone Number is required!</p>
@@ -38,7 +41,7 @@
 
     <ion-item>
       <ion-label floating>Zip Code</ion-label>
-      <ion-input formControlName="zipCode" type="text"></ion-input>
+      <ion-input formControlName="zipCode" type="text" id="zipCode"></ion-input>
     </ion-item>
     <ion-item *ngIf="authForm.controls.zipCode.hasError('required') && authForm.controls.zipCode.touched">
       <p>Sorry, field Zip Code is required!</p>
@@ -61,7 +64,7 @@
 
 
 
-    <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="secondary" id ="form1Sbm" type = "submit"(click)="goToEULA();">Create Account</button>
+    <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="secondary" id ="form1Sbm" type = "submit"(click)="register();goToEULA();">Create Account</button>
   </form>
 </ion-content>
 

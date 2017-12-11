@@ -59,18 +59,11 @@ export class RegistrationPage {
 
 
   public register() {
-    $("#form1Sbm").click(function () {
       //submitHandlerPatient("<%= configUrl %>");
-      var firstName = $("#firstName") ? $("#firstName")[0].value : "a";
       var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "a";
       var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "a";
       var email = $("#email") ? ($("#email")[0].value) : "a"; //default
       var password = $("#psw") ? $("#psw")[0].value : "a";
-      var repeatPassword = $("#psw-repeat") ? $("#psw-repeat")[0].value : "ab";
-      if (password != repeatPassword){
-        console.log("Don't match");
-        return
-      }
 
       // @Michael: Please keep this or refactor it because @Ben is relying on this for sending it to the server
       // You can remove this comment.
@@ -80,13 +73,12 @@ export class RegistrationPage {
         type: 'POST',
         url: "localhost:8001/api/signup",
         data: {
-          firstName: firstName,
           email: email,
           password: password,
           phoneNumber: phoneNumber,
           zipCode: zipCode
         },
-        dataType: "application/json",
+        dataType: "jsonp",
         success: function (data, text) {
           //basil.set('cookie', data);
 
@@ -103,7 +95,7 @@ export class RegistrationPage {
           console.log('failure')
         }
       });
-    })}
+    }
   public goToEULA(): void{
       this.navCtrl.setRoot(EulaPage);
   }
