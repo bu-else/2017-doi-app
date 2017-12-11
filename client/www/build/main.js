@@ -408,45 +408,36 @@ var RegistrationPage = (function () {
         });
     };
     RegistrationPage.prototype.register = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__("#form1Sbm").click(function () {
-            //submitHandlerPatient("<%= configUrl %>");
-            var firstName = __WEBPACK_IMPORTED_MODULE_4_jquery__("#firstName") ? __WEBPACK_IMPORTED_MODULE_4_jquery__("#firstName")[0].value : "a";
-            var phoneNumber = __WEBPACK_IMPORTED_MODULE_4_jquery__("#phoneNumber") ? __WEBPACK_IMPORTED_MODULE_4_jquery__("#phoneNumber")[0].value : "a";
-            var zipCode = __WEBPACK_IMPORTED_MODULE_4_jquery__("#zipCode") ? __WEBPACK_IMPORTED_MODULE_4_jquery__("#zipCode")[0].value : "a";
-            var email = __WEBPACK_IMPORTED_MODULE_4_jquery__("#email") ? (__WEBPACK_IMPORTED_MODULE_4_jquery__("#email")[0].value) : "a"; //default
-            var password = __WEBPACK_IMPORTED_MODULE_4_jquery__("#psw") ? __WEBPACK_IMPORTED_MODULE_4_jquery__("#psw")[0].value : "a";
-            var repeatPassword = __WEBPACK_IMPORTED_MODULE_4_jquery__("#psw-repeat") ? __WEBPACK_IMPORTED_MODULE_4_jquery__("#psw-repeat")[0].value : "ab";
-            if (password != repeatPassword) {
-                console.log("Don't match");
-                return;
+        //submitHandlerPatient("<%= configUrl %>");
+        var phoneNumber = __WEBPACK_IMPORTED_MODULE_4_jquery__("#phoneNumber") ? __WEBPACK_IMPORTED_MODULE_4_jquery__("#phoneNumber")[0].value : "a";
+        var zipCode = __WEBPACK_IMPORTED_MODULE_4_jquery__("#zipCode") ? __WEBPACK_IMPORTED_MODULE_4_jquery__("#zipCode")[0].value : "a";
+        var email = __WEBPACK_IMPORTED_MODULE_4_jquery__("#email") ? (__WEBPACK_IMPORTED_MODULE_4_jquery__("#email")[0].value) : "a"; //default
+        var password = __WEBPACK_IMPORTED_MODULE_4_jquery__("#psw") ? __WEBPACK_IMPORTED_MODULE_4_jquery__("#psw")[0].value : "a";
+        // @Michael: Please keep this or refactor it because @Ben is relying on this for sending it to the server
+        // You can remove this comment.
+        this.storage.set("phoneNumber", __WEBPACK_IMPORTED_MODULE_4_jquery__("#phoneNumber"));
+        __WEBPACK_IMPORTED_MODULE_4_jquery__["ajax"]({
+            type: 'POST',
+            url: "localhost:8001/api/signup",
+            data: {
+                email: email,
+                password: password,
+                phoneNumber: phoneNumber,
+                zipCode: zipCode
+            },
+            dataType: "jsonp",
+            success: function (data, text) {
+                //basil.set('cookie', data);
+                console.log("sucess");
+                console.log(data);
+                //window.location.href = serverUrl;
+            },
+            error: function (request, status, error) {
+                var reply = request.responseText;
+                var replyText = (JSON.parse(reply));
+                alert(replyText.message);
+                console.log('failure');
             }
-            // @Michael: Please keep this or refactor it because @Ben is relying on this for sending it to the server
-            // You can remove this comment.
-            this.storage.set("phoneNumber", __WEBPACK_IMPORTED_MODULE_4_jquery__("#phoneNumber"));
-            __WEBPACK_IMPORTED_MODULE_4_jquery__["ajax"]({
-                type: 'POST',
-                url: "localhost:8001/api/signup",
-                data: {
-                    firstName: firstName,
-                    email: email,
-                    password: password,
-                    phoneNumber: phoneNumber,
-                    zipCode: zipCode
-                },
-                dataType: "application/json",
-                success: function (data, text) {
-                    //basil.set('cookie', data);
-                    console.log("sucess");
-                    console.log(data);
-                    //window.location.href = serverUrl;
-                },
-                error: function (request, status, error) {
-                    var reply = request.responseText;
-                    var replyText = (JSON.parse(reply));
-                    alert(replyText.message);
-                    console.log('failure');
-                }
-            });
         });
     };
     RegistrationPage.prototype.goToEULA = function () {
@@ -469,7 +460,11 @@ __decorate([
 ], RegistrationPage.prototype, "nav", void 0);
 RegistrationPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+<<<<<<< Updated upstream
         selector: 'page-registration',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/registration/registration.html"*/'<ion-header>\n  <ion-navbar>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">\n\n    <ion-item>\n      <ion-label floating>Email</ion-label>\n      <ion-input formControlName="email" type="text"></ion-input>\n    </ion-item>\n\n    <ion-item *ngIf="authForm.controls.email.hasError(\'required\') && authForm.controls.email.touched">\n      <p>Sorry, field email is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.email.hasError(\'email\') && authForm.controls.email.touched">\n      <p>Must be a valid email!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Password</ion-label>\n      <ion-input formControlName="password" type="password"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'required\') && authForm.controls.password.touched">\n      <p>Sorry, field password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'minlength\') && authForm.controls.password.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Phone Number</ion-label>\n      <ion-input formControlName="phoneNumber" type="text"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.phoneNumber.hasError(\'required\') && authForm.controls.phoneNumber.touched">\n      <p>Sorry, field Phone Number is required!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Zip Code</ion-label>\n      <ion-input formControlName="zipCode" type="text"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.zipCode.hasError(\'required\') && authForm.controls.zipCode.touched">\n      <p>Sorry, field Zip Code is required!</p>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label floating>Repeat Password</ion-label>\n      <ion-input formControlName="repeatPassword" type="password" ></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'required\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, field Repeat Password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'minlength\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.touched && authForm.hasError(\'mismatchedPasswords\') && authForm.controls.password.valid">\n      <p>Passwords do not match</p>\n    </ion-item>\n\n\n\n    <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="secondary" id ="form1Sbm" type = "submit"(click)="goToEULA();">Create Account</button>\n  </form>\n</ion-content>\n\n\n<!--\n<script>\n  function register(){\n    console.log("hello");\n    $("#form1Sbm").click(function () {\n      //submitHandlerPatient("<%= configUrl %>");\n      var firstName = $("#firstName") ? $("#firstName")[0].value : " ";\n      var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "";\n      var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "";\n      var email = $("#email") ? ($("#email")[0].value) : ""; //default\n      var password = $("#psw") ? $("#psw")[0].value : "";\n\n      $.ajax({\n        type: \'POST\',\n        url: "localhost:8001/api/signup",\n        data: {\n          firstName: Joi.string().required(),\n          email: Joi.string().email().lowercase().required(),\n          password: Joi.string().required(),\n          phoneNumber: Joi.string().required(),\n          zipCode: Joi.string().required()\n        },\n        dataType: "json",\n        success: function (data, text) {\n          basil.set(\'cookie\', data);\n          console.log("sucess");\n          console.log(data)\n          window.location.href = serverUrl;\n        },\n        error: function (request, status, error) {\n          var reply = request.responseText\n          var replyText = (JSON.parse(reply))\n          alert(replyText.message)\n          console.log(\'failure\')\n        }\n      });\n    }\n</script>\n-->\n\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/registration/registration.html"*/
+=======
+        selector: 'page-registration',template:/*ion-inline-start:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/registration/registration.html"*/'<ion-header>\n  <ion-navbar>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">\n\n    <ion-item>\n      <ion-label floating>Email</ion-label>\n      <ion-input formControlName="email" type="text" id="email"></ion-input>\n    </ion-item>\n\n    <ion-item *ngIf="authForm.controls.email.hasError(\'required\') && authForm.controls.email.touched">\n      <p>Sorry, field email is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.email.hasError(\'email\') && authForm.controls.email.touched">\n      <p>Must be a valid email!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Password</ion-label>\n      <ion-input formControlName="password" type="password" id="psw"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'required\') && authForm.controls.password.touched">\n      <p>Sorry, field password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'minlength\') && authForm.controls.password.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'pattern\') && authForm.controls.password.touched">\n      <p>Password should be at least 8 characters long and <br>should contain one number,one character <br>and one special character.</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Phone Number</ion-label>\n      <ion-input formControlName="phoneNumber" type="text" id="phoneNumber"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.phoneNumber.hasError(\'required\') && authForm.controls.phoneNumber.touched">\n      <p>Sorry, field Phone Number is required!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Zip Code</ion-label>\n      <ion-input formControlName="zipCode" type="text" id="zipCode"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.zipCode.hasError(\'required\') && authForm.controls.zipCode.touched">\n      <p>Sorry, field Zip Code is required!</p>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label floating>Repeat Password</ion-label>\n      <ion-input formControlName="repeatPassword" type="password" ></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'required\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, field Repeat Password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'minlength\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.touched && authForm.hasError(\'mismatchedPasswords\') && authForm.controls.password.valid">\n      <p>Passwords do not match</p>\n    </ion-item>\n\n\n\n    <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="secondary" id ="form1Sbm" type = "submit"(click)="register();goToEULA();">Create Account</button>\n  </form>\n</ion-content>\n\n\n<!--\n<script>\n  function register(){\n    console.log("hello");\n    $("#form1Sbm").click(function () {\n      //submitHandlerPatient("<%= configUrl %>");\n      var firstName = $("#firstName") ? $("#firstName")[0].value : " ";\n      var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "";\n      var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "";\n      var email = $("#email") ? ($("#email")[0].value) : ""; //default\n      var password = $("#psw") ? $("#psw")[0].value : "";\n\n      $.ajax({\n        type: \'POST\',\n        url: "localhost:8001/api/signup",\n        data: {\n          firstName: Joi.string().required(),\n          email: Joi.string().email().lowercase().required(),\n          password: Joi.string().required(),\n          phoneNumber: Joi.string().required(),\n          zipCode: Joi.string().required()\n        },\n        dataType: "json",\n        success: function (data, text) {\n          basil.set(\'cookie\', data);\n          console.log("sucess");\n          console.log(data)\n          window.location.href = serverUrl;\n        },\n        error: function (request, status, error) {\n          var reply = request.responseText\n          var replyText = (JSON.parse(reply))\n          alert(replyText.message)\n          console.log(\'failure\')\n        }\n      });\n    }\n</script>\n-->\n\n'/*ion-inline-end:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/registration/registration.html"*/
+>>>>>>> Stashed changes
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]])
 ], RegistrationPage);
