@@ -6,6 +6,7 @@ import { AlertController } from 'ionic-angular';
 import * as $ from 'jquery';
 import {RegistrationPage} from "../registration/registration";
 import {TabsPage} from "../tabs/tabs";
+import * as Env from "../../env";
 
 /*
 import * as basil from 'basil-js';
@@ -72,17 +73,18 @@ export class LoginPage {
         }
       });
     })}
-    public goToReg(): void{
-      this.navCtrl.push(RegistrationPage);
-    }
-    public goToMain(): void{
-      this.navCtrl.setRoot(TabsPage);
-    }
-
-    /*
-    public async register() {
-      await this.storage.set("registered",true);
-      this.checkAgreed()
-    }
-    */
+  public goToReg(): void{
+    this.navCtrl.push(RegistrationPage);
   }
+  public goToMain(): void{
+    this.navCtrl.setRoot(TabsPage);
+  }
+
+  /*
+  public async register() {
+    await this.storage.set("registered",true);
+    this.checkAgreed()
+  }
+  */
+}
+
