@@ -78,3 +78,5 @@ client/src/env.ts
 client/www/build/main.js
 
 client/www/build/main.js.map
+
+client/www/build/main.js
