@@ -24,6 +24,7 @@ internals.applyRoutes = function (server, next) {
                     /*
                     email: Joi.string().email().lowercase().required(),
                     password: Joi.string().required(),
+                    username: Joi.string().required(),
                     phoneNumber: Joi.string().required(),
                     zipCode: Joi.string().required(),
                     username: Joi.string().required()
@@ -94,7 +95,7 @@ internals.applyRoutes = function (server, next) {
                 },
                 account: ['user', function (results, done) {
 
-                    const name = request.payload.name;
+                    const name = request.payload.username;
 
                     Account.create(name, done);
                 }],
