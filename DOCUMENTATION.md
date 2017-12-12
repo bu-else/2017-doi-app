@@ -31,6 +31,12 @@ First, you will want to clone this repository onto your computer. Then you will 
 client\src\env.ts
 ```
 which either Ben or Michael can send you. You can also find it our Slack channel!
+Once that is done, you can test it fully-functional in your browser with:
+```
+ionic serve
+```
+in the client folder.
+The [Ionic tutorial](https://ionicframework.com/docs/intro/deploying/) does a good job on explaining deploying to a device. 
 
 
 # API
