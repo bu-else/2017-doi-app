@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, AlertController } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
+import { HttpModule } from '@angular/http';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { EulaPage } from "../pages/eula/eula";
@@ -36,7 +37,8 @@ import { SMS } from '@ionic-native/sms';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    HttpModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

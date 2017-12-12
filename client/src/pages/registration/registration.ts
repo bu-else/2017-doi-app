@@ -5,6 +5,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AlertController} from 'ionic-angular';
 import * as $ from 'jquery';
 import {EulaPage} from "../eula/eula";
+import 'rxjs/add/operator/toPromise';
+
+import { Injectable } from '@angular/core';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 /*
 import * as basil from 'basil-js';
@@ -20,18 +25,44 @@ export class RegistrationPage {
   registered: boolean;
   @ViewChild('myNav') nav: NavController;
   authForm: FormGroup;
-
-  constructor(public navCtrl: NavController, public storage: Storage, public navParams: NavParams, public formBuilder: FormBuilder) {
+  email;
+  zipCode;
+  password;
+  phoneNumber;
+  name;
+  constructor(private http:Http, public navCtrl: NavController, public storage: Storage, public navParams: NavParams, public formBuilder: FormBuilder) {
     this.nav = navCtrl;
 
     this.authForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
       phoneNumber: ['', Validators.compose([Validators.required])],
+      name: ['', Validators.compose([Validators.required])],
       repeatPassword: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
       zipCode: ['', Validators.compose([Validators.required])],
     }, {validator: this.matchingPasswords('password', 'repeatPassword')});
     this.checkAgreed();
+  }
+
+
+  postRequest() {
+    var headers = new Headers();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/json' );
+    let options = new RequestOptions({ headers: headers });
+
+    let postParams = {
+      title: 'foo',
+      body: 'bar',
+      userId: 1
+    }
+
+    this.http.post("http://jsonplaceholder.typicode.com/posts", postParams, options)
+      .subscribe(data => {
+        console.log(data['_body']);
+      }, error => {
+        console.log(error);// Error getting the data
+      });
   }
 
   matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
@@ -58,41 +89,30 @@ export class RegistrationPage {
 
 
   public register() {
-    //submitHandlerPatient("<%= configUrl %>");
-    var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "a";
-    var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "a";
-    var email = $("#email") ? ($("#email")[0].value) : "a"; //default
-    var password = $("#psw") ? $("#psw")[0].value : "a";
+    var headers = new Headers();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/json' );
+    //headers.append("Access-Control-Allow-Origin"," *");
+    let options = new RequestOptions({ headers: headers });
+    var name = this.name;
+    var email = this.email;
+    var password = this.password;
 
-    // @Michael: Please keep this or refactor it because @Ben is relying on this for sending it to the server
-    // You can remove this comment.
-    this.storage.set("phoneNumber", $("#phoneNumber"));
+    let postParams = {
+      "name": name,
+      "email": email,
+      "username": name,
+      "password": password
+    }
+    console.log(postParams);
 
-    $.ajax({
-      type: 'POST',
-      url: "localhost:8001/api/signup",
-      data: {
-        email: email,
-        password: password,
-        phoneNumber: phoneNumber,
-        zipCode: zipCode
-      },
-      dataType: "jsonp",
-      success: function (data, text) {
-        //basil.set('cookie', data);
-
-
-        console.log("sucess");
-        console.log(data)
-        //window.location.href = serverUrl;
-      },
-      error: function (request, status, error) {
-        var reply = request.responseText
-        var replyText = (JSON.parse(reply))
-        alert(replyText.message)
-        console.log('failure')
-      }
-    });
+    this.http.post("http://localhost:8001/api/signup", postParams, options)
+      .subscribe(data => {
+        console.log(data['_body']);
+      }, error => {
+        console.log("error");
+        console.log(error);// Error getting the data
+      });
   }
 
   public goToEULA(): void {

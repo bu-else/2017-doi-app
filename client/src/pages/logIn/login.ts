@@ -3,6 +3,7 @@ import { IonicPage, NavController,NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { AlertController } from 'ionic-angular';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import * as $ from 'jquery';
 import {RegistrationPage} from "../registration/registration";
 import {TabsPage} from "../tabs/tabs";
@@ -22,10 +23,13 @@ export class LoginPage {
   registered: boolean;
   @ViewChild('myNav') nav: NavController;
   authForm: FormGroup;
+  name;
+  password;
+  items;
 
-  constructor(public navCtrl: NavController, public storage: Storage, private alertCtrl: AlertController,public navParams: NavParams, public formBuilder: FormBuilder) {
+  constructor(private http:Http, public navCtrl: NavController, public storage: Storage, private alertCtrl: AlertController,public navParams: NavParams, public formBuilder: FormBuilder) {
     this.authForm = formBuilder.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
+      name: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
     });
     this.checkAgreed();
@@ -40,44 +44,42 @@ export class LoginPage {
     this.navCtrl.parent.select(2);
   }
 
-  signin() {
-    $("#form2Sbm").click(function () {
-      //submitHandlerPatient("<%= configUrl %>");
-      var email = $("#email") ? ($("#email")[0].value) : "a"; //default
-      var password = $("#psw") ? $("#psw")[0].value : "a";
-      var repeatPassword = $("#psw-repeat") ? $("#psw-repeat")[0].value : "ab";
-      if (password != repeatPassword){
-        console.log("Don't match");
-        return
-      }
+  public logIn():void {
+    var headers = new Headers();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/json' );
+    //headers.append("Access-Control-Allow-Origin"," *");
+    let options = new RequestOptions({ headers: headers });
+    var name = this.name;
+    var password = this.password;
 
-      $.ajax({
-        type: 'POST',
-        url: "localhost:8001/api/login",
-        data: {
-          email: email,
-          password: password,
-        },
-        dataType: "application/json",
-        success: function (data, text) {
-          //basil.set('cookie', data);
-          console.log("sucess");
-          console.log(data)
-          //window.location.href = serverUrl;
-        },
-        error: function (request, status, error) {
-          var reply = request.responseText
-          var replyText = (JSON.parse(reply))
-          alert(replyText.message)
-          console.log('failure')
-        }
+    let postParams = {
+      "username": name,
+      "password": password
+    }
+    console.log(postParams);
+
+    this.http.post("http://localhost:8001/api/login", postParams, options)
+      .subscribe(data => {
+        console.log(data['_body']);
+        this.items = data.json().session._id;
+        console.log(this.items);
+      }, error => {
+        console.log("error");
+        console.log(error);// Error getting the data
       });
-    })}
-  public goToReg(): void{
+    console.log("here");
+
+  }
+  public goToReg(): void {
     this.navCtrl.push(RegistrationPage);
   }
-  public goToMain(): void{
-    this.navCtrl.setRoot(TabsPage);
+
+  public goToMain(): void {
+    console.log(this.items);
+    this.navCtrl.push(TabsPage, {
+      sessionKey: this.items
+    });
   }
 
   /*

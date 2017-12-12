@@ -7,23 +7,20 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)" >
 
     <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input formControlName="email" type="text"></ion-input>
+      <ion-label floating>Name</ion-label>
+      <ion-input formControlName="name" type="text" [(ngModel)]="name"></ion-input>
     </ion-item>
 
-    <ion-item *ngIf="authForm.controls.email.hasError('required') && authForm.controls.email.touched">
-      <p>Sorry, field email is required!</p>
-    </ion-item>
-    <ion-item *ngIf="authForm.controls.email.hasError('email') && authForm.controls.email.touched">
-      <p>Must be a valid email!</p>
+    <ion-item *ngIf="authForm.controls.name.hasError('required') && authForm.controls.name.touched">
+      <p>Sorry, field name is required!</p>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Password</ion-label>
-      <ion-input formControlName="password" type="password"></ion-input>
+      <ion-input formControlName="password" type="password" [(ngModel)]="password"></ion-input>
     </ion-item>
     <ion-item *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched">
       <p>Sorry, field password is required!</p>
@@ -33,7 +30,7 @@
     </ion-item>
   </form>
   <br>
-  <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="Primary" id ="form1Sbm" type = "submit"(click)="goToMain();">Log In</button>
+  <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="Primary" id ="form1Sbm" type = "submit"(click)="logIn();goToMain();">Log In</button>
   <br>
   <button ion-button full class="quarter-button" color="light" id ="form9Sbm" type = "submit"(click)="goToReg();">Create Account</button>
 </ion-content>

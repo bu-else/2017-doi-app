@@ -9,6 +9,10 @@
     {
       "path": "/",
       "proxyUrl": "https://doi-server.herokuapp.com/"
+    },
+    {
+      "path": "/api/signup",
+      "proxyUrl": "http://localhost:8001/api/signup"
     }
   ]
 }

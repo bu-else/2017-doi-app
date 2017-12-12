@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
+import { Http, Headers, RequestOptions } from '@angular/http';
 // import * as Config from './config.js';
 import * as $ from 'jquery';
 import {LoginPage} from "../logIn/login";
@@ -14,9 +15,10 @@ import * as Env from "../../env";
 })
 export class MainPage {
   @ViewChild('myNav') nav: NavController;
+  sessionKey;
 
-  constructor(public navCtrl: NavController, public storage: Storage, private alertCtrl: AlertController) {
-
+  constructor(public navParams: NavParams,private http:Http, public navCtrl: NavController, public storage: Storage, private alertCtrl: AlertController) {
+    this.sessionKey = navParams.get('sessionKey');
   }
 
   public async clearStorage() {
@@ -29,6 +31,18 @@ export class MainPage {
     this.navCtrl.setRoot(LoginPage);
   }
 
+  public logout():void {
+    var headers = new Headers();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/json');
+    //headers.append("Access-Control-Allow-Origin"," *");
+    let options = new RequestOptions({headers: headers});
+    console.log(this.sessionKey);
+    this.http.delete("http://localhost:8001/api/logout/" + "hello").subscribe(
+      resp => console.log('deleted'),
+      error => console.log('error occur, delete fail')
+    );
+  }
   public presentAlert(): void {
     let alert = this.alertCtrl.create({
       title: 'You have been logged out!',
