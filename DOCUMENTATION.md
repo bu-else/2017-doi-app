@@ -33,7 +33,7 @@ However, it can only send to Ben and Michael's numbers. You will want to upgrade
 the Twilio number onto this repository and it stayed there for like months, so you 
 [might want to replace it](https://github.com/bu-else/2017-doi-app/issues/54). It doesn't seem compromised and it 
 doesn't really matter if it gets a lot of texts, 
-(but it might be a good idea to get a new one)[https://www.twilio.com/pricing]. If you do so, you have to set up its webhook
+[but it might be a good idea to get a new one](https://www.twilio.com/pricing). If you do so, you have to set up its webhook
 handler as noted above.
 
 
