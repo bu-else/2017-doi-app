@@ -70,5 +70,10 @@
         You must agree to the EULA to use the app.
       </ion-card-content>
     </div>
+    <div *ngIf="hidden && !hasLocation">
+      <ion-card-content>
+        You must agree to the EULA to use the app.
+      </ion-card-content>
+    </div>
   </ion-card>
 </ion-content>

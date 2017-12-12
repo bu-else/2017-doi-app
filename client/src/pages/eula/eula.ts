@@ -10,23 +10,29 @@ import {TabsPage} from "../tabs/tabs";
 })
 export class EulaPage {
   hidden: boolean;
+  hasLocation = false;
+  agreed = false;
   constructor(public navCtrl: NavController, public storage: Storage, public geolocation: Geolocation) {
     this.checkAgreed();
   }
   public async checkAgreed() {
-    var result = await this.storage.get("agreed");
-    if (!result) {
+    this.agreed = await this.storage.get("agreed");
+    if (!this.agreed) {
       return;
     }
-    this.navCtrl.parent.select(1);
+
+    this.geolocation.getCurrentPosition().then((resp) => {
+      // Requesting the coordinate is good enough.
+      this.navCtrl.parent.select(1);
+    }).catch((error) => {
+      this.hasLocation = false;
+      console.log('Error getting location', error);
+    });
+
   }
   public async agree() {
     await this.storage.set("agreed",true);
-    this.geolocation.getCurrentPosition().then((resp) => {
-      // Requesting the coordinate is good enough.
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
+
     this.checkAgreed();
   }
 
