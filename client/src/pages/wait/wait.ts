@@ -5,7 +5,7 @@ import {Geolocation} from "@ionic-native/geolocation";
 import {UniqueDeviceID} from "@ionic-native/unique-device-id";
 import {SMS} from '@ionic-native/sms';
 import * as Env from "../../env";
-import { Storage } from '@ionic/storage';
+import {Storage} from '@ionic/storage';
 
 enum EmergencyState {
   CALL, // Button is available to call emergency. We then confirm.
@@ -27,7 +27,7 @@ export class WaitPage {
   private isSMS: boolean;
   private isConfirmed: boolean;
   private confirmationTime: number = 2 * 60 * 1000;
-  private confirmationPings: number = 4;
+  private pingIntervalTime: number = 15 * 1000;
   private currentPings: number = 0;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public storage: Storage, public geolocation: Geolocation, public http: HttpClient, public  uniqueDeviceID: UniqueDeviceID, public sms: SMS) {
@@ -100,7 +100,7 @@ export class WaitPage {
     const latLng = location.coords.latitude + "," + location.coords.longitude;
     const phoneNumber = await this.storage.get("phoneNumber");
     if (!phoneNumber) {
-      this.showError("400","No phone number stored for this account");
+      this.showError("400", "No phone number stored for this account");
     }
 
     if (this.isSMS) {
@@ -200,32 +200,45 @@ export class WaitPage {
     } catch (e) {
       deviceID = "computer-id";
     }
+    setTimeout(() => {
+      this.getDispatch()
+    }, this.pingIntervalTime);
     this.currentPings++;
+
+
     this.http.get("http://localhost:8100/dispatch/?&deviceID=" + deviceID, {"responseType": "text"}).subscribe(
       data => {
-        if (data == "Accepted") {
-          this.showAlert('Emergency confirmed!',
-            'Help is on the way to your position now!',
-            ()=> {
-            });
-          this.isConfirmed = true;
-        } else if (data == "Ended") {
-          this.showAlert('Emergency ended!',
-            'The emergency was ended! Check your SMS for more details.',
-            ()=> {
-              this.resetEmergency();
-          });
-        } else if (data == "Rejected") {
-          this.showError("503","The dispatcher is unable to handle your request.");
-        } else if (data == "Pending") {
-          if (this.currentPings < this.confirmationPings) {
-            setTimeout(() => {this.getDispatch()}, this.confirmationTime/this.confirmationPings);
-          } else {
-            this.showError("408", "Did not receive a confirmation in time.");
-          }
-        } else {
-          this.showError("501","Unexpected response from the server");
+        switch (data) {
+          case "Accepted":
+            if (this.isConfirmed) {
+              return;
+            }
+            this.showAlert('Emergency confirmed!',
+              'Help is on the way to your position now!',
+              () => {
+              });
+            this.isConfirmed = true;
+            break;
+          case "Rejected":
+            this.showError("503", "The dispatcher is unable to handle your request.");
+            break;
+          case "Pending":
+            if (this.currentPings > this.confirmationTime / this.pingIntervalTime) {
+              this.showError("408", "Did not receive a confirmation in time.");
+            }
+            break;
+          case "Ended":
+            this.showAlert('Emergency ended!',
+              'The emergency was ended! Check your SMS for more details.',
+              () => {
+                this.resetEmergency();
+              });
+            break;
+          default:
+            this.showError("501", "Unexpected response from the server");
+            break;
         }
+
       },
       err => {
         console.log(err);
@@ -237,12 +250,13 @@ export class WaitPage {
 
   public showError(code: string, text: string): void {
     this.showAlert('Error ' + code,
-      'An error occurred:\n' + text +'\n Please call 911 to handle this emergency!',
-      () => {this.resetEmergency();
-    });
+      'An error occurred:\n' + text + '\n Please call 911 to handle this emergency!',
+      () => {
+        this.resetEmergency();
+      });
   }
 
-  public showAlert(title:string,message:string,handler:()=>void) {
+  public showAlert(title: string, message: string, handler: () => void) {
     let dialogue = this.alertCtrl.create({
       title: title,
       message: message,

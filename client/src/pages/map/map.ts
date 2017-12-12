@@ -78,7 +78,7 @@ export class MapPage {
     mapBox.style.height = this.mapHeight;
 
     const s = latLngRaw.split(",");
-    const latLng = new L.LatLng(Number(s[0]),Number(s[1]));
+    const latLng = new L.LatLng(Number(s[0]), Number(s[1]));
     this.map.setView(latLng, this.viewHeight);
 
     var marker = L.marker(latLng).addTo(this.map);

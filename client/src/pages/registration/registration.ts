@@ -1,8 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController,NavParams } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { AlertController } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
+import {Storage} from '@ionic/storage';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AlertController} from 'ionic-angular';
 import * as $ from 'jquery';
 import {EulaPage} from "../eula/eula";
 
@@ -21,7 +21,7 @@ export class RegistrationPage {
   @ViewChild('myNav') nav: NavController;
   authForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public storage: Storage, private alertCtrl: AlertController,public navParams: NavParams, public formBuilder: FormBuilder){
+  constructor(public navCtrl: NavController, public storage: Storage, public navParams: NavParams, public formBuilder: FormBuilder) {
     this.nav = navCtrl;
 
     this.authForm = formBuilder.group({
@@ -35,7 +35,7 @@ export class RegistrationPage {
   }
 
   matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
-    return (group: FormGroup): {[key: string]: any} => {
+    return (group: FormGroup): { [key: string]: any } => {
       let password = group.controls[passwordKey];
       let confirmPassword = group.controls[confirmPasswordKey];
 
@@ -57,63 +57,63 @@ export class RegistrationPage {
   }
 
 
-
   public register() {
-      //submitHandlerPatient("<%= configUrl %>");
-      var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "a";
-      var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "a";
-      var email = $("#email") ? ($("#email")[0].value) : "a"; //default
-      var password = $("#psw") ? $("#psw")[0].value : "a";
+    //submitHandlerPatient("<%= configUrl %>");
+    var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "a";
+    var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "a";
+    var email = $("#email") ? ($("#email")[0].value) : "a"; //default
+    var password = $("#psw") ? $("#psw")[0].value : "a";
 
-      // @Michael: Please keep this or refactor it because @Ben is relying on this for sending it to the server
-      // You can remove this comment.
-      this.storage.set("phoneNumber",$("#phoneNumber"));
+    // @Michael: Please keep this or refactor it because @Ben is relying on this for sending it to the server
+    // You can remove this comment.
+    this.storage.set("phoneNumber", $("#phoneNumber"));
 
-      $.ajax({
-        type: 'POST',
-        url: "localhost:8001/api/signup",
-        data: {
-          email: email,
-          password: password,
-          phoneNumber: phoneNumber,
-          zipCode: zipCode
-        },
-        dataType: "jsonp",
-        success: function (data, text) {
-          //basil.set('cookie', data);
+    $.ajax({
+      type: 'POST',
+      url: "localhost:8001/api/signup",
+      data: {
+        email: email,
+        password: password,
+        phoneNumber: phoneNumber,
+        zipCode: zipCode
+      },
+      dataType: "jsonp",
+      success: function (data, text) {
+        //basil.set('cookie', data);
 
 
-
-          console.log("sucess");
-          console.log(data)
-          //window.location.href = serverUrl;
-        },
-        error: function (request, status, error) {
-          var reply = request.responseText
-          var replyText = (JSON.parse(reply))
-          alert(replyText.message)
-          console.log('failure')
-        }
-      });
-    }
-  public goToEULA(): void{
-      this.navCtrl.setRoot(EulaPage);
+        console.log("sucess");
+        console.log(data)
+        //window.location.href = serverUrl;
+      },
+      error: function (request, status, error) {
+        var reply = request.responseText
+        var replyText = (JSON.parse(reply))
+        alert(replyText.message)
+        console.log('failure')
+      }
+    });
   }
+
+  public goToEULA(): void {
+    this.navCtrl.setRoot(EulaPage);
+  }
+
   onSubmit(value: any): void {
-    if(this.authForm.valid) {
+    if (this.authForm.valid) {
       window.localStorage.setItem('email', value.email);
       window.localStorage.setItem('password', value.password);
-      window.localStorage.setItem('repeatPassword',value.repeatPassword);
-      window.localStorage.setItem('phoneNum',value.phoneNumber);
-      window.localStorage.setItem('zipCode',value.zipCode);
+      window.localStorage.setItem('repeatPassword', value.repeatPassword);
+      window.localStorage.setItem('phoneNum', value.phoneNumber);
+      window.localStorage.setItem('zipCode', value.zipCode);
     }
   }
 
-    /*
-    public async register() {
-      await this.storage.set("registered",true);
-      this.checkAgreed()
-    }
-    */
+  /*
+  public async register() {
+    await this.storage.set("registered",true);
+    this.checkAgreed()
   }
+  */
+}
 

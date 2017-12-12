@@ -20,11 +20,11 @@
       </ion-card-header>
       <ion-card-content>
         <ion-input type="text" style="width: 50%; margin: auto;" [(ngModel)]="uuid" placeholder=""></ion-input>
-        <button ion-button full class="quarter-button" color="secondary" (click)="viewEmergency()">View Emergency</button>
+        <button ion-button full class="quarter-button" color="light" (click)="viewEmergency()">View Emergency</button>
       </ion-card-content>
     </div>
     <div *ngIf="showMap">
-      <button ion-button full style="width: 10%;" color="secondary" (click)="goBack()">←</button>
+      <button ion-button full style="width: 10%;" color="light" (click)="goBack()">←</button>
       <button ion-button full class="quarter-button" color="dark" (click)="endEmergency()">Emergency Over</button>
     </div>
     <div id="map"></div>

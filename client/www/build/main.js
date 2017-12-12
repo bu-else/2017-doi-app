@@ -6,9 +6,9 @@ webpackJsonp([0],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(200);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__registration_registration__ = __webpack_require__(201);
@@ -147,7 +147,7 @@ __decorate([
 ], LoginPage.prototype, "nav", void 0);
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-login',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/logIn/login.html"*/'\n<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Welcome!\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">\n\n    <ion-item>\n      <ion-label floating>Email</ion-label>\n      <ion-input formControlName="email" type="text"></ion-input>\n    </ion-item>\n\n    <ion-item *ngIf="authForm.controls.email.hasError(\'required\') && authForm.controls.email.touched">\n      <p>Sorry, field email is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.email.hasError(\'email\') && authForm.controls.email.touched">\n      <p>Must be a valid email!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Password</ion-label>\n      <ion-input formControlName="password" type="password"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'required\') && authForm.controls.password.touched">\n      <p>Sorry, field password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'minlength\') && authForm.controls.password.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n  </form>\n  <br>\n  <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="Primary" id ="form1Sbm" type = "submit"(click)="goToMain();">Log In</button>\n  <br>\n  <button ion-button full class="quarter-button" color="secondary" id ="form9Sbm" type = "submit"(click)="goToReg();">Create Account</button>\n</ion-content>\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/logIn/login.html"*/
+        selector: 'page-login',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/logIn/login.html"*/'\n<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Welcome!\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">\n\n    <ion-item>\n      <ion-label floating>Email</ion-label>\n      <ion-input formControlName="email" type="text"></ion-input>\n    </ion-item>\n\n    <ion-item *ngIf="authForm.controls.email.hasError(\'required\') && authForm.controls.email.touched">\n      <p>Sorry, field email is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.email.hasError(\'email\') && authForm.controls.email.touched">\n      <p>Must be a valid email!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Password</ion-label>\n      <ion-input formControlName="password" type="password"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'required\') && authForm.controls.password.touched">\n      <p>Sorry, field password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'minlength\') && authForm.controls.password.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n  </form>\n  <br>\n  <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="Primary" id ="form1Sbm" type = "submit"(click)="goToMain();">Log In</button>\n  <br>\n  <button ion-button full class="quarter-button" color="light" id ="form9Sbm" type = "submit"(click)="goToReg();">Create Account</button>\n</ion-content>\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/logIn/login.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]])
 ], LoginPage);
@@ -205,7 +205,7 @@ TabsPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MainPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__logIn_login__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__env__ = __webpack_require__(206);
@@ -305,7 +305,7 @@ __decorate([
 ], MainPage.prototype, "nav", void 0);
 MainPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-main',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/main/main.html"*/'<ion-header xmlns="http://www.w3.org/1999/html">\n  <ion-navbar>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h2>Version 0.1!</h2>\n  <p>\n    This page will explain information about the application, and allow people to navigate the application easily.\n  </p>\n  <p>\n    For now, all pages created will be added as a tab at the bottom of the page.\n  </p>\n\n  <button ion-button full class="quarter-button" color="secondary" (click)="clearStorage()">Clear Storage</button>\n  <br>\n  <br>\n  <button ion-button full class="quarter-button" color="primary" id ="form3Sbm" (click)="clearStorage();goToLogin();presentAlert();">LogOut</button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/main/main.html"*/
+        selector: 'page-main',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/main/main.html"*/'<ion-header xmlns="http://www.w3.org/1999/html">\n  <ion-navbar>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h2>Version 0.1!</h2>\n  <p>\n    This page will explain information about the application, and allow people to navigate the application easily.\n  </p>\n  <p>\n    For now, all pages created will be added as a tab at the bottom of the page.\n  </p>\n\n  <button ion-button full class="quarter-button" color="light" (click)="clearStorage()">Clear Storage</button>\n  <br>\n  <br>\n  <button ion-button full class="quarter-button" color="primary" id ="form3Sbm" (click)="clearStorage();goToLogin();presentAlert();">LogOut</button>\n\n</ion-content>\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/main/main.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
 ], MainPage);
@@ -354,9 +354,9 @@ webpackEmptyAsyncContext.id = 157;
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegistrationPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(200);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__eula_eula__ = __webpack_require__(202);
@@ -410,16 +410,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-
 /*
 import * as basil from 'basil-js';
 import * as Hapi from 'hapi';
 */
 var RegistrationPage = (function () {
-    function RegistrationPage(navCtrl, storage, alertCtrl, navParams, formBuilder) {
+    function RegistrationPage(navCtrl, storage, navParams, formBuilder) {
         this.navCtrl = navCtrl;
         this.storage = storage;
-        this.alertCtrl = alertCtrl;
         this.navParams = navParams;
         this.formBuilder = formBuilder;
         this.nav = navCtrl;
@@ -514,13 +512,9 @@ __decorate([
 ], RegistrationPage.prototype, "nav", void 0);
 RegistrationPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-<<<<<<< Updated upstream
-        selector: 'page-registration',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/registration/registration.html"*/'<ion-header>\n  <ion-navbar>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">\n\n    <ion-item>\n      <ion-label floating>Email</ion-label>\n      <ion-input formControlName="email" type="text"></ion-input>\n    </ion-item>\n\n    <ion-item *ngIf="authForm.controls.email.hasError(\'required\') && authForm.controls.email.touched">\n      <p>Sorry, field email is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.email.hasError(\'email\') && authForm.controls.email.touched">\n      <p>Must be a valid email!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Password</ion-label>\n      <ion-input formControlName="password" type="password"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'required\') && authForm.controls.password.touched">\n      <p>Sorry, field password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'minlength\') && authForm.controls.password.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Phone Number</ion-label>\n      <ion-input formControlName="phoneNumber" type="text"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.phoneNumber.hasError(\'required\') && authForm.controls.phoneNumber.touched">\n      <p>Sorry, field Phone Number is required!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Zip Code</ion-label>\n      <ion-input formControlName="zipCode" type="text"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.zipCode.hasError(\'required\') && authForm.controls.zipCode.touched">\n      <p>Sorry, field Zip Code is required!</p>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label floating>Repeat Password</ion-label>\n      <ion-input formControlName="repeatPassword" type="password" ></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'required\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, field Repeat Password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'minlength\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.touched && authForm.hasError(\'mismatchedPasswords\') && authForm.controls.password.valid">\n      <p>Passwords do not match</p>\n    </ion-item>\n\n\n\n    <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="secondary" id ="form1Sbm" type = "submit"(click)="goToEULA();">Create Account</button>\n  </form>\n</ion-content>\n\n\n<!--\n<script>\n  function register(){\n    console.log("hello");\n    $("#form1Sbm").click(function () {\n      //submitHandlerPatient("<%= configUrl %>");\n      var firstName = $("#firstName") ? $("#firstName")[0].value : " ";\n      var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "";\n      var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "";\n      var email = $("#email") ? ($("#email")[0].value) : ""; //default\n      var password = $("#psw") ? $("#psw")[0].value : "";\n\n      $.ajax({\n        type: \'POST\',\n        url: "localhost:8001/api/signup",\n        data: {\n          firstName: Joi.string().required(),\n          email: Joi.string().email().lowercase().required(),\n          password: Joi.string().required(),\n          phoneNumber: Joi.string().required(),\n          zipCode: Joi.string().required()\n        },\n        dataType: "json",\n        success: function (data, text) {\n          basil.set(\'cookie\', data);\n          console.log("sucess");\n          console.log(data)\n          window.location.href = serverUrl;\n        },\n        error: function (request, status, error) {\n          var reply = request.responseText\n          var replyText = (JSON.parse(reply))\n          alert(replyText.message)\n          console.log(\'failure\')\n        }\n      });\n    }\n</script>\n-->\n\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/registration/registration.html"*/
-=======
-        selector: 'page-registration',template:/*ion-inline-start:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/registration/registration.html"*/'<ion-header>\n  <ion-navbar>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">\n\n    <ion-item>\n      <ion-label floating>Email</ion-label>\n      <ion-input formControlName="email" type="text" id="email"></ion-input>\n    </ion-item>\n\n    <ion-item *ngIf="authForm.controls.email.hasError(\'required\') && authForm.controls.email.touched">\n      <p>Sorry, field email is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.email.hasError(\'email\') && authForm.controls.email.touched">\n      <p>Must be a valid email!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Password</ion-label>\n      <ion-input formControlName="password" type="password" id="psw"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'required\') && authForm.controls.password.touched">\n      <p>Sorry, field password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'minlength\') && authForm.controls.password.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'pattern\') && authForm.controls.password.touched">\n      <p>Password should be at least 8 characters long and <br>should contain one number,one character <br>and one special character.</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Phone Number</ion-label>\n      <ion-input formControlName="phoneNumber" type="text" id="phoneNumber"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.phoneNumber.hasError(\'required\') && authForm.controls.phoneNumber.touched">\n      <p>Sorry, field Phone Number is required!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Zip Code</ion-label>\n      <ion-input formControlName="zipCode" type="text" id="zipCode"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.zipCode.hasError(\'required\') && authForm.controls.zipCode.touched">\n      <p>Sorry, field Zip Code is required!</p>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label floating>Repeat Password</ion-label>\n      <ion-input formControlName="repeatPassword" type="password" ></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'required\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, field Repeat Password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'minlength\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.touched && authForm.hasError(\'mismatchedPasswords\') && authForm.controls.password.valid">\n      <p>Passwords do not match</p>\n    </ion-item>\n\n\n\n    <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="secondary" id ="form1Sbm" type = "submit"(click)="register();goToEULA();">Create Account</button>\n  </form>\n</ion-content>\n\n\n<!--\n<script>\n  function register(){\n    console.log("hello");\n    $("#form1Sbm").click(function () {\n      //submitHandlerPatient("<%= configUrl %>");\n      var firstName = $("#firstName") ? $("#firstName")[0].value : " ";\n      var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "";\n      var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "";\n      var email = $("#email") ? ($("#email")[0].value) : ""; //default\n      var password = $("#psw") ? $("#psw")[0].value : "";\n\n      $.ajax({\n        type: \'POST\',\n        url: "localhost:8001/api/signup",\n        data: {\n          firstName: Joi.string().required(),\n          email: Joi.string().email().lowercase().required(),\n          password: Joi.string().required(),\n          phoneNumber: Joi.string().required(),\n          zipCode: Joi.string().required()\n        },\n        dataType: "json",\n        success: function (data, text) {\n          basil.set(\'cookie\', data);\n          console.log("sucess");\n          console.log(data)\n          window.location.href = serverUrl;\n        },\n        error: function (request, status, error) {\n          var reply = request.responseText\n          var replyText = (JSON.parse(reply))\n          alert(replyText.message)\n          console.log(\'failure\')\n        }\n      });\n    }\n</script>\n-->\n\n'/*ion-inline-end:"/Users/MichaelHendrick/2017-doi-app/client/src/pages/registration/registration.html"*/
->>>>>>> Stashed changes
+        selector: 'page-registration',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/registration/registration.html"*/'<ion-header>\n  <ion-navbar>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">\n\n    <ion-item>\n      <ion-label floating>Email</ion-label>\n      <ion-input formControlName="email" type="text" id="email"></ion-input>\n    </ion-item>\n\n    <ion-item *ngIf="authForm.controls.email.hasError(\'required\') && authForm.controls.email.touched">\n      <p>Sorry, field email is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.email.hasError(\'email\') && authForm.controls.email.touched">\n      <p>Must be a valid email!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Password</ion-label>\n      <ion-input formControlName="password" type="password" id="psw"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'required\') && authForm.controls.password.touched">\n      <p>Sorry, field password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'minlength\') && authForm.controls.password.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'pattern\') && authForm.controls.password.touched">\n      <p>Password should be at least 8 characters long and <br>should contain one number,one character <br>and one special character.</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Phone Number</ion-label>\n      <ion-input formControlName="phoneNumber" type="text" id="phoneNumber"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.phoneNumber.hasError(\'required\') && authForm.controls.phoneNumber.touched">\n      <p>Sorry, field Phone Number is required!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Zip Code</ion-label>\n      <ion-input formControlName="zipCode" type="text" id="zipCode"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.zipCode.hasError(\'required\') && authForm.controls.zipCode.touched">\n      <p>Sorry, field Zip Code is required!</p>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label floating>Repeat Password</ion-label>\n      <ion-input formControlName="repeatPassword" type="password" ></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'required\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, field Repeat Password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'minlength\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.touched && authForm.hasError(\'mismatchedPasswords\') && authForm.controls.password.valid">\n      <p>Passwords do not match</p>\n    </ion-item>\n\n\n\n    <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="light" id ="form1Sbm" type = "submit"(click)="register();goToEULA();">Create Account</button>\n  </form>\n</ion-content>\n\n\n<!--\n<script>\n  function register(){\n    console.log("hello");\n    $("#form1Sbm").click(function () {\n      //submitHandlerPatient("<%= configUrl %>");\n      var firstName = $("#firstName") ? $("#firstName")[0].value : " ";\n      var phoneNumber = $("#phoneNumber") ? $("#phoneNumber")[0].value : "";\n      var zipCode = $("#zipCode") ? $("#zipCode")[0].value : "";\n      var email = $("#email") ? ($("#email")[0].value) : ""; //default\n      var password = $("#psw") ? $("#psw")[0].value : "";\n\n      $.ajax({\n        type: \'POST\',\n        url: "localhost:8001/api/signup",\n        data: {\n          firstName: Joi.string().required(),\n          email: Joi.string().email().lowercase().required(),\n          password: Joi.string().required(),\n          phoneNumber: Joi.string().required(),\n          zipCode: Joi.string().required()\n        },\n        dataType: "json",\n        success: function (data, text) {\n          basil.set(\'cookie\', data);\n          console.log("sucess");\n          console.log(data)\n          window.location.href = serverUrl;\n        },\n        error: function (request, status, error) {\n          var reply = request.responseText\n          var replyText = (JSON.parse(reply))\n          alert(replyText.message)\n          console.log(\'failure\')\n        }\n      });\n    }\n</script>\n-->\n\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/registration/registration.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]])
 ], RegistrationPage);
 
 //# sourceMappingURL=registration.js.map
@@ -533,7 +527,7 @@ RegistrationPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EulaPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tabs_tabs__ = __webpack_require__(105);
@@ -654,7 +648,7 @@ EulaPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WaitPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_unique_device_id__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_sms__ = __webpack_require__(205);
@@ -731,7 +725,7 @@ var WaitPage = (function () {
         // HACK: This is the only way to access an enum declared in the same file in this class. (It seems)
         this.emergencyEnum = EmergencyState;
         this.confirmationTime = 2 * 60 * 1000;
-        this.confirmationPings = 4;
+        this.pingIntervalTime = 15 * 1000;
         this.currentPings = 0;
         this.state = this.emergencyEnum.CALL;
     }
@@ -786,7 +780,7 @@ var WaitPage = (function () {
     WaitPage.prototype.sendLocation = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var location, e_1, deviceID, e_2, latLng;
+            var location, e_1, deviceID, e_2, latLng, phoneNumber;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -814,11 +808,17 @@ var WaitPage = (function () {
                         return [3 /*break*/, 7];
                     case 7:
                         latLng = location.coords.latitude + "," + location.coords.longitude;
+                        return [4 /*yield*/, this.storage.get("phoneNumber")];
+                    case 8:
+                        phoneNumber = _a.sent();
+                        if (!phoneNumber) {
+                            this.showError("400", "No phone number stored for this account");
+                        }
                         if (this.isSMS) {
                             this.sms.send(__WEBPACK_IMPORTED_MODULE_6__env__["b" /* TWILLIO_NUMBER */], "latlng\n" + deviceID + "\n" + latLng, { replaceLineBreaks: true });
                         }
                         else {
-                            this.http.get("http://localhost:8100/latlng/?&deviceID=" + deviceID + "&From=" + this.storage.get("phoneNumber") + "&LatLng=" + latLng, { "responseType": "text" }).subscribe(function (data) {
+                            this.http.get("http://localhost:8100/latlng/?&deviceID=" + deviceID + "&From=" + phoneNumber + "&LatLng=" + latLng, { "responseType": "text" }).subscribe(function (data) {
                                 _this.getDispatch();
                                 return console.log(data);
                             }, function (err) {
@@ -944,51 +944,36 @@ var WaitPage = (function () {
                         deviceID = "computer-id";
                         return [3 /*break*/, 4];
                     case 4:
+                        setTimeout(function () {
+                            _this.getDispatch();
+                        }, this.pingIntervalTime);
                         this.currentPings++;
                         this.http.get("http://localhost:8100/dispatch/?&deviceID=" + deviceID, { "responseType": "text" }).subscribe(function (data) {
-                            if (data == "Accepted") {
-                                var dialogue = _this.alertCtrl.create({
-                                    title: 'Emergency confirmed!',
-                                    message: 'Help is on the way to your position now!',
-                                    buttons: [
-                                        {
-                                            text: 'OK',
-                                        },
-                                    ],
-                                    cssClass: 'big-alert'
-                                });
-                                dialogue.present();
-                                _this.isConfirmed = true;
-                            }
-                            else if (data == "Ended") {
-                                var dialogue = _this.alertCtrl.create({
-                                    title: 'Emergency ended!',
-                                    message: 'The emergency was ended! Check your SMS for more details.',
-                                    buttons: [
-                                        {
-                                            text: 'OK',
-                                            handler: function () {
-                                                _this.resetEmergency();
-                                            }
-                                        },
-                                    ],
-                                    cssClass: 'big-alert'
-                                });
-                                dialogue.present();
-                            }
-                            else if (data == "Rejected") {
-                                _this.showError("503", "The dispatcher is unable to handle your request.");
-                            }
-                            else if (data == "Pending") {
-                                if (_this.currentPings < _this.confirmationPings) {
-                                    setTimeout(function () { _this.getDispatch(); }, _this.confirmationTime / _this.confirmationPings);
-                                }
-                                else {
-                                    _this.showError("408", "Did not receive a confirmation in time.");
-                                }
-                            }
-                            else {
-                                _this.showError("501", "Unexpected response from the server");
+                            switch (data) {
+                                case "Accepted":
+                                    if (_this.isConfirmed) {
+                                        return;
+                                    }
+                                    _this.showAlert('Emergency confirmed!', 'Help is on the way to your position now!', function () {
+                                    });
+                                    _this.isConfirmed = true;
+                                    break;
+                                case "Rejected":
+                                    _this.showError("503", "The dispatcher is unable to handle your request.");
+                                    break;
+                                case "Pending":
+                                    if (_this.currentPings > _this.confirmationTime / _this.pingIntervalTime) {
+                                        _this.showError("408", "Did not receive a confirmation in time.");
+                                    }
+                                    break;
+                                case "Ended":
+                                    _this.showAlert('Emergency ended!', 'The emergency was ended! Check your SMS for more details.', function () {
+                                        _this.resetEmergency();
+                                    });
+                                    break;
+                                default:
+                                    _this.showError("501", "Unexpected response from the server");
+                                    break;
                             }
                         }, function (err) {
                             console.log(err);
@@ -1001,15 +986,18 @@ var WaitPage = (function () {
     };
     WaitPage.prototype.showError = function (code, text) {
         var _this = this;
+        this.showAlert('Error ' + code, 'An error occurred:\n' + text + '\n Please call 911 to handle this emergency!', function () {
+            _this.resetEmergency();
+        });
+    };
+    WaitPage.prototype.showAlert = function (title, message, handler) {
         var dialogue = this.alertCtrl.create({
-            title: 'Error ' + code,
-            message: 'An error occurred:\n' + text + "\n Please call 911 to handle this emergency!",
+            title: title,
+            message: message,
             buttons: [
                 {
                     text: 'OK',
-                    handler: function () {
-                        _this.resetEmergency();
-                    }
+                    handler: handler
                 },
             ],
             cssClass: 'big-alert'
@@ -1053,9 +1041,9 @@ var BEN_NUMBER = "8576361412";
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountSettingsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__main_main__ = __webpack_require__(106);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1126,7 +1114,7 @@ __decorate([
 ], AccountSettingsPage.prototype, "nav", void 0);
 AccountSettingsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-accountSettings',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/accountSettings/accountSettings.html"*/'<ion-header>\n  <ion-navbar>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">\n\n    <ion-item>\n      <ion-label floating>Change Email</ion-label>\n      <ion-input formControlName="email" type="text"></ion-input>\n    </ion-item>\n\n    <ion-item *ngIf="authForm.controls.email.hasError(\'required\') && authForm.controls.email.touched">\n      <p>Sorry, field email is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.email.hasError(\'email\') && authForm.controls.email.touched">\n      <p>Must be a valid email!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Change Password</ion-label>\n      <ion-input formControlName="password" type="password"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'required\') && authForm.controls.password.touched">\n      <p>Sorry, field password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'minlength\') && authForm.controls.password.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Change Phone Number</ion-label>\n      <ion-input formControlName="phoneNumber" type="text"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.phoneNumber.hasError(\'required\') && authForm.controls.phoneNumber.touched">\n      <p>Sorry, field Phone Number is required!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Change Zip Code</ion-label>\n      <ion-input formControlName="zipCode" type="text"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.zipCode.hasError(\'required\') && authForm.controls.zipCode.touched">\n      <p>Sorry, field Zip Code is required!</p>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label floating>Repeat New Password</ion-label>\n      <ion-input formControlName="repeatPassword" type="password"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'required\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, field Repeat Password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'minlength\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.touched && authForm.hasError(\'mismatchedPasswords\') && authForm.controls.password.valid">\n      <p>Passwords do not match</p>\n    </ion-item>\n\n\n\n  <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="secondary" id ="form1Sbm" type = "submit"(click)="goToMain();presentAlert();">Confirm Changes</button>\n  </form>\n</ion-content>\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/accountSettings/accountSettings.html"*/
+        selector: 'page-accountSettings',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/accountSettings/accountSettings.html"*/'<ion-header>\n  <ion-navbar>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">\n\n    <ion-item>\n      <ion-label floating>Change Email</ion-label>\n      <ion-input formControlName="email" type="text"></ion-input>\n    </ion-item>\n\n    <ion-item *ngIf="authForm.controls.email.hasError(\'required\') && authForm.controls.email.touched">\n      <p>Sorry, field email is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.email.hasError(\'email\') && authForm.controls.email.touched">\n      <p>Must be a valid email!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Change Password</ion-label>\n      <ion-input formControlName="password" type="password"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'required\') && authForm.controls.password.touched">\n      <p>Sorry, field password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.password.hasError(\'minlength\') && authForm.controls.password.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Change Phone Number</ion-label>\n      <ion-input formControlName="phoneNumber" type="text"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.phoneNumber.hasError(\'required\') && authForm.controls.phoneNumber.touched">\n      <p>Sorry, field Phone Number is required!</p>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Change Zip Code</ion-label>\n      <ion-input formControlName="zipCode" type="text"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.zipCode.hasError(\'required\') && authForm.controls.zipCode.touched">\n      <p>Sorry, field Zip Code is required!</p>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label floating>Repeat New Password</ion-label>\n      <ion-input formControlName="repeatPassword" type="password"></ion-input>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'required\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, field Repeat Password is required!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.hasError(\'minlength\') && authForm.controls.repeatPassword.touched">\n      <p>Sorry, minimum password length is 8!</p>\n    </ion-item>\n    <ion-item *ngIf="authForm.controls.repeatPassword.touched && authForm.hasError(\'mismatchedPasswords\') && authForm.controls.password.valid">\n      <p>Passwords do not match</p>\n    </ion-item>\n\n\n\n  <button ion-button full class="quarter-button" [disabled]="!authForm.valid" color="light" id ="form1Sbm" type = "submit"(click)="goToMain();presentAlert();">Confirm Changes</button>\n  </form>\n</ion-content>\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/accountSettings/accountSettings.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]])
 ], AccountSettingsPage);
@@ -1141,7 +1129,7 @@ AccountSettingsPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MapPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_leaflet__ = __webpack_require__(283);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_leaflet___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_leaflet__);
@@ -1258,7 +1246,7 @@ var MapPage = (function () {
 }());
 MapPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-map',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/map/map.html"*/'<head>\n  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"\n        integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="\n        crossorigin=""/>\n  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"\n          integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="\n          crossorigin=""></script>\n</head>\n<ion-header>\n  <ion-navbar>\n    <ion-title>Map</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-card>\n    <div *ngIf="!showMap">\n      <ion-card-header>\n        Please enter 4-digit emergency code:\n      </ion-card-header>\n      <ion-card-content>\n        <ion-input type="text" style="width: 50%; margin: auto;" [(ngModel)]="uuid" placeholder=""></ion-input>\n        <button ion-button full class="quarter-button" color="secondary" (click)="viewEmergency()">View Emergency</button>\n      </ion-card-content>\n    </div>\n    <div *ngIf="showMap">\n      <button ion-button full style="width: 10%;" color="secondary" (click)="goBack()">←</button>\n      <button ion-button full class="quarter-button" color="dark" (click)="endEmergency()">Emergency Over</button>\n    </div>\n    <div id="map"></div>\n  </ion-card>\n</ion-content>\n\n\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/map/map.html"*/
+        selector: 'page-map',template:/*ion-inline-start:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/map/map.html"*/'<head>\n  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"\n        integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="\n        crossorigin=""/>\n  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"\n          integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="\n          crossorigin=""></script>\n</head>\n<ion-header>\n  <ion-navbar>\n    <ion-title>Map</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-card>\n    <div *ngIf="!showMap">\n      <ion-card-header>\n        Please enter 4-digit emergency code:\n      </ion-card-header>\n      <ion-card-content>\n        <ion-input type="text" style="width: 50%; margin: auto;" [(ngModel)]="uuid" placeholder=""></ion-input>\n        <button ion-button full class="quarter-button" color="light" (click)="viewEmergency()">View Emergency</button>\n      </ion-card-content>\n    </div>\n    <div *ngIf="showMap">\n      <button ion-button full style="width: 10%;" color="light" (click)="goBack()">←</button>\n      <button ion-button full class="quarter-button" color="dark" (click)="endEmergency()">Emergency Over</button>\n    </div>\n    <div id="map"></div>\n  </ion-card>\n</ion-content>\n\n\n'/*ion-inline-end:"/Users/Ben/Desktop/2017-doi-app/client/src/pages/map/map.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]])
 ], MapPage);
@@ -1289,7 +1277,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(274);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_tabs_tabs__ = __webpack_require__(105);
@@ -1392,7 +1380,7 @@ AppModule = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(199);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_logIn_login__ = __webpack_require__(103);
