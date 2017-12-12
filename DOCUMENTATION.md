@@ -1,5 +1,5 @@
 # Heroku
-The backend of the API is set up on Heroku. The source code is hosted on [2017-doi-server](https://github.com/bu-else/2017-doi-server). To make changes, the repository must be cloned to your computer. The app is currently hosted on Ben's free Heroku account,  so to modify it you will have to get permissions. I am unsure if it is even possible to have multiple collaborators on a free Heroku account. If I can hand it over, the proccess of pushing is very easy, you just do a normal commit by adding to the staging and then commit, but then you must use the command:
+The backend of the API is set up on Heroku. The source code is hosted on [2017-doi-server](https://github.com/bu-else/2017-doi-server). To make changes, the repository must be cloned to your computer. The app is currently hosted on Ben's free Heroku account, so to modify it you will have to get permissions. I am unsure if it is even possible to have multiple collaborators on a free Heroku account. If I can hand it over, the proccess of pushing is very easy, you just do a normal commit by adding to the staging and then commit, but then you must use the command:
 ```
 git push heroku master
 ```
@@ -11,11 +11,11 @@ and also you must point the webhook for the Twilio account's SMS reciever at the
 ```
 heroku config
 ```
-while in the 2017-doi-server folder. They are pretty self explanatory, but if you get a new Twilio phone number you will wantto change TWILIO_NUM and once you have the dispatcher's real number you will want to change DISPATCH_NUMBER.Note that the DISPATCH_NUMBER is currently set to Ben's phone number, and anytime you test this app it sendsBen the text messages as if he were the dispatcher, so please be considerate :).
+while in the 2017-doi-server folder. They are pretty self explanatory, but if you get a new Twilio phone number you will wantto change TWILIO_NUM and once you have the dispatcher's real number you will want to change DISPATCH_NUMBER. Note that the DISPATCH_NUMBER is currently set to Ben's phone number, and anytime you test this app it sends Ben the text messages as if he were the dispatcher, so please be considerate :).
 
 
 # Twilio
-Currently, we are using the trial version of Twilio. It worked well during the semester, as it allows unlimited messages.However, it can only send to Ben and Michael's numbers. You will want to upgrade it. As noted in the issues, Ben pushedthe Twilio number onto this repository and it stayed there for like months, so you [might want to replace it](https://github.com/bu-else/2017-doi-app/issues/54). It doesn't seem compromised and it doesn't really matter if it gets a lot of texts, [but it might be a good idea to get a new one](https://www.twilio.com/pricing). If you do so, you have to set up its webhookhandler as noted above.
+Currently, we are using the trial version of Twilio. It worked well during the semester, as it allows unlimited messages. However, it can only send to Ben and Michael's numbers. You will want to upgrade it. As noted in the issues, Ben pushed the Twilio number onto this repository and it stayed there for like months, so you [might want to replace it](https://github.com/bu-else/2017-doi-app/issues/54). It doesn't seem compromised and it doesn't really matter if it gets a lot of texts, [but it might be a good idea to get a new one](https://www.twilio.com/pricing). If you do so, you have to set up its webhookhandler as noted above.
 
 
 # Google Maps
