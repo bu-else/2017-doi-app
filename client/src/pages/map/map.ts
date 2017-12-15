@@ -20,6 +20,7 @@ export class MapPage {
   private pingIntervalTime: number = 30 * 1000;
   private latLng: L.LatLng;
   private marker: L.Marker;
+  private address: string;
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HttpClient) {
 
   }
@@ -68,7 +69,7 @@ export class MapPage {
     );
   }
 
-  public loadMap(address: string, latLngRaw: string): void {
+  public loadMap(newAddress: string, latLngRaw: string): void {
     if (!this.loaded) {
       this.initMap();
     }
@@ -83,26 +84,28 @@ export class MapPage {
     this.map.setView(this.latLng, this.viewHeight);
 
     this.marker = L.marker(this.latLng).addTo(this.map);
-    this.marker.bindPopup(address).openPopup();
+    this.marker.bindPopup(newAddress).openPopup();
+    this.address = newAddress;
 
     this.pullUpdates();
   }
 
-  public updateMap(address: string, latLngRaw: string): void {
+  public updateMap(newAddress: string, latLngRaw: string): void {
     if (!this.showMap) {
       return;
     }
     const s = latLngRaw.split(",");
-    const latLng = new L.LatLng(Number(s[0]), Number(s[1]));
-    if (latLng.equals(this.latLng)) {
+    const newLatLng = new L.LatLng(Number(s[0]), Number(s[1]));
+    if (newLatLng.equals(this.latLng) && this.address==newAddress) {
       return
     }
+    this.latLng = newLatLng;
     this.showAlert("Emergency has been updated",
-      "The updated location for the emergency is now shown on your map",
+      "The updated location for the emergency is now shown on your map.",
       () => {
         this.marker.unbindPopup();
         this.marker.setLatLng(this.latLng)
-        this.marker.bindPopup(address).openPopup();
+        this.marker.bindPopup(newAddress).openPopup();
       })
   }
 
@@ -116,6 +119,7 @@ export class MapPage {
 
     this.http.get("http://localhost:8100/dispatch/?&emergencyID=" + this.uuid, {"responseType": "text"}).subscribe(
       data => {
+        console.log(data);
         switch (data) {
           case "Ended":
             this.showAlert('Emergency over!',
@@ -123,6 +127,14 @@ export class MapPage {
               () => {
                 this.goBack();
               });
+            break;
+          case "Accepted":
+            break;
+          case "Rejected":
+            break;
+          case "Pending":
+            break;
+          case "Ended":
             break;
           default:
             this.showError("501", "Unexpected response from the server");
@@ -168,7 +180,7 @@ export class MapPage {
 
   public showError(code: string, text: string): void {
     this.showAlert('Error ' + code,
-      'An error occurred:\n' + text + '\n Please call 911 to handle this emergency!',
+      'An error occurred:\n' + text,
       () => {
         this.goBack();
       });
