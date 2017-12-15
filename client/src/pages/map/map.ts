@@ -17,7 +17,9 @@ export class MapPage {
   private zero: string = "0px";
   private uuid: string;
   private viewHeight: number = 15;
-
+  private pingIntervalTime: number = 30 * 1000;
+  private latLng: L.LatLng;
+  private marker: L.Marker;
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public http: HttpClient) {
 
   }
@@ -66,8 +68,7 @@ export class MapPage {
     );
   }
 
-
-  public loadMap(address: string, latLngRaw: string) {
+  public loadMap(address: string, latLngRaw: string): void {
     if (!this.loaded) {
       this.initMap();
     }
@@ -78,11 +79,71 @@ export class MapPage {
     mapBox.style.height = this.mapHeight;
 
     const s = latLngRaw.split(",");
-    const latLng = new L.LatLng(Number(s[0]), Number(s[1]));
-    this.map.setView(latLng, this.viewHeight);
+    this.latLng = new L.LatLng(Number(s[0]), Number(s[1]));
+    this.map.setView(this.latLng, this.viewHeight);
 
-    var marker = L.marker(latLng).addTo(this.map);
-    marker.bindPopup(address).openPopup();
+    this.marker = L.marker(this.latLng).addTo(this.map);
+    this.marker.bindPopup(address).openPopup();
+
+    this.pullUpdates();
+  }
+
+  public updateMap(address: string, latLngRaw: string): void {
+    if (!this.showMap) {
+      return;
+    }
+    const s = latLngRaw.split(",");
+    const latLng = new L.LatLng(Number(s[0]), Number(s[1]));
+    if (latLng.equals(this.latLng)) {
+      return
+    }
+    this.showAlert("Emergency has been updated",
+      "The updated location for the emergency is now shown on your map",
+      () => {
+        this.marker.unbindPopup();
+        this.marker.setLatLng(this.latLng)
+        this.marker.bindPopup(address).openPopup();
+      })
+  }
+
+  public pullUpdates(): void {
+    if (!this.showMap) {
+      return;
+    }
+    setTimeout(() => {
+      this.pullUpdates()
+    }, this.pingIntervalTime);
+
+    this.http.get("http://localhost:8100/dispatch/?&emergencyID=" + this.uuid, {"responseType": "text"}).subscribe(
+      data => {
+        switch (data) {
+          case "Ended":
+            this.showAlert('Emergency over!',
+              'The emergency was ended successfully!',
+              () => {
+                this.goBack();
+              });
+            break;
+          default:
+            this.showError("501", "Unexpected response from the server");
+            break;
+        }
+
+      },
+      err => {
+        console.log(err);
+        this.showError(err.status, err.statusText);
+      }
+    );
+    this.http.get("http://localhost:8100/fetch/?&emergencyID=" + this.uuid, {"responseType": "json"}).subscribe(
+      data => {
+        this.updateMap(data["address"], data["latLng"]);
+      },
+      err => {
+        console.log(err);
+        this.showError(err.status, err.statusText);
+      }
+    );
   }
 
   public goBack(): void {
@@ -106,20 +167,25 @@ export class MapPage {
   }
 
   public showError(code: string, text: string): void {
+    this.showAlert('Error ' + code,
+      'An error occurred:\n' + text + '\n Please call 911 to handle this emergency!',
+      () => {
+        this.goBack();
+      });
+  }
+
+  public showAlert(title: string, message: string, handler: () => void) {
     let dialogue = this.alertCtrl.create({
-      title: 'Error ' + code,
-      message: 'An error occurred:\n' + text,
+      title: title,
+      message: message,
       buttons: [
         {
           text: 'OK',
-          handler: () => {
-            this.goBack();
-          }
+          handler: handler
         },
       ],
       cssClass: 'big-alert'
     });
     dialogue.present();
   }
-
 }
