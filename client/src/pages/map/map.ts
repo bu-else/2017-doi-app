@@ -10,13 +10,15 @@ import L from "leaflet";
 })
 export class MapPage {
   private loaded: boolean;
+  private uuid: string;
   private showMap: boolean = false;
+
   private map: L.Map;
   private mapWidth: string = "500px";
   private mapHeight: string = "500px";
   private zero: string = "0px";
-  private uuid: string;
   private viewHeight: number = 15;
+
   private pingIntervalTime: number = 30 * 1000;
   private latLng: L.LatLng;
   private marker: L.Marker;
@@ -67,6 +69,16 @@ export class MapPage {
         this.showError(err.status, err.statusText);
       }
     );
+  }
+
+  public initMap(): void {
+    this.loaded = true;
+    this.map = L.map('map', {
+      zoom: this.viewHeight
+    });
+    //Add OSM Layer
+    L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+      .addTo(this.map);
   }
 
   public loadMap(newAddress: string, latLngRaw: string): void {
@@ -165,17 +177,6 @@ export class MapPage {
     const mapBox = document.getElementById("map");
     mapBox.style.width = this.zero;
     mapBox.style.height = this.zero;
-  }
-
-
-  initMap() {
-    this.loaded = true;
-    this.map = L.map('map', {
-      zoom: 13
-    });
-    //Add OSM Layer
-    L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
-      .addTo(this.map);
   }
 
   public showError(code: string, text: string): void {
