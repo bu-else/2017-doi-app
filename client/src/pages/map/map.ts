@@ -129,7 +129,7 @@ export class MapPage {
       this.pullUpdates()
     }, this.pingIntervalTime);
 
-    this.http.get("http://localhost:8100/dispatch/?&emergencyID=" + this.uuid, {"responseType": "text"}).subscribe(
+    this.http.get("http://localhost:8100/dispatch-status/?&emergencyID=" + this.uuid, {"responseType": "text"}).subscribe(
       data => {
         console.log(data);
         switch (data) {
@@ -145,8 +145,6 @@ export class MapPage {
           case "Rejected":
             break;
           case "Pending":
-            break;
-          case "Ended":
             break;
           default:
             this.showError("501", "Unexpected response from the server");
