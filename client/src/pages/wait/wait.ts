@@ -119,7 +119,7 @@ export class WaitPage {
     }
 
     const latLng = this.latLng.lat + "," + this.latLng.lat;
-    const request = "http://localhost:8100/update-latlng/?&deviceID=" + deviceID + "&LatLng=" + latLng;
+    const request = "http://localhost:8100/update-latlng/?&DeviceID=" + deviceID + "&LatLng=" + latLng;
     this.http.get(request, {"responseType": "text"}).subscribe(
       data => {
         this.state = this.emergencyEnum.SEND_DESCRIPTION;
@@ -133,6 +133,29 @@ export class WaitPage {
 
   public async sendUpdate() {
     this.state = this.emergencyEnum.WAIT_FOR_SERVER_POST_START;
+    var deviceID;
+    try {
+      deviceID = await this.uniqueDeviceID.get();
+    } catch (e) {
+      deviceID = "computer-id";
+    }
+
+    const request = "http://localhost:8100/update-description/?&DeviceID=" + deviceID + "&Description=" + this.description;
+    this.http.get(request, {"responseType": "text"}).subscribe(
+      data => {
+        this.showAlert("Emergency updated",
+          "The dispatcher has received your update!",
+          ()=>{
+            this.state = this.emergencyEnum.SEND_DESCRIPTION;
+            this.description="";
+          }
+        );
+      },
+      err => {
+        console.log(err);
+        this.showError(err.statusText);
+      }
+    );
   }
 
   public askMethod(): void {
@@ -188,7 +211,7 @@ export class WaitPage {
       this.state = this.emergencyEnum.SEND_DESCRIPTION;
       this.sms.send(Env.TWILLIO_NUMBER, "start-call\n" + deviceID + "\n" + latLng, {replaceLineBreaks: true});
     } else {
-      const request = "http://localhost:8100/start-call/?&deviceID=" + deviceID + "&From=" + phoneNumber + "&LatLng=" + latLng;
+      const request = "http://localhost:8100/start-call/?&DeviceID=" + deviceID + "&From=" + phoneNumber + "&LatLng=" + latLng;
       this.http.get(request, {"responseType": "text"}).subscribe(
         data => {
           this.state = this.emergencyEnum.DRAG_ON_MAP;
@@ -234,9 +257,9 @@ export class WaitPage {
       deviceID = "computer-id";
     }
     if (this.isSMS) {
-      this.sms.send(Env.TWILLIO_NUMBER, "end\n" + deviceID, {replaceLineBreaks: true});
+      this.sms.send(Env.TWILLIO_NUMBER, "end-emergency\n" + deviceID, {replaceLineBreaks: true});
     } else {
-      this.http.get("http://localhost:8100/end/?&deviceID=" + deviceID, {"responseType": "text"}).subscribe(
+      this.http.get("http://localhost:8100/end-emergency/?&DeviceID=" + deviceID, {"responseType": "text"}).subscribe(
         data => {
           return console.log(data);
         },
@@ -264,7 +287,7 @@ export class WaitPage {
     this.currentPings++;
 
 
-    this.http.get("http://localhost:8100/dispatch-status/?&deviceID=" + deviceID, {"responseType": "text"}).subscribe(
+    this.http.get("http://localhost:8100/dispatch-status/?&DeviceID=" + deviceID, {"responseType": "text"}).subscribe(
       data => {
         switch (data) {
           case "Accepted":

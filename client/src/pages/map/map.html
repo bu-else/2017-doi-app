@@ -32,6 +32,11 @@
     <!--map is not included in showMap div because it is bad practice to remove the Leaflet map from the DOM-->
     <div id="map"></div>
   </ion-card>
+
+  <ion-card *ngIf="showMap">
+    <ion-card-header>Emergency Information</ion-card-header>
+    <ion-card-content id="description"></ion-card-content>
+  </ion-card>
 </ion-content>
 
 
