@@ -1,3 +1,12 @@
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+        integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+        crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+          integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+          crossorigin=""></script>
+</head>
+
 <ion-header>
   <ion-navbar>
     <ion-title>Wait</ion-title>
@@ -5,36 +14,60 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngIf="state==emergencyEnum.CALL">
-    <ion-card-content>
+  <ion-card>
+    <ion-card-content *ngIf="state==emergencyEnum.CONFIRM_CALL">
       <button ion-button full class="quarter-button" color="danger" (click)="startEmergency()">Emergency</button>
     </ion-card-content>
-  </ion-card>
-  <ion-card *ngIf="state==emergencyEnum.SEND">
-    <ion-card-content>
-      <h2 style="text-align: center;">Please confirm your location</h2>
-      <ion-label color="primary" stacked>Address</ion-label>
-      <ion-input type="text" [(ngModel)]="address" placeholder="Confirm Address"></ion-input>
-      <ion-label color="primary" stacked>Zipcode</ion-label>
-      <ion-input type="text" [(ngModel)]="zipcode" placeholder="Confirm Zipcode"></ion-input>
-      <button ion-button full class="quarter-button" color="light" (click)="sendAddress()">Update Information</button>
-    </ion-card-content>
+
+    <div *ngIf="state==emergencyEnum.WAIT_FOR_SERVER_PRE_START||state==emergencyEnum.WAIT_FOR_SERVER_POST_START">
+      <ion-card-header>Waiting for a response from the server</ion-card-header>
+      <ion-card-content>
+        <ion-spinner></ion-spinner>
+      </ion-card-content>
+    </div>
+
+    <div *ngIf="state==emergencyEnum.DRAG_ON_MAP">
+      <ion-card-header>Confirm your location on the map</ion-card-header>
+      <ion-card-content>
+        <h3>Please drag the marker on the map to your location</h3>
+      </ion-card-content>
+    </div>
+    <!--We must split the DRAG_ON_MAP div in two so that we never remove map from the DOM-->
+    <div id="map"></div>
+    <div *ngIf="state==emergencyEnum.DRAG_ON_MAP">
+      <ion-card-content>
+        <button ion-button full class="quarter-button" color="dark" (click)="finishDrag()">Confirm Location</button>
+      </ion-card-content>
+    </div>
+
+    <div *ngIf="state==emergencyEnum.SEND_DESCRIPTION">
+      <ion-card-header>Additional emergency information or description</ion-card-header>
+      <ion-card-content>
+        <ion-label color="primary">For the ambulance to help find you</ion-label>
+        <ion-input type="text" [(ngModel)]="description"></ion-input>
+        <button ion-button full class="quarter-button" color="dark" (click)="sendUpdate()">Send Update Information</button>
+      </ion-card-content>
+    </div>
   </ion-card>
 
-  <ion-card *ngIf="state!=emergencyEnum.CALL">
+
+  <ion-card *ngIf="state.valueOf()>emergencyEnum.WAIT_FOR_SERVER_PRE_START.valueOf()">
     <ion-card-header>
       <div *ngIf="isSMS">
         Please check your SMS to ensure help is on the way!
       </div>
+
       <div *ngIf="!isSMS">
         <div *ngIf="isConfirmed">
           Help is on the way!
         </div>
+
         <div *ngIf="!isConfirmed">
           Waiting for confirmation from the dispatcher!
         </div>
       </div>
     </ion-card-header>
+
     <ion-card-content>
       <button ion-button full class="quarter-button" color="dark" (click)="endEmergency()">Emergency Over</button>
     </ion-card-content>

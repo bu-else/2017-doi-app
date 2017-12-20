@@ -20,18 +20,19 @@ import * as Hapi from 'hapi';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  registered: boolean;
   @ViewChild('myNav') nav: NavController;
-  authForm: FormGroup;
-  name;
-  password;
-  items;
+  private registered: boolean;
+  private authForm: FormGroup;
+  private name:string = "TEST";
+  private password:string = "TEST_PASSWORD";
+  private items;
 
   constructor(private http:Http, public navCtrl: NavController, public storage: Storage, private alertCtrl: AlertController,public navParams: NavParams, public formBuilder: FormBuilder) {
     this.authForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
     });
+    console.log("Using test password");
     this.checkAgreed();
   }
 
@@ -57,26 +58,24 @@ export class LoginPage {
       "username": name,
       "password": password
     }
-    console.log(postParams);
+    // console.log(postParams);
 
     this.http.post("http://localhost:8001/api/login", postParams, options)
       .subscribe(data => {
-        console.log(data['_body']);
+        // console.log(data['_body']);
         this.items = data.json().session._id;
-        console.log(this.items);
+        // console.log(this.items);
       }, error => {
-        console.log("error");
-        console.log(error);// Error getting the data
+        // console.log("error");
+        // console.log(error);// Error getting the data
       });
-    console.log("here");
-
   }
   public goToReg(): void {
     this.navCtrl.push(RegistrationPage);
   }
 
   public goToMain(): void {
-    console.log(this.items);
+    // console.log(this.items);
     this.navCtrl.push(TabsPage, {
       sessionKey: this.items
     });

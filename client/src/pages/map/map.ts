@@ -10,13 +10,15 @@ import L from "leaflet";
 })
 export class MapPage {
   private loaded: boolean;
+  private uuid: string;
   private showMap: boolean = false;
+
   private map: L.Map;
   private mapWidth: string = "500px";
   private mapHeight: string = "500px";
   private zero: string = "0px";
-  private uuid: string;
   private viewHeight: number = 15;
+
   private pingIntervalTime: number = 30 * 1000;
   private latLng: L.LatLng;
   private marker: L.Marker;
@@ -26,9 +28,9 @@ export class MapPage {
   }
 
   public viewEmergency(): void {
-    this.http.get("http://localhost:8100/fetch/?&emergencyID=" + this.uuid, {"responseType": "json"}).subscribe(
+    this.http.get("http://localhost:8100/fetch-info/?&EmergencyID=" + this.uuid, {"responseType": "json"}).subscribe(
       data => {
-        this.loadMap(data["address"], data["latLng"]);
+        this.loadMap(data["address"], data["latLng"], data["description"]);
       },
       err => {
         console.log(err);
@@ -58,7 +60,7 @@ export class MapPage {
   }
 
   private sendEndHttp(): void {
-    this.http.get("http://localhost:8100/end/?&emergencyID=" + this.uuid, {"responseType": "text"}).subscribe(
+    this.http.get("http://localhost:8100/end-emergency/?&EmergencyID=" + this.uuid, {"responseType": "text"}).subscribe(
       data => {
         this.goBack();
       },
@@ -69,7 +71,18 @@ export class MapPage {
     );
   }
 
-  public loadMap(newAddress: string, latLngRaw: string): void {
+  public initMap(): void {
+    console.log("HELLO");
+    this.loaded = true;
+    this.map = L.map('map', {
+      zoom: this.viewHeight
+    });
+    //Add OSM Layer
+    L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+      .addTo(this.map);
+  }
+
+  public loadMap(newAddress: string, latLngRaw: string, description: string): void {
     if (!this.loaded) {
       this.initMap();
     }
@@ -87,10 +100,14 @@ export class MapPage {
     this.marker.bindPopup(newAddress).openPopup();
     this.address = newAddress;
 
+    setTimeout(()=> {
+      document.getElementById("description").innerText = description;
+    },1);
+
     this.pullUpdates();
   }
 
-  public updateMap(newAddress: string, latLngRaw: string): void {
+  public updateMap(newAddress: string, latLngRaw: string, description: string): void {
     if (!this.showMap) {
       return;
     }
@@ -107,6 +124,8 @@ export class MapPage {
         this.marker.setLatLng(this.latLng)
         this.marker.bindPopup(newAddress).openPopup();
       })
+
+    document.getElementById("description").innerText = description;
   }
 
   public pullUpdates(): void {
@@ -117,39 +136,33 @@ export class MapPage {
       this.pullUpdates()
     }, this.pingIntervalTime);
 
-    this.http.get("http://localhost:8100/dispatch/?&emergencyID=" + this.uuid, {"responseType": "text"}).subscribe(
+    this.http.get("http://localhost:8100/dispatch-status/?&EmergencyID=" + this.uuid, {"responseType": "text"}).subscribe(
       data => {
-        console.log(data);
         switch (data) {
           case "Ended":
+            this.goBack();
             this.showAlert('Emergency over!',
               'The emergency was ended successfully!',
-              () => {
-                this.goBack();
-              });
+              () => {});
             break;
           case "Accepted":
-            break;
           case "Rejected":
-            break;
           case "Pending":
-            break;
-          case "Ended":
+            this.http.get("http://localhost:8100/fetch-info/?&EmergencyID=" + this.uuid, {"responseType": "json"}).subscribe(
+              data => {
+                this.updateMap(data["address"], data["latLng"], data["description"]);
+              },
+              err => {
+                console.log(err);
+                this.showError(err.status, err.statusText);
+              }
+            );
             break;
           default:
             this.showError("501", "Unexpected response from the server");
             break;
         }
 
-      },
-      err => {
-        console.log(err);
-        this.showError(err.status, err.statusText);
-      }
-    );
-    this.http.get("http://localhost:8100/fetch/?&emergencyID=" + this.uuid, {"responseType": "json"}).subscribe(
-      data => {
-        this.updateMap(data["address"], data["latLng"]);
       },
       err => {
         console.log(err);
@@ -165,17 +178,6 @@ export class MapPage {
     const mapBox = document.getElementById("map");
     mapBox.style.width = this.zero;
     mapBox.style.height = this.zero;
-  }
-
-
-  initMap() {
-    this.loaded = true;
-    this.map = L.map('map', {
-      zoom: 13
-    });
-    //Add OSM Layer
-    L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
-      .addTo(this.map);
   }
 
   public showError(code: string, text: string): void {

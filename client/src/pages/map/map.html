@@ -6,6 +6,7 @@
           integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
           crossorigin=""></script>
 </head>
+
 <ion-header>
   <ion-navbar>
     <ion-title>Map</ion-title>
@@ -23,11 +24,18 @@
         <button ion-button full class="quarter-button" color="light" (click)="viewEmergency()">View Emergency</button>
       </ion-card-content>
     </div>
+
     <div *ngIf="showMap">
       <button ion-button full style="width: 10%;" color="light" (click)="goBack()">←</button>
       <button ion-button full class="quarter-button" color="dark" (click)="endEmergency()">Emergency Over</button>
     </div>
+    <!--map is not included in showMap div because it is bad practice to remove the Leaflet map from the DOM-->
     <div id="map"></div>
+  </ion-card>
+
+  <ion-card *ngIf="showMap">
+    <ion-card-header>Emergency Information</ion-card-header>
+    <ion-card-content id="description"></ion-card-content>
   </ion-card>
 </ion-content>
 

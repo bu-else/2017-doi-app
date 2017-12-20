@@ -6,11 +6,15 @@ import {UniqueDeviceID} from "@ionic-native/unique-device-id";
 import {SMS} from '@ionic-native/sms';
 import * as Env from "../../env";
 import {Storage} from '@ionic/storage';
+import L from "leaflet";
 
 enum EmergencyState {
-  CALL, // Button is available to call emergency. We then confirm.
-  SEND, // Input address and send it to the dispatcher.
-  WAIT // Nothing else to be done. Wait for dispatcher or button to be pressed.
+  CONFIRM_CALL,
+  WAIT_FOR_SERVER_PRE_START,
+  DRAG_ON_MAP,
+  WAIT_FOR_SERVER_POST_START,
+  SEND_DESCRIPTION,
+  WAIT_FOR_END
 };
 
 @Component({
@@ -19,19 +23,27 @@ enum EmergencyState {
 })
 
 export class WaitPage {
-  // HACK: This is the only way to access an enum declared in the same file in this class. (It seems)
+  // HACK: We save the enum as a private variable so that it can be used in the HTML
   private emergencyEnum = EmergencyState;
   private state: EmergencyState;
-  private address: string;
-  private zipcode: string;
   private isSMS: boolean;
   private isConfirmed: boolean;
   private confirmationTime: number = 2 * 60 * 1000;
   private pingIntervalTime: number = 15 * 1000;
   private currentPings: number = 0;
+  private description: string;
+
+
+  private loaded: boolean;
+  private map: L.Map;
+  private mapWidth: string = "500px";
+  private mapHeight: string = "500px";
+  private zero: string = "0px";
+  private viewHeight: number = 17;
+  private latLng: L.LatLng;
 
   constructor(public navCtrl: NavController, public alertCtrl: AlertController, public storage: Storage, public geolocation: Geolocation, public http: HttpClient, public  uniqueDeviceID: UniqueDeviceID, public sms: SMS) {
-    this.state = this.emergencyEnum.CALL;
+    this.state = this.emergencyEnum.CONFIRM_CALL;
   }
 
   public startEmergency(): void {
@@ -57,10 +69,99 @@ export class WaitPage {
     dialogue.present();
   }
 
+  public initMap(): void {
+    this.loaded = true;
+    this.map = L.map('map', {
+      zoom: this.viewHeight
+    });
+    //Add OSM Layer
+    L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+      .addTo(this.map);
+  }
+
+  public async viewMap(latLngRaw: string) {
+    if (!this.loaded) {
+      this.initMap();
+    }
+
+    const mapBox = document.getElementById("map");
+    mapBox.style.width = this.mapWidth;
+    mapBox.style.height = this.mapHeight;
+
+    const s = latLngRaw.split(",");
+    this.latLng = new L.LatLng(Number(s[0]), Number(s[1]));
+    this.map.panTo(this.latLng);
+
+    const marker = L.marker(this.latLng, {draggable:true}).addTo(this.map);
+    marker.on('dragend', function(event){
+      const marker = event.target;
+      const position = marker.getLatLng();
+
+      this.latLng =  new L.LatLng(position.lat, position.lng);
+      marker.setLatLng(this.latLng,{draggable:'true'});
+      this.map.panTo(this.latLng);
+    },this);
+  }
+
+  public hideMap(): void {
+    const mapBox = document.getElementById("map");
+    mapBox.style.width = this.zero;
+    mapBox.style.height = this.zero;
+  }
+
+  public async finishDrag() {
+    this.hideMap();
+    var deviceID;
+    try {
+      deviceID = await this.uniqueDeviceID.get();
+    } catch (e) {
+      deviceID = "computer-id";
+    }
+
+    const latLng = this.latLng.lat + "," + this.latLng.lat;
+    const request = "http://localhost:8100/update-latlng/?&DeviceID=" + deviceID + "&LatLng=" + latLng;
+    this.http.get(request, {"responseType": "text"}).subscribe(
+      data => {
+        this.state = this.emergencyEnum.SEND_DESCRIPTION;
+      },
+      err => {
+        console.log(err);
+        this.showError(err.statusText);
+      }
+    );
+  }
+
+  public async sendUpdate() {
+    this.state = this.emergencyEnum.WAIT_FOR_SERVER_POST_START;
+    var deviceID;
+    try {
+      deviceID = await this.uniqueDeviceID.get();
+    } catch (e) {
+      deviceID = "computer-id";
+    }
+
+    const request = "http://localhost:8100/update-description/?&DeviceID=" + deviceID + "&Description=" + this.description;
+    this.http.get(request, {"responseType": "text"}).subscribe(
+      data => {
+        this.showAlert("Emergency updated",
+          "The dispatcher has received your update!",
+          ()=>{
+            this.state = this.emergencyEnum.SEND_DESCRIPTION;
+            this.description="";
+          }
+        );
+      },
+      err => {
+        console.log(err);
+        this.showError(err.statusText);
+      }
+    );
+  }
+
   public askMethod(): void {
     let dialogue = this.alertCtrl.create({
       title: 'Method',
-      message: 'Send this emergency over wifi or sms?',
+      message: 'Send this emergency over data or sms?',
       buttons: [
         {
           text: 'Sms',
@@ -70,7 +171,7 @@ export class WaitPage {
           }
         },
         {
-          text: 'Wifi',
+          text: 'Data',
           handler: () => {
             this.isSMS = false;
             this.sendLocation();
@@ -83,65 +184,46 @@ export class WaitPage {
   }
 
   public async sendLocation() {
-    this.state = this.emergencyEnum.SEND;
+    this.state = this.emergencyEnum.WAIT_FOR_SERVER_PRE_START;
+
     var location;
     try {
       location = await this.geolocation.getCurrentPosition();
     } catch (e) {
-      console.log("Error getting location");
+      this.showError(e.toString());
       return;
     }
+
     var deviceID;
     try {
       deviceID = await this.uniqueDeviceID.get();
     } catch (e) {
       deviceID = "computer-id";
     }
+
     const latLng = location.coords.latitude + "," + location.coords.longitude;
     const phoneNumber = await this.storage.get("phoneNumber");
     if (!phoneNumber) {
-      this.showError("400", "No phone number stored for this account");
+      this.showError("No phone number stored for this account");
     }
 
     if (this.isSMS) {
-      this.sms.send(Env.TWILLIO_NUMBER, "latlng\n" + deviceID + "\n" + latLng, {replaceLineBreaks: true});
+      this.state = this.emergencyEnum.SEND_DESCRIPTION;
+      this.sms.send(Env.TWILLIO_NUMBER, "start-call\n" + deviceID + "\n" + latLng, {replaceLineBreaks: true});
     } else {
-      this.http.get("http://localhost:8100/latlng/?&deviceID=" + deviceID + "&From=" + phoneNumber + "&LatLng=" + latLng, {"responseType": "text"}).subscribe(
+      const request = "http://localhost:8100/start-call/?&DeviceID=" + deviceID + "&From=" + phoneNumber + "&LatLng=" + latLng;
+      this.http.get(request, {"responseType": "text"}).subscribe(
         data => {
+          this.state = this.emergencyEnum.DRAG_ON_MAP;
+          this.viewMap(latLng);
           this.getDispatch();
-          return console.log(data);
         },
         err => {
           console.log(err);
-          this.showError(err.status, err.statusText);
+          this.showError(err.statusText);
         }
       );
     }
-  }
-
-  public async sendAddress() {
-    var deviceID;
-    try {
-      deviceID = await this.uniqueDeviceID.get();
-    } catch (e) {
-      deviceID = "computer-id";
-    }
-
-    if (this.isSMS) {
-      this.sms.send(Env.TWILLIO_NUMBER, "address\n" + deviceID + "\n" + this.address + "\n" + this.zipcode, {replaceLineBreaks: true});
-    } else {
-      console.log("HELLO");
-      this.http.get("http://localhost:8100/address/?&deviceID=" + deviceID + "&Address=" + this.address + "&Zipcode=" + this.zipcode, {"responseType": "text"}).subscribe(
-        data => {
-          return console.log(data);
-        },
-        err => {
-          console.log(err);
-          this.showError(err.status, err.statusText);
-        }
-      );
-    }
-    this.state = this.emergencyEnum.WAIT;
   }
 
   public endEmergency(): void {
@@ -175,23 +257,22 @@ export class WaitPage {
       deviceID = "computer-id";
     }
     if (this.isSMS) {
-      this.sms.send(Env.TWILLIO_NUMBER, "end\n" + deviceID, {replaceLineBreaks: true});
+      this.sms.send(Env.TWILLIO_NUMBER, "end-emergency\n" + deviceID, {replaceLineBreaks: true});
     } else {
-      this.http.get("http://localhost:8100/end/?&deviceID=" + deviceID, {"responseType": "text"}).subscribe(
+      this.http.get("http://localhost:8100/end-emergency/?&DeviceID=" + deviceID, {"responseType": "text"}).subscribe(
         data => {
           return console.log(data);
         },
         err => {
           console.log(err);
-          this.showError(err.status, err.statusText);
+          this.showError(err.statusText);
         }
       );
     }
-
   }
 
   public async getDispatch() {
-    if (this.state == this.emergencyEnum.CALL) {
+    if (this.state == this.emergencyEnum.CONFIRM_CALL) {
       return;
     }
     var deviceID;
@@ -206,7 +287,7 @@ export class WaitPage {
     this.currentPings++;
 
 
-    this.http.get("http://localhost:8100/dispatch/?&deviceID=" + deviceID, {"responseType": "text"}).subscribe(
+    this.http.get("http://localhost:8100/dispatch-status/?&DeviceID=" + deviceID, {"responseType": "text"}).subscribe(
       data => {
         switch (data) {
           case "Accepted":
@@ -220,11 +301,12 @@ export class WaitPage {
             this.isConfirmed = true;
             break;
           case "Rejected":
-            this.showError("503", "The dispatcher is unable to handle your request.");
+            this.showError("The dispatcher is unable to handle your request.");
             break;
           case "Pending":
             if (this.currentPings > this.confirmationTime / this.pingIntervalTime) {
-              this.showError("408", "Did not receive a confirmation in time.");
+              this.showError( "Did not receive a confirmation in time.");
+              this.sendEndHttp();
             }
             break;
           case "Ended":
@@ -235,25 +317,24 @@ export class WaitPage {
               });
             break;
           default:
-            this.showError("501", "Unexpected response from the server");
+            this.showError( "Unexpected response from the server.");
             break;
         }
 
       },
       err => {
         console.log(err);
-        this.showError(err.status, err.statusText);
+        this.showError(err.statusText);
       }
     );
   }
 
 
-  public showError(code: string, text: string): void {
-    this.showAlert('Error ' + code,
+  public showError(text: string): void {
+    this.resetEmergency();
+    this.showAlert('Error!',
       'An error occurred:\n' + text + '\n Please call 911 to handle this emergency!',
-      () => {
-        this.resetEmergency();
-      });
+      () => {});
   }
 
   public showAlert(title: string, message: string, handler: () => void) {
@@ -272,10 +353,11 @@ export class WaitPage {
   }
 
   private resetEmergency() {
-    this.state = EmergencyState.CALL;
+    this.state = EmergencyState.CONFIRM_CALL;
     this.navCtrl.parent.select(0);
     this.isConfirmed = false;
     this.currentPings = 0;
+    this.hideMap();
   }
 
 }
