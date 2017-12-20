@@ -47,7 +47,11 @@ in the client folder.
 The [Ionic tutorial](https://ionicframework.com/docs/intro/deploying/) does a good job on explaining deploying to a device. 
 
 # TESTING
-test.js in 2017-doi-server is the closest thing to a testing framework for the backend. It runs a bunch of end-to-end tests to confirm that the server is working but does not validate the returned JSON. Ben's number is in that file for ease of us.
+test.js in 2017-doi-server is the closest thing to a testing framework for the backend. It runs a bunch of end-to-end tests to confirm that the server is working but does not validate the returned JSON. Ben's number is in that file for ease of us. Simply use the command: 
+```
+node test.js
+```
+in the server repository to run it. It will alert you of any errors.
 
 # API
 The following URLS with annotations are useful to test the backend. Note, Ben's number is in the URLs so please do not DOX him.
