@@ -140,11 +140,10 @@ export class MapPage {
       data => {
         switch (data) {
           case "Ended":
+            this.goBack();
             this.showAlert('Emergency over!',
               'The emergency was ended successfully!',
-              () => {
-                this.goBack();
-              });
+              () => {});
             break;
           case "Accepted":
           case "Rejected":
